@@ -1,0 +1,217 @@
+# PEGN (v1.0.0-alpha) gitlab.com/pegn/spec
+# Copyright 2020 Robert S Muhlestein (rwx@robs.io)
+# Licensed under Apache-2, CC-BY-4.0
+
+Grammar    <-- Meta? Copyright? Licensed?
+               ComEndLine*
+               (Definition ComEndLine*)+
+
+Meta       <-- '# ' Language ' (' Version ') ' Home EndLine
+Copyright  <-- '# Copyright ' Comment EndLine
+Licensed   <-- '# Licensed under ' Comment EndLine
+ComEndLine  <- SP* ('# ' Comment)? EndLine
+Definition  <- SchemaDef / CheckDef / ClassDef / TokenDef
+
+Language    <- Lang ('-' LangExt)?
+Version     <- 'v' MajorVer '.' MinorVer '.' PatchVer ('-' PreVer)?
+Home       <-- (!ws any)+
+
+Comment    <-- (!EndLine any)+
+
+SchemaDef  <-- CheckId SP+ '<--' SP+ Expression   # significant
+CheckDef   <-- CheckId SP+ '<-'  SP+ Expression   # convenient
+ClassDef   <-- ClassId SP+ '<-' SP+ ClassExpr
+TokenDef   <-- TokenId SP+ '<-' SP+ 
+               (Rune / SQ String SQ / TokenId)
+               ComEndLine
+
+Lang       <-- upper{2,12}
+LangExt    <-- visible{1,20}
+
+MajorVer   <-- digit+
+MinorVer   <-- digit+
+PatchVer   <-- digit+
+PreVer     <-- (word / DASH)+ ('.' (word / DASH)+)*
+
+CheckId    <-- ResCheckId / (upper lower+)+
+ClassId    <-- ResClassId / lower (lower / UNDER lower)+
+TokenId    <-- ResTokenId / upper (upper / UNDER upper)+
+
+Expression <-- Sequence (Spacing '/' SP+ Sequence)*
+ClassExpr  <-- Simple (Spacing '/' SP+ Simple)*
+
+Simple      <- Rune / ClassId / TokenId / Range / SQ String SQ
+
+Spacing     <- ComEndLine? SP+
+
+Sequence   <-- Rule (Spacing Rule)*
+Rule        <- PosLook / NegLook / Plain
+Plain      <-- Primary Quant?
+PosLook    <-- '&' Primary Quant?
+NegLook    <-- '!' Primary Quant?
+Primary     <- Simple / CheckId / '(' Expression ')'
+
+Quant       <- Optional / MinZero / MinOne / MinMax / Count
+Optional   <-- '?'
+MinZero    <-- '*'
+MinOne     <-- '+'
+MinMax     <-- '{' Min ',' Max? '}'
+Min        <-- digit+
+Max        <-- digit+
+Count      <-- '{' digit+ '}'
+
+Range       <- AlphaRange / IntRange / UniRange
+             / BinRange / HexRange / OctRange
+
+UniRange   <-- '[' Unicode '-' Unicode ']'  # [U+0000-U+10FFFF]
+AlphaRange <-- '[' Alpha '-' Alpha ']'      # [a-m] [A-Z]
+IntRange   <-- '[' Integer '-' Integer ']'  # [0-108] [0-9]
+BinRange   <-- '[' Binary '-' Binary ']'    # [b101-b1010]
+HexRange   <-- '[' Hexadec '-' Hexadec ']'  # [x20-x2F]
+OctRange   <-- '[' Octal '-' Octal ']'      # [o20-o37]
+
+Rune        <- Unicode / Binary / Hexadec / Octal
+String     <-- quotable+
+Alpha      <-- alpha
+Digit      <-- digit
+Unicode    <-- 'U+' upperhex{4,8}
+Integer    <-- digit+
+Binary     <-- 'b' bindig+
+Hexadec    <-- 'x' upperhex+
+Octal      <-- 'o' octdig+
+
+EndLine    <-- LF / CRLF / CR
+
+ResClassId <-- 'alphanum' / 'alpha' / 'any' / 'bitdig' / 'control' 
+             / 'digit' / 'hexdig' / 'lowerhex' / 'lower' / 'octdig' 
+             / 'punct' / 'quotable' / 'sign' / 'upperhex' / 'upper' 
+             / 'visible' / 'ws' / 'alnum' / 'ascii' / 'blank' / 'cntrl' 
+             / 'graph' / 'print' / 'space' / 'word' / 'xdigit'
+
+ResTokenId <-- 'TAB' / 'CRLF' / 'CR' / 'LF' / 'SP' / 'VT' / 'FF' / 'NOT'
+             / 'BANG' / 'DQ' / 'HASH' / 'DOLLAR' / 'PERCENT' / 'AND' 
+             / 'SQ' / 'LPAREN' / 'RPAREN' / 'STAR' / 'PLUS' / 'COMMA'
+             / 'DASH' / 'MINUS' / 'DOT' / 'SLASH' / 'COLON' / 'SEMI' / 'LT'
+             / 'EQ' / 'GT' / 'QUERY' / 'QUESTION' / 'AT' / 'LBRAKT'
+             / 'BKSLASH' / 'RBRAKT' / 'CARET' / 'UNDER' / 'BKTICK' 
+             / 'LCURLY' / 'LBRACE' / 'BAR' / 'PIPE' / 'RCURLY' 
+             / 'RBRACE' / 'TILDE' / 'UNKNOWN' / 'REPLACE' / 'MAXRUNE' 
+             / 'MAXASCII' / 'MAXLATIN' / 'LARROW' / 'RARROW' / 'LLARROW'
+             / 'RLARROW' / 'LARROWF' / 'LFAT' / 'RARROWF' / 'RFAT' 
+             / 'WALRUS'
+
+ResCheckId <-- 'EndLine'
+
+# json ast
+
+NodeLong      <-- TerminalLong / ParentLong
+TerminalLong  <-- '[' DQ CheckId DQ ',' SP DQ Literal DQ ']'
+ParentLong    <-- '[' DQ CheckId DQ ',' SP ('[]' / ChildrenLong) ']'
+ChildrenLong   <- '[' LF In NodeLong (',' LF In{2}  NodeLong)* LF In ']'
+In             <- SP{2,}    # MUST be two spaces per depth level
+
+NodeShort     <-- TerminalShort / ParentShort
+TerminalShort <-- '[' Integer ',' DQ Literal DQ ']'
+                / '[' Integer ']' # implied empty value ''
+                / '[]'            # implied 0 type (Undefined)
+ParentShort   <-- '[' Integer (',' ('[]' / ChildrenShort))? ']' 
+ChildrenShort  <- '[' NodeShort (',' NodeShort)* ']'
+Literal       <-- AstEsc / [x20-x21] / [x23-x5B] / [x5D-x10FFFF]
+AstEsc         <- BKSLASH ('b' / 'f' / 'n' / 'r' / 't' # \u not included
+                / DQ / BKSLASH / SLASH)
+
+# classes
+
+alpha       <- [A-Z] / [a-z]
+alphanum    <- [A-Z] / [a-z] / [0-9]
+any         <- [U+0000-U+FFFC] / [U+FFFE-U+10FFFF]
+bitdig      <- [0-1]
+control     <- [x00-x1F] / [x7F-x9F]
+digit       <- [0-9]
+hexdig      <- [0-9] / [a-f] / [A-F]
+lowerhex    <- [0-9] / [a-f]
+lower       <- [a-z]
+octdig      <- [0-7]
+punct       <- [x21-x2F] / [x3A-x40] / [x5B-x60] / [x7B-x7E]
+quotable    <- alphanum / [x20-x26] / [x28-x2F]    # skips single quote '
+             / [x3A-x40] / [x5B-x60] / [x7B-x7E]
+sign        <- PLUS / MINUS
+upperhex    <- [0-9] / [A-F]
+upper       <- [A-Z]
+visible     <- alphanum / punct
+ws          <- SP / TAB / CR / LF
+
+alnum       <- alphanum
+ascii       <- [x0-x7F]
+blank       <- SP / TAB
+cntrl       <- control
+graph       <- [x21-x7E]
+print       <- [x20-x7E]
+space       <- ws / VT / FF                   # [:space:] \s
+word        <- upper / lower / digit / UNDER  # [:word:]  \w
+xdigit      <- hex
+
+# tokens
+
+TAB         <- x9     # "\t"
+LF          <- xA     # "\n" (line feed)
+CR          <- xD     # "\r" (carriage return)
+CRLF        <- CR LF  # "\r\n"
+SP          <- x20    # " "
+VT          <- xB     # "\v" (vertical tab)
+FF          <- xC     # "\f" (form feed)
+
+NOT         <- x21 # !
+BANG        <- x21 # !
+DQ          <- x22 # "
+HASH        <- x23 # #
+DOLLAR      <- x24 # $
+PERCENT     <- x25 # %
+AND         <- x26 # &
+SQ          <- x27 # '
+LPAREN      <- x28 # (
+RPAREN      <- x29 # )
+STAR        <- x2A # *
+PLUS        <- x2B # +
+COMMA       <- x2C # ,
+DASH        <- x2D # -
+MINUS       <- x2D # -
+DOT         <- x2E # .
+SLASH       <- x2F # /
+COLON       <- x3A # :
+SEMI        <- x3B # ;
+LT          <- x3C # <
+EQ          <- x3D # =
+GT          <- x3E # >
+QUERY       <- x3F # ?
+QUESTION    <- x3F # ?
+AT          <- x40 # @
+LBRAKT      <- x5B # [
+BKSLASH     <- x5C # \
+RBRAKT      <- x5D # ]
+CARET       <- x5E # ^
+UNDER       <- x5F # _
+BKTICK      <- x60 # `
+LCURLY      <- x7B # {
+LBRACE      <- x7B # {
+BAR         <- x7C # |
+PIPE        <- x7C # |
+RCURLY      <- x7D # }
+RBRACE      <- x7D # }
+TILDE       <- x7E # ~
+UNKNOWN     <- U+FFFD # �
+REPLACE     <- U+FFFD # �
+MAXRUNE     <- U+10FFFF
+MAXASCII    <- x7F
+MAXLATIN    <- xFF
+
+LARROW      <- '<-'
+RARROW      <- '->'
+LLARROW     <- '<--'
+RLARROW     <- '-->'
+LARROWF     <- '<='
+LFAT        <- '<='
+RARROWF     <- '=>'
+RFAT        <- '=>'
+WALRUS      <- ':='
+

@@ -1,0 +1,24 @@
+${top()}
+${if(xh1off)}
+${else}
+${if(Title)}
+${if(Query)}
+  <h1 id=title class=duck><a href="https://duckduckgo.com/lite?kae=t&q=${Title}">${Title}</a></h1>
+${else}
+  <h1 id=title>${Title}</h1>
+${endif}
+${endif}
+${if(Subtitle)}
+  <h2 id=subtitle>${Subtitle}</h2>
+${endif}
+${endif}
+${if(Summary)}
+  <p id=summary>${Summary}</p>
+${endif}
+${if(Quotes)}
+${for(Quotes)}<div class="co-qt what"><p>${it.What}</p>${if(it.Who)}<p class=who>${it.Who}</p>${endif}</div>${sep}
+  ${endfor}
+${else}
+${body}
+${endif}
+${bottom()}
