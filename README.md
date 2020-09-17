@@ -323,6 +323,12 @@ have otherwise provided. The details of this section are designed to meet
 those needs with the hope that more will choose to use PEGN openly,
 collaborative, and privately.
 
+## MIME Type
+
+Currently the official MIME type associated with the `.pegn` suffix
+related to PEGN grammars is `text/x-pegn` with the hope of eventually
+obtaining `text/pegn` from IANA.
+
 ### Trademarks
 
 Whether marked with ™ or not, PEGN, `pegn`, and the PEGN logo are
