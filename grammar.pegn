@@ -22,8 +22,10 @@ SchemaDef  <-- CheckId SP+ '<--' SP+ Expression   # significant
 CheckDef   <-- CheckId SP+ '<-'  SP+ Expression   # convenient
 ClassDef   <-- ClassId SP+ '<-' SP+ ClassExpr
 TokenDef   <-- TokenId SP+ '<-' SP+ 
-               (Rune / SQ String SQ / TokenId)+
+               TokenVal (Spacing TokenVal)*
                ComEndLine
+
+TokenVal    <- Rune / SQ String SQ / TokenId
 
 Lang       <-- upper{2,12}
 LangExt    <-- visible{1,20}
