@@ -22,7 +22,7 @@ SchemaDef  <-- CheckId SP+ '<--' SP+ Expression   # significant
 CheckDef   <-- CheckId SP+ '<-'  SP+ Expression   # convenient
 ClassDef   <-- ClassId SP+ '<-' SP+ ClassExpr
 TokenDef   <-- TokenId SP+ '<-' SP+ 
-               (Rune / SQ String SQ / TokenId)
+               (Rune / SQ String SQ / TokenId)+
                ComEndLine
 
 Lang       <-- upper{2,12}
