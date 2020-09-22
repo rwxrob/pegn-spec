@@ -67,13 +67,13 @@ Integer  &lt;- &#39;0&#39; / [1-9] DIGIT*
 Escaped  &lt;- BKSLASH (&#39;b&#39; / &#39;f&#39; / &#39;n&#39; / &#39;r&#39; / &#39;t&#39; / &#39;u&#39; hex{4}
           / DQ / BKSLASH / SLASH)</code></pre>
 <h2 id="pegn-expect-parameter-syntax">PEGN Expect Parameter Syntax</h2>
-<p>One strength of PEGN is how easy the syntax is to represent in code. The <code>pegn.Parser</code> from the Go reference implementation contains a powerful <code>Expect(p ...interface{}) (*pegn.Mark, error)</code> method which takes list of parameters of differing types that directly map to PEGN notation. This makes short work code generation from any grammar. This approach can easily be adapted to any implementation language.</p>
+<p>One strength of PEG notations is how easy they are to represent in code. The <code>pegn.Parser</code> contains a powerful <code>Expect(p ...interface{}) (*pegn.Mark, error)</code> method which takes list of parameters of differing types that directly map to PEGN notation. This makes short work code generation from any grammar.</p>
 <h3 id="sequence-all-in-order">Sequence (All in Order)</h3>
 <pre class="pegn"><code>This That Other</code></pre>
 <pre class="go"><code>m, err := p.Expect(This,That,Other)</code></pre>
 <p>Sequence is the default implied for all of the arguments passed but can also be explicitly specified in order to combine with other operations.</p>
 <pre class="go"><code>m, err := p.Expect(is.Seq{This,That, Other})</code></pre>
-<h3 id="or-one-of-two">Or (One Of Two)</h3>
+<h3 id="or-one-of-two">Or (One of Two)</h3>
 <pre class="pegn"><code>This / That</code></pre>
 <pre class="go"><code>m, err := p.Expect(is.OneOf{This,That})</code></pre>
 <h3 id="and-one-of-each">And (One of Each)</h3>
@@ -88,7 +88,13 @@ Escaped  &lt;- BKSLASH (&#39;b&#39; / &#39;f&#39; / &#39;n&#39; / &#39;r&#39; / 
 <h3 id="optional-one-or-none">Optional (One or None)</h3>
 <pre class="pegn"><code>This?</code></pre>
 <pre class="go"><code>m, err := p.Expect(is.Opt{This})</code></pre>
-<h3 id="minimum-one-or-more">Minimum (One or More)</h3>
+<h3 id="one-or-more">One or More</h3>
+<pre class="pegn"><code>This+</code></pre>
+<pre class="go"><code>m, err := p.Expect(is.Min{This,1})</code></pre>
+<h3 id="zero-or-more">Zero or More</h3>
+<pre class="pegn"><code>This*</code></pre>
+<pre class="go"><code>m, err := p.Expect(is.Min{This,0})</code></pre>
+<h3 id="minimum">Minimum</h3>
 <pre class="pegn"><code>This{3,}</code></pre>
 <pre class="go"><code>m, err := p.Expect(is.Min{This,3})</code></pre>
 <h3 id="maximum-not-more-than">Maximum (Not More Than)</h3>
@@ -97,7 +103,7 @@ Escaped  &lt;- BKSLASH (&#39;b&#39; / &#39;f&#39; / &#39;n&#39; / &#39;r&#39; / 
 <h3 id="minimum-and-maximum">Minimum and Maximum</h3>
 <pre class="pegn"><code>This{5,20}</code></pre>
 <pre class="go"><code>m, err := p.Expect(is.MinMax{This,5,20})</code></pre>
-<h3 id="exact-count-exactly-n">Exact Count (Exactly N)</h3>
+<h3 id="exact-count">Exact Count</h3>
 <pre class="pegn"><code>This{5}</code></pre>
 <pre class="go"><code>m, err := p.Expect(is.Count{This,5})</code></pre>
 <h2 id="abstract-syntax-tree">Abstract Syntax Tree</h2>

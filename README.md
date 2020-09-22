@@ -105,12 +105,11 @@ Escaped  <- BKSLASH ('b' / 'f' / 'n' / 'r' / 't' / 'u' hex{4}
 
 ## PEGN Expect Parameter Syntax
 
-One strength of PEGN is how easy the syntax is to represent in code. The
-`pegn.Parser` from the Go reference implementation contains a powerful
-`Expect(p ...interface{}) (*pegn.Mark, error)` method which takes list
-of parameters of differing types that directly map to PEGN notation.
-This makes short work code generation from any grammar. This approach
-can easily be adapted to any implementation language.
+One strength of PEG notations is how easy they are to represent in code.
+The `pegn.Parser` contains a powerful `Expect(p ...interface{})
+(*pegn.Mark, error)` method which takes list of parameters of differing
+types that directly map to PEGN notation. This makes short work code
+generation from any grammar.
 
 ### Sequence (All in Order)
 
@@ -129,7 +128,7 @@ also be explicitly specified in order to combine with other operations.
 m, err := p.Expect(is.Seq{This,That, Other})
 ```
 
-### Or (One Of Two)
+### Or (One of Two)
 
 ```pegn
 This / That
@@ -179,7 +178,27 @@ This?
 m, err := p.Expect(is.Opt{This})
 ```
 
-### Minimum (One or More)
+### One or More
+
+```pegn
+This+
+```
+
+```go
+m, err := p.Expect(is.Min{This,1})
+```
+
+### Zero or More
+
+```pegn
+This*
+```
+
+```go
+m, err := p.Expect(is.Min{This,0})
+```
+
+### Minimum
 
 ```pegn
 This{3,}
@@ -199,7 +218,7 @@ This{0,20}
 m, err := p.Expect(is.MinMax{This,0,20})
 ```
 
-### Minimum and Maximum
+### Minimum and Maximum 
 
 ```pegn
 This{5,20}
@@ -209,7 +228,7 @@ This{5,20}
 m, err := p.Expect(is.MinMax{This,5,20})
 ```
 
-### Exact Count (Exactly N)
+### Exact Count
 
 ```pegn
 This{5}
