@@ -1,0 +1,2374 @@
+["Grammar", [
+  ["Meta", [
+    ["Lang", "PEGN"],
+    ["MajorVer", "1"],
+    ["MinorVer", "0"],
+    ["PatchVer", "0"],
+    ["PreVer", "alpha"],
+    ["Home", "gitlab.com/pegn/spec"],
+    ["EndLine", "\n"]
+  ]],
+  ["Copyright", [
+    ["Comment", "2020 Robert S Muhlestein (rwx@robs.io)"],
+    ["EndLine", "\n"]
+  ]],
+  ["Licensed", [
+    ["Comment", "Apache-2, CC-BY-4.0"],
+    ["EndLine", "\n"]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Grammar"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Meta"],
+          ["Optional", "?"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Copyright"],
+          ["Optional", "?"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Licensed"],
+          ["Optional", "?"]
+        ]],
+        ["EndLine", "\n"],
+        ["Plain", [
+          ["CheckId", "ComEndLine"],
+          ["MinZero", "*"]
+        ]],
+        ["EndLine", "\n"],
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["CheckId", "Definition"]
+              ]],
+              ["Plain", [
+                ["CheckId", "ComEndLine"],
+                ["MinZero", "*"]
+              ]]
+            ]]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Meta"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "# "]
+        ]],
+        ["Plain", [
+          ["CheckId", "Language"]
+        ]],
+        ["Plain", [
+          ["String", " ("]
+        ]],
+        ["Plain", [
+          ["CheckId", "Version"]
+        ]],
+        ["Plain", [
+          ["String", ") "]
+        ]],
+        ["Plain", [
+          ["CheckId", "Home"]
+        ]],
+        ["Plain", [
+          ["CheckId", [
+            ["ResCheckId", "EndLine"]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Copyright"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "# Copyright "]
+        ]],
+        ["Plain", [
+          ["CheckId", "Comment"]
+        ]],
+        ["Plain", [
+          ["CheckId", [
+            ["ResCheckId", "EndLine"]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Licensed"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "# Licensed under "]
+        ]],
+        ["Plain", [
+          ["CheckId", "Comment"]
+        ]],
+        ["Plain", [
+          ["CheckId", [
+            ["ResCheckId", "EndLine"]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "ComEndLine"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SP"]
+          ]],
+          ["MinZero", "*"]
+        ]],
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["String", "# "]
+              ]],
+              ["Plain", [
+                ["CheckId", "Comment"]
+              ]]
+            ]]
+          ]],
+          ["Optional", "?"]
+        ]],
+        ["Plain", [
+          ["CheckId", [
+            ["ResCheckId", "EndLine"]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "Definition"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "SchemaDef"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "CheckDef"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "ClassDef"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "TokenDef"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "Language"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Lang"]
+        ]],
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["String", "-"]
+              ]],
+              ["Plain", [
+                ["CheckId", "LangExt"]
+              ]]
+            ]]
+          ]],
+          ["Optional", "?"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "Version"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "v"]
+        ]],
+        ["Plain", [
+          ["CheckId", "MajorVer"]
+        ]],
+        ["Plain", [
+          ["String", "."]
+        ]],
+        ["Plain", [
+          ["CheckId", "MinorVer"]
+        ]],
+        ["Plain", [
+          ["String", "."]
+        ]],
+        ["Plain", [
+          ["CheckId", "PatchVer"]
+        ]],
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["String", "-"]
+              ]],
+              ["Plain", [
+                ["CheckId", "PreVer"]
+              ]]
+            ]]
+          ]],
+          ["Optional", "?"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Home"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["NegLook", [
+                ["ClassId", [
+                  ["ResClassId", "ws"]
+                ]]
+              ]],
+              ["Plain", [
+                ["ClassId", [
+                  ["ResClassId", "any"]
+                ]]
+              ]]
+            ]]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Comment"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["NegLook", [
+                ["CheckId", [
+                  ["ResCheckId", "EndLine"]
+                ]]
+              ]],
+              ["Plain", [
+                ["ClassId", [
+                  ["ResClassId", "any"]
+                ]]
+              ]]
+            ]]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "SchemaDef"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "CheckId"]
+        ]],
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SP"]
+          ]],
+          ["MinOne", "+"]
+        ]],
+        ["Plain", [
+          ["String", "<--"]
+        ]],
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SP"]
+          ]],
+          ["MinOne", "+"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Expression"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["Comment", "significant"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "CheckDef"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "CheckId"]
+        ]],
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SP"]
+          ]],
+          ["MinOne", "+"]
+        ]],
+        ["Plain", [
+          ["String", "<-"]
+        ]],
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SP"]
+          ]],
+          ["MinOne", "+"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Expression"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["Comment", "convenient"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "ClassDef"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "ClassId"]
+        ]],
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SP"]
+          ]],
+          ["MinOne", "+"]
+        ]],
+        ["Plain", [
+          ["String", "<-"]
+        ]],
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SP"]
+          ]],
+          ["MinOne", "+"]
+        ]],
+        ["Plain", [
+          ["CheckId", "ClassExpr"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "TokenDef"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "TokenId"]
+        ]],
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SP"]
+          ]],
+          ["MinOne", "+"]
+        ]],
+        ["Plain", [
+          ["String", "<-"]
+        ]],
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SP"]
+          ]],
+          ["MinOne", "+"]
+        ]],
+        ["EndLine", "\n"],
+        ["Plain", [
+          ["CheckId", "TokenVal"]
+        ]],
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["CheckId", "Spacing"]
+              ]],
+              ["Plain", [
+                ["CheckId", "TokenVal"]
+              ]]
+            ]]
+          ]],
+          ["MinZero", "*"]
+        ]],
+        ["EndLine", "\n"],
+        ["Plain", [
+          ["CheckId", "ComEndLine"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "TokenVal"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Rune"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SQ"]
+          ]]
+        ]],
+        ["Plain", [
+          ["CheckId", "String"]
+        ]],
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SQ"]
+          ]]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "TokenId"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Lang"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "upper"]
+          ]],
+          ["MinMax", [
+            ["Min", "2"],
+            ["Max", "12"]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "LangExt"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "visible"]
+          ]],
+          ["MinMax", [
+            ["Min", "1"],
+            ["Max", "20"]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "MajorVer"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "digit"]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "MinorVer"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "digit"]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "PatchVer"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "digit"]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "PreVer"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["ClassId", [
+                  ["ResClassId", "word"]
+                ]]
+              ]]
+            ]],
+            ["Sequence", [
+              ["Plain", [
+                ["TokenId", [
+                  ["ResTokenId", "DASH"]
+                ]]
+              ]]
+            ]]
+          ]],
+          ["MinOne", "+"]
+        ]],
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["String", "."]
+              ]],
+              ["Plain", [
+                ["Expression", [
+                  ["Sequence", [
+                    ["Plain", [
+                      ["ClassId", [
+                        ["ResClassId", "word"]
+                      ]]
+                    ]]
+                  ]],
+                  ["Sequence", [
+                    ["Plain", [
+                      ["TokenId", [
+                        ["ResTokenId", "DASH"]
+                      ]]
+                    ]]
+                  ]]
+                ]],
+                ["MinOne", "+"]
+              ]]
+            ]]
+          ]],
+          ["MinZero", "*"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "CheckId"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "ResCheckId"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["ClassId", [
+                  ["ResClassId", "upper"]
+                ]]
+              ]],
+              ["Plain", [
+                ["ClassId", [
+                  ["ResClassId", "lower"]
+                ]],
+                ["MinOne", "+"]
+              ]]
+            ]]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "ClassId"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "ResClassId"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "lower"]
+          ]]
+        ]],
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["ClassId", [
+                  ["ResClassId", "lower"]
+                ]]
+              ]]
+            ]],
+            ["Sequence", [
+              ["Plain", [
+                ["TokenId", [
+                  ["ResTokenId", "UNDER"]
+                ]]
+              ]],
+              ["Plain", [
+                ["ClassId", [
+                  ["ResClassId", "lower"]
+                ]]
+              ]]
+            ]]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "TokenId"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "ResTokenId"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "upper"]
+          ]]
+        ]],
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["ClassId", [
+                  ["ResClassId", "upper"]
+                ]]
+              ]]
+            ]],
+            ["Sequence", [
+              ["Plain", [
+                ["TokenId", [
+                  ["ResTokenId", "UNDER"]
+                ]]
+              ]],
+              ["Plain", [
+                ["ClassId", [
+                  ["ResClassId", "upper"]
+                ]]
+              ]]
+            ]]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Expression"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Sequence"]
+        ]],
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["CheckId", "Spacing"]
+              ]],
+              ["Plain", [
+                ["String", "/"]
+              ]],
+              ["Plain", [
+                ["TokenId", [
+                  ["ResTokenId", "SP"]
+                ]],
+                ["MinOne", "+"]
+              ]],
+              ["Plain", [
+                ["CheckId", "Sequence"]
+              ]]
+            ]]
+          ]],
+          ["MinZero", "*"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "ClassExpr"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Simple"]
+        ]],
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["CheckId", "Spacing"]
+              ]],
+              ["Plain", [
+                ["String", "/"]
+              ]],
+              ["Plain", [
+                ["TokenId", [
+                  ["ResTokenId", "SP"]
+                ]],
+                ["MinOne", "+"]
+              ]],
+              ["Plain", [
+                ["CheckId", "Simple"]
+              ]]
+            ]]
+          ]],
+          ["MinZero", "*"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "Simple"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Rune"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "ClassId"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "TokenId"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Range"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SQ"]
+          ]]
+        ]],
+        ["Plain", [
+          ["CheckId", "String"]
+        ]],
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SQ"]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "Spacing"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "ComEndLine"],
+          ["Optional", "?"]
+        ]],
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SP"]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Sequence"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Rule"]
+        ]],
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["CheckId", "Spacing"]
+              ]],
+              ["Plain", [
+                ["CheckId", "Rule"]
+              ]]
+            ]]
+          ]],
+          ["MinZero", "*"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "Rule"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "PosLook"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "NegLook"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Plain"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Plain"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Primary"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Quant"],
+          ["Optional", "?"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "PosLook"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "&"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Primary"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Quant"],
+          ["Optional", "?"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "NegLook"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "!"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Primary"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Quant"],
+          ["Optional", "?"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "Primary"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Simple"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "CheckId"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "("]
+        ]],
+        ["Plain", [
+          ["CheckId", "Expression"]
+        ]],
+        ["Plain", [
+          ["String", ")"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "Quant"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Optional"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "MinZero"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "MinOne"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "MinMax"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Count"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Optional"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "?"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "MinZero"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "*"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "MinOne"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "MinMax"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "{"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Min"]
+        ]],
+        ["Plain", [
+          ["String", ","]
+        ]],
+        ["Plain", [
+          ["CheckId", "Max"],
+          ["Optional", "?"]
+        ]],
+        ["Plain", [
+          ["String", "}"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Min"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "digit"]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Max"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "digit"]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Count"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "{"]
+        ]],
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "digit"]
+          ]],
+          ["MinOne", "+"]
+        ]],
+        ["Plain", [
+          ["String", "}"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "Range"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "AlphaRange"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "IntRange"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "UniRange"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "BinRange"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "HexRange"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "OctRange"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "UniRange"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "["]
+        ]],
+        ["Plain", [
+          ["CheckId", "Unicode"]
+        ]],
+        ["Plain", [
+          ["String", "-"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Unicode"]
+        ]],
+        ["Plain", [
+          ["String", "]"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["Comment", "[U+0000-U+10FFFF]"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "AlphaRange"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "["]
+        ]],
+        ["Plain", [
+          ["CheckId", "Alpha"]
+        ]],
+        ["Plain", [
+          ["String", "-"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Alpha"]
+        ]],
+        ["Plain", [
+          ["String", "]"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["Comment", "[a-m] [A-Z]"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "IntRange"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "["]
+        ]],
+        ["Plain", [
+          ["CheckId", "Integer"]
+        ]],
+        ["Plain", [
+          ["String", "-"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Integer"]
+        ]],
+        ["Plain", [
+          ["String", "]"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["Comment", "[0-108] [0-9]"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "BinRange"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "["]
+        ]],
+        ["Plain", [
+          ["CheckId", "Binary"]
+        ]],
+        ["Plain", [
+          ["String", "-"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Binary"]
+        ]],
+        ["Plain", [
+          ["String", "]"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["Comment", "[b101-b1010]"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "HexRange"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "["]
+        ]],
+        ["Plain", [
+          ["CheckId", "Hexadec"]
+        ]],
+        ["Plain", [
+          ["String", "-"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Hexadec"]
+        ]],
+        ["Plain", [
+          ["String", "]"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["Comment", "[x20-x2F]"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "OctRange"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "["]
+        ]],
+        ["Plain", [
+          ["CheckId", "Octal"]
+        ]],
+        ["Plain", [
+          ["String", "-"]
+        ]],
+        ["Plain", [
+          ["CheckId", "Octal"]
+        ]],
+        ["Plain", [
+          ["String", "]"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["Comment", "[o20-o37]"],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "Rune"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Unicode"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Binary"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Hexadec"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Octal"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "String"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "quotable"]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Alpha"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "alpha"]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Digit"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "digit"]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Unicode"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "U+"]
+        ]],
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "upperhex"]
+          ]],
+          ["MinMax", [
+            ["Min", "4"],
+            ["Max", "8"]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Integer"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "digit"]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Binary"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "b"]
+        ]],
+        ["Plain", [
+          ["ClassId", "bindig"],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Hexadec"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "x"]
+        ]],
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "upperhex"]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Octal"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "o"]
+        ]],
+        ["Plain", [
+          ["ClassId", [
+            ["ResClassId", "octdig"]
+          ]],
+          ["MinOne", "+"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", [
+      ["ResCheckId", "EndLine"]
+    ]],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "LF"]
+          ]]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "CRLF"]
+          ]]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "CR"]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "ResClassId"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "alphanum"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "alpha"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "any"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "bitdig"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "control"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "digit"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "hexdig"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "lowerhex"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "lower"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "octdig"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "punct"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "quotable"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "sign"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "upperhex"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "upper"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "visible"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "ws"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "alnum"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "ascii"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "blank"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "cntrl"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "graph"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "print"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "space"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "word"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "xdigit"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "ResTokenId"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "TAB"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "CRLF"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "CR"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "LF"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "SP"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "VT"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "FF"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "NOT"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "BANG"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "DQ"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "HASH"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "DOLLAR"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "PERCENT"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "AND"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "SQ"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "LPAREN"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "RPAREN"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "STAR"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "PLUS"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "COMMA"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "DASH"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "MINUS"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "DOT"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "SLASH"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "COLON"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "SEMI"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "LT"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "EQ"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "GT"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "QUERY"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "QUESTION"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "AT"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "LBRAKT"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "BKSLASH"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "RBRAKT"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "CARET"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "UNDER"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "BKTICK"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "LCURLY"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "LBRACE"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "BAR"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "PIPE"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "RCURLY"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "RBRACE"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "TILDE"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "UNKNOWN"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "REPLACE"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "MAXRUNE"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "MAXASCII"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "MAXLATIN"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "LARROW"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "RARROW"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "LLARROW"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "RLARROW"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "LARROWF"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "LFAT"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "RARROWF"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "RFAT"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "WALRUS"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "ResCheckId"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "EndLine"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["Comment", "Classes of Runes"],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "alpha"]
+    ]],
+    ["ClassExpr", [
+      ["AlphaRange", [
+        ["Alpha", "A"],
+        ["Alpha", "Z"]
+      ]],
+      ["AlphaRange", [
+        ["Alpha", "a"],
+        ["Alpha", "z"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "alphanum"]
+    ]],
+    ["ClassExpr", [
+      ["AlphaRange", [
+        ["Alpha", "A"],
+        ["Alpha", "Z"]
+      ]],
+      ["AlphaRange", [
+        ["Alpha", "a"],
+        ["Alpha", "z"]
+      ]],
+      ["IntRange", [
+        ["Integer", "0"],
+        ["Integer", "9"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "any"]
+    ]],
+    ["ClassExpr", [
+      ["UniRange", [
+        ["Unicode", "U+0000"],
+        ["Unicode", "U+FFFC"]
+      ]],
+      ["UniRange", [
+        ["Unicode", "U+FFFE"],
+        ["Unicode", "U+10FFFF"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "bitdig"]
+    ]],
+    ["ClassExpr", [
+      ["IntRange", [
+        ["Integer", "0"],
+        ["Integer", "1"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "control"]
+    ]],
+    ["ClassExpr", [
+      ["HexRange", [
+        ["Hexadec", "x00"],
+        ["Hexadec", "x1F"]
+      ]],
+      ["HexRange", [
+        ["Hexadec", "x7F"],
+        ["Hexadec", "x9F"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "digit"]
+    ]],
+    ["ClassExpr", [
+      ["IntRange", [
+        ["Integer", "0"],
+        ["Integer", "9"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "hexdig"]
+    ]],
+    ["ClassExpr", [
+      ["IntRange", [
+        ["Integer", "0"],
+        ["Integer", "9"]
+      ]],
+      ["AlphaRange", [
+        ["Alpha", "a"],
+        ["Alpha", "f"]
+      ]],
+      ["AlphaRange", [
+        ["Alpha", "A"],
+        ["Alpha", "F"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "lowerhex"]
+    ]],
+    ["ClassExpr", [
+      ["IntRange", [
+        ["Integer", "0"],
+        ["Integer", "9"]
+      ]],
+      ["AlphaRange", [
+        ["Alpha", "a"],
+        ["Alpha", "f"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "lower"]
+    ]],
+    ["ClassExpr", [
+      ["AlphaRange", [
+        ["Alpha", "a"],
+        ["Alpha", "z"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "octdig"]
+    ]],
+    ["ClassExpr", [
+      ["IntRange", [
+        ["Integer", "0"],
+        ["Integer", "7"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "punct"]
+    ]],
+    ["ClassExpr", [
+      ["HexRange", [
+        ["Hexadec", "x21"],
+        ["Hexadec", "x2F"]
+      ]],
+      ["HexRange", [
+        ["Hexadec", "x3A"],
+        ["Hexadec", "x40"]
+      ]],
+      ["HexRange", [
+        ["Hexadec", "x5B"],
+        ["Hexadec", "x60"]
+      ]],
+      ["HexRange", [
+        ["Hexadec", "x7B"],
+        ["Hexadec", "x7E"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["Comment", "visible ASCII character except single quote or a space"],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "quotable"]
+    ]],
+    ["ClassExpr", [
+      ["ClassId", [
+        ["ResClassId", "alphanum"]
+      ]],
+      ["HexRange", [
+        ["Hexadec", "x20"],
+        ["Hexadec", "x26"]
+      ]],
+      ["HexRange", [
+        ["Hexadec", "x28"],
+        ["Hexadec", "x2F"]
+      ]],
+      ["EndLine", "\n"],
+      ["HexRange", [
+        ["Hexadec", "x3A"],
+        ["Hexadec", "x40"]
+      ]],
+      ["HexRange", [
+        ["Hexadec", "x5B"],
+        ["Hexadec", "x60"]
+      ]],
+      ["HexRange", [
+        ["Hexadec", "x7B"],
+        ["Hexadec", "x7E"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "sign"]
+    ]],
+    ["ClassExpr", [
+      ["TokenId", [
+        ["ResTokenId", "PLUS"]
+      ]],
+      ["TokenId", [
+        ["ResTokenId", "MINUS"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "upperhex"]
+    ]],
+    ["ClassExpr", [
+      ["IntRange", [
+        ["Integer", "0"],
+        ["Integer", "9"]
+      ]],
+      ["AlphaRange", [
+        ["Alpha", "A"],
+        ["Alpha", "F"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "upper"]
+    ]],
+    ["ClassExpr", [
+      ["AlphaRange", [
+        ["Alpha", "A"],
+        ["Alpha", "Z"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "visible"]
+    ]],
+    ["ClassExpr", [
+      ["ClassId", [
+        ["ResClassId", "alphanum"]
+      ]],
+      ["ClassId", [
+        ["ResClassId", "punct"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "ws"]
+    ]],
+    ["ClassExpr", [
+      ["TokenId", [
+        ["ResTokenId", "SP"]
+      ]],
+      ["TokenId", [
+        ["ResTokenId", "TAB"]
+      ]],
+      ["TokenId", [
+        ["ResTokenId", "CR"]
+      ]],
+      ["TokenId", [
+        ["ResTokenId", "LF"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "alnum"]
+    ]],
+    ["ClassExpr", [
+      ["ClassId", [
+        ["ResClassId", "alphanum"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "ascii"]
+    ]],
+    ["ClassExpr", [
+      ["HexRange", [
+        ["Hexadec", "x0"],
+        ["Hexadec", "x7F"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "blank"]
+    ]],
+    ["ClassExpr", [
+      ["TokenId", [
+        ["ResTokenId", "SP"]
+      ]],
+      ["TokenId", [
+        ["ResTokenId", "TAB"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "cntrl"]
+    ]],
+    ["ClassExpr", [
+      ["ClassId", [
+        ["ResClassId", "control"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "graph"]
+    ]],
+    ["ClassExpr", [
+      ["HexRange", [
+        ["Hexadec", "x21"],
+        ["Hexadec", "x7E"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "print"]
+    ]],
+    ["ClassExpr", [
+      ["HexRange", [
+        ["Hexadec", "x20"],
+        ["Hexadec", "x7E"]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "space"]
+    ]],
+    ["ClassExpr", [
+      ["ClassId", [
+        ["ResClassId", "ws"]
+      ]],
+      ["TokenId", [
+        ["ResTokenId", "VT"]
+      ]],
+      ["TokenId", [
+        ["ResTokenId", "FF"]
+      ]]
+    ]]
+  ]],
+  ["Comment", "[:space:] \\s"],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "word"]
+    ]],
+    ["ClassExpr", [
+      ["ClassId", [
+        ["ResClassId", "upper"]
+      ]],
+      ["ClassId", [
+        ["ResClassId", "lower"]
+      ]],
+      ["ClassId", [
+        ["ResClassId", "digit"]
+      ]],
+      ["TokenId", [
+        ["ResTokenId", "UNDER"]
+      ]]
+    ]]
+  ]],
+  ["Comment", "[:word:]  \\w"],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "xdigit"]
+    ]],
+    ["ClassExpr", [
+      ["ClassId", "hex"]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["Comment", "Single Rune and String Tokens"],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["TokenDef", [
+    ["ResTokenId", "TAB"],
+    ["Hexadec", "x9"],
+    ["Comment", "\"\\t\""],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["ResTokenId", "LF"],
+    ["Hexadec", "xA"],
+    ["Comment", "\"\\n\" (line feed)"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["ResTokenId", "CR"],
+    ["Hexadec", "xD"],
+    ["Comment", "\"\\r\" (carriage return)"],
+    ["EndLine", "\n"]
+  ]]
+]]

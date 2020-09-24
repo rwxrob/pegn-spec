@@ -104,25 +104,7 @@ ResTokenId <-- 'TAB' / 'CRLF' / 'CR' / 'LF' / 'SP' / 'VT' / 'FF' / 'NOT'
 
 ResCheckId <-- 'EndLine'
 
-# json ast
-
-NodeLong      <-- TerminalLong / ParentLong
-TerminalLong  <-- '[' DQ CheckId DQ ',' SP DQ Literal DQ ']'
-ParentLong    <-- '[' DQ CheckId DQ ',' SP ('[]' / ChildrenLong) ']'
-ChildrenLong   <- '[' LF In NodeLong (',' LF In{2}  NodeLong)* LF In ']'
-In             <- SP{2,}    # MUST be two spaces per depth level
-
-NodeShort     <-- TerminalShort / ParentShort
-TerminalShort <-- '[' Integer ',' DQ Literal DQ ']'
-                / '[' Integer ']' # implied empty value ''
-                / '[]'            # implied 0 type (Undefined)
-ParentShort   <-- '[' Integer (',' ('[]' / ChildrenShort))? ']' 
-ChildrenShort  <- '[' NodeShort (',' NodeShort)* ']'
-Literal       <-- AstEsc / [x20-x21] / [x23-x5B] / [x5D-x10FFFF]
-AstEsc         <- BKSLASH ('b' / 'f' / 'n' / 'r' / 't' # \u not included
-                / DQ / BKSLASH / SLASH)
-
-# classes
+# Classes of Runes
 
 alpha       <- [A-Z] / [a-z]
 alphanum    <- [A-Z] / [a-z] / [0-9]
@@ -135,8 +117,11 @@ lowerhex    <- [0-9] / [a-f]
 lower       <- [a-z]
 octdig      <- [0-7]
 punct       <- [x21-x2F] / [x3A-x40] / [x5B-x60] / [x7B-x7E]
-quotable    <- alphanum / [x20-x26] / [x28-x2F]    # skips single quote '
+
+# visible ASCII character except single quote or a space
+quotable    <- alphanum / [x20-x26] / [x28-x2F]
              / [x3A-x40] / [x5B-x60] / [x7B-x7E]
+
 sign        <- PLUS / MINUS
 upperhex    <- [0-9] / [A-F]
 upper       <- [A-Z]
@@ -153,7 +138,7 @@ space       <- ws / VT / FF                   # [:space:] \s
 word        <- upper / lower / digit / UNDER  # [:word:]  \w
 xdigit      <- hex
 
-# tokens
+# Single Rune and String Tokens
 
 TAB         <- x9     # "\t"
 LF          <- xA     # "\n" (line feed)

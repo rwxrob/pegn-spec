@@ -1,0 +1,303 @@
+["Grammar", [
+  ["Meta", [
+    ["Lang", "PEGN"],
+    ["LangExt", "AST-SHORT"],
+    ["MajorVer", "1"],
+    ["MinorVer", "0"],
+    ["PatchVer", "0"],
+    ["PreVer", "alpha"],
+    ["Home", "gitlab.com/pegn/spec/ast/short"],
+    ["EndLine", "\n"]
+  ]],
+  ["Copyright", [
+    ["Comment", "2020 Robert S Muhlestein (rwx@robs.io)"],
+    ["EndLine", "\n"]
+  ]],
+  ["Licensed", [
+    ["Comment", "Apache-2, CC-BY-4.0"],
+    ["EndLine", "\n"]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Node"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Terminal"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Parent"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Terminal"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "["]
+        ]],
+        ["Plain", [
+          ["CheckId", "Integer"]
+        ]],
+        ["Plain", [
+          ["String", ","]
+        ]],
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "DQ"]
+          ]]
+        ]],
+        ["Plain", [
+          ["CheckId", "Literal"]
+        ]],
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "DQ"]
+          ]]
+        ]],
+        ["Plain", [
+          ["String", "]"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "["]
+        ]],
+        ["Plain", [
+          ["CheckId", "Integer"]
+        ]],
+        ["Plain", [
+          ["String", "]"]
+        ]]
+      ]],
+      ["Comment", "implied empty value ''"],
+      ["EndLine", "\n"],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "[]"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["Comment", "implied 0 type (Undefined)"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Parent"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "["]
+        ]],
+        ["Plain", [
+          ["CheckId", "Integer"]
+        ]],
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["String", ","]
+              ]],
+              ["Plain", [
+                ["Expression", [
+                  ["Sequence", [
+                    ["Plain", [
+                      ["String", "[]"]
+                    ]]
+                  ]],
+                  ["Sequence", [
+                    ["Plain", [
+                      ["CheckId", "Children"]
+                    ]]
+                  ]]
+                ]]
+              ]]
+            ]]
+          ]],
+          ["Optional", "?"]
+        ]],
+        ["Plain", [
+          ["String", "]"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "Children"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["String", "["]
+        ]],
+        ["Plain", [
+          ["CheckId", "Node"]
+        ]],
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["String", ","]
+              ]],
+              ["Plain", [
+                ["CheckId", "Node"]
+              ]]
+            ]]
+          ]],
+          ["MinZero", "*"]
+        ]],
+        ["Plain", [
+          ["String", "]"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "In"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "SP"]
+          ]],
+          ["MinMax", [
+            ["Min", "2"]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["Comment", "two spaces per depth level"],
+  ["EndLine", "\n"],
+  ["SchemaDef", [
+    ["CheckId", "Literal"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Escaped"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["HexRange", [
+            ["Hexadec", "x20"],
+            ["Hexadec", "x21"]
+          ]]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["HexRange", [
+            ["Hexadec", "x23"],
+            ["Hexadec", "x5B"]
+          ]]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["HexRange", [
+            ["Hexadec", "x5D"],
+            ["Hexadec", "x10FFFF"]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["CheckDef", [
+    ["CheckId", "Escaped"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["TokenId", [
+            ["ResTokenId", "BKSLASH"]
+          ]]
+        ]],
+        ["Plain", [
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["String", "b"]
+              ]]
+            ]],
+            ["Sequence", [
+              ["Plain", [
+                ["String", "f"]
+              ]]
+            ]],
+            ["Sequence", [
+              ["Plain", [
+                ["String", "n"]
+              ]]
+            ]],
+            ["Sequence", [
+              ["Plain", [
+                ["String", "r"]
+              ]]
+            ]],
+            ["Sequence", [
+              ["Plain", [
+                ["String", "t"]
+              ]]
+            ]],
+            ["Comment", "\\u not included"],
+            ["EndLine", "\n"],
+            ["Sequence", [
+              ["Plain", [
+                ["TokenId", [
+                  ["ResTokenId", "DQ"]
+                ]]
+              ]]
+            ]],
+            ["Sequence", [
+              ["Plain", [
+                ["TokenId", [
+                  ["ResTokenId", "BKSLASH"]
+                ]]
+              ]]
+            ]],
+            ["Sequence", [
+              ["Plain", [
+                ["TokenId", [
+                  ["ResTokenId", "SLASH"]
+                ]]
+              ]]
+            ]]
+          ]]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["TokenDef", [
+    ["ResTokenId", "DQ"],
+    ["Hexadec", "x22"],
+    ["Comment", "\""],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["ResTokenId", "SP"],
+    ["Hexadec", "x20"],
+    ["Comment", "\" \""],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["ResTokenId", "BKSLASH"],
+    ["Hexadec", "x5C"],
+    ["Comment", "\\"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["ResTokenId", "SLASH"],
+    ["Hexadec", "x2F"],
+    ["Comment", "/"],
+    ["EndLine", "\n"]
+  ]]
+]]

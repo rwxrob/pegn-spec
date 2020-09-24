@@ -246,6 +246,8 @@ optional human-friendly version as well as the core compressed version.
 
 ### AST (Short-Form)
 
+[[PEGN Specification of AST Short-Form](/ast/short/grammar.pegn)]
+
 The compressed, short-form of the JSON AST is optimized for the best
 parsing speeds and most efficient storage and transfer. It *must* be
 used whenever an AST is stored or transferred over the network in any
@@ -259,6 +261,8 @@ compressed into a single line of short-form AST JSON:
 ```
 
 ### AST (Long-Form)
+
+[[PEGN Specification of AST Long-Form](/ast/long/grammar.pegn)]
 
 The human-friendly JSON long-form AST is used only for debugging and
 documentation and need never be parsed itself (despite it being JSON as
