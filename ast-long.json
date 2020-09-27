@@ -17,7 +17,7 @@
     ["EndLine", "\n"]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Grammar"],
     ["Expression", [
       ["Sequence", [
@@ -58,7 +58,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Meta"],
     ["Expression", [
       ["Sequence", [
@@ -89,7 +89,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Copyright"],
     ["Expression", [
       ["Sequence", [
@@ -108,7 +108,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Licensed"],
     ["Expression", [
       ["Sequence", [
@@ -164,7 +164,7 @@
     ["Expression", [
       ["Sequence", [
         ["Plain", [
-          ["CheckId", "SchemaDef"]
+          ["CheckId", "NodeDef"]
         ]]
       ]],
       ["Sequence", [
@@ -249,7 +249,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Home"],
     ["Expression", [
       ["Sequence", [
@@ -275,7 +275,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Comment"],
     ["Expression", [
       ["Sequence", [
@@ -301,8 +301,8 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
-    ["CheckId", "SchemaDef"],
+  ["NodeDef", [
+    ["CheckId", "NodeDef"],
     ["Expression", [
       ["Sequence", [
         ["Plain", [
@@ -331,7 +331,7 @@
   ]],
   ["Comment", "significant"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "CheckDef"],
     ["Expression", [
       ["Sequence", [
@@ -361,7 +361,7 @@
   ]],
   ["Comment", "convenient"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "ClassDef"],
     ["Expression", [
       ["Sequence", [
@@ -390,7 +390,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "TokenDef"],
     ["Expression", [
       ["Sequence", [
@@ -470,7 +470,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Lang"],
     ["Expression", [
       ["Sequence", [
@@ -487,7 +487,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "LangExt"],
     ["Expression", [
       ["Sequence", [
@@ -505,7 +505,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "MajorVer"],
     ["Expression", [
       ["Sequence", [
@@ -519,7 +519,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "MinorVer"],
     ["Expression", [
       ["Sequence", [
@@ -533,7 +533,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "PatchVer"],
     ["Expression", [
       ["Sequence", [
@@ -547,7 +547,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "PreVer"],
     ["Expression", [
       ["Sequence", [
@@ -604,7 +604,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "CheckId"],
     ["Expression", [
       ["Sequence", [
@@ -635,7 +635,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "ClassId"],
     ["Expression", [
       ["Sequence", [
@@ -677,7 +677,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "TokenId"],
     ["Expression", [
       ["Sequence", [
@@ -720,7 +720,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Expression"],
     ["Expression", [
       ["Sequence", [
@@ -753,7 +753,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "ClassExpr"],
     ["Expression", [
       ["Sequence", [
@@ -848,7 +848,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Sequence"],
     ["Expression", [
       ["Sequence", [
@@ -893,7 +893,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Plain"],
     ["Expression", [
       ["Sequence", [
@@ -908,7 +908,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "PosLook"],
     ["Expression", [
       ["Sequence", [
@@ -926,7 +926,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "NegLook"],
     ["Expression", [
       ["Sequence", [
@@ -1003,7 +1003,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Optional"],
     ["Expression", [
       ["Sequence", [
@@ -1014,7 +1014,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "MinZero"],
     ["Expression", [
       ["Sequence", [
@@ -1025,7 +1025,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "MinOne"],
     ["Expression", [
       ["Sequence", [
@@ -1036,7 +1036,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "MinMax"],
     ["Expression", [
       ["Sequence", [
@@ -1060,7 +1060,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Min"],
     ["Expression", [
       ["Sequence", [
@@ -1074,7 +1074,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Max"],
     ["Expression", [
       ["Sequence", [
@@ -1088,7 +1088,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Count"],
     ["Expression", [
       ["Sequence", [
@@ -1147,7 +1147,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "UniRange"],
     ["Expression", [
       ["Sequence", [
@@ -1171,7 +1171,7 @@
   ]],
   ["Comment", "[U+0000-U+10FFFF]"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "AlphaRange"],
     ["Expression", [
       ["Sequence", [
@@ -1195,7 +1195,7 @@
   ]],
   ["Comment", "[a-m] [A-Z]"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "IntRange"],
     ["Expression", [
       ["Sequence", [
@@ -1219,7 +1219,7 @@
   ]],
   ["Comment", "[0-108] [0-9]"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "BinRange"],
     ["Expression", [
       ["Sequence", [
@@ -1243,7 +1243,7 @@
   ]],
   ["Comment", "[b101-b1010]"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "HexRange"],
     ["Expression", [
       ["Sequence", [
@@ -1267,7 +1267,7 @@
   ]],
   ["Comment", "[x20-x2F]"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "OctRange"],
     ["Expression", [
       ["Sequence", [
@@ -1318,7 +1318,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "String"],
     ["Expression", [
       ["Sequence", [
@@ -1332,7 +1332,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Alpha"],
     ["Expression", [
       ["Sequence", [
@@ -1345,20 +1345,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
-    ["CheckId", "Digit"],
-    ["Expression", [
-      ["Sequence", [
-        ["Plain", [
-          ["ClassId", [
-            ["ResClassId", "digit"]
-          ]]
-        ]]
-      ]]
-    ]]
-  ]],
-  ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Unicode"],
     ["Expression", [
       ["Sequence", [
@@ -1378,7 +1365,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Integer"],
     ["Expression", [
       ["Sequence", [
@@ -1392,7 +1379,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Binary"],
     ["Expression", [
       ["Sequence", [
@@ -1407,7 +1394,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Hexadec"],
     ["Expression", [
       ["Sequence", [
@@ -1424,7 +1411,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "Octal"],
     ["Expression", [
       ["Sequence", [
@@ -1442,7 +1429,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", [
       ["ResCheckId", "EndLine"]
     ]],
@@ -1472,7 +1459,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "ResClassId"],
     ["Expression", [
       ["Sequence", [
@@ -1613,7 +1600,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "ResTokenId"],
     ["Expression", [
       ["Sequence", [
@@ -1925,7 +1912,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["SchemaDef", [
+  ["NodeDef", [
     ["CheckId", "ResCheckId"],
     ["Expression", [
       ["Sequence", [
@@ -2354,21 +2341,367 @@
   ["EndLine", "\n"],
   ["EndLine", "\n"],
   ["TokenDef", [
-    ["ResTokenId", "TAB"],
+    ["TokenId", [
+      ["ResTokenId", "TAB"]
+    ]],
     ["Hexadec", "x9"],
     ["Comment", "\"\\t\""],
     ["EndLine", "\n"]
   ]],
   ["TokenDef", [
-    ["ResTokenId", "LF"],
+    ["TokenId", [
+      ["ResTokenId", "LF"]
+    ]],
     ["Hexadec", "xA"],
     ["Comment", "\"\\n\" (line feed)"],
     ["EndLine", "\n"]
   ]],
   ["TokenDef", [
-    ["ResTokenId", "CR"],
+    ["TokenId", [
+      ["ResTokenId", "CR"]
+    ]],
     ["Hexadec", "xD"],
     ["Comment", "\"\\r\" (carriage return)"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "CRLF"]
+    ]],
+    ["TokenId", [
+      ["ResTokenId", "CR"]
+    ]],
+    ["TokenId", [
+      ["ResTokenId", "LF"]
+    ]],
+    ["Comment", "\"\\r\\n\""],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "SP"]
+    ]],
+    ["Hexadec", "x20"],
+    ["Comment", "\" \""],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "VT"]
+    ]],
+    ["Hexadec", "xB"],
+    ["Comment", "\"\\v\" (vertical tab)"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "FF"]
+    ]],
+    ["Hexadec", "xC"],
+    ["Comment", "\"\\f\" (form feed)"],
+    ["EndLine", "\n"]
+  ]],
+  ["EndLine", "\n"],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "NOT"]
+    ]],
+    ["Hexadec", "x21"],
+    ["Comment", "!"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "BANG"]
+    ]],
+    ["Hexadec", "x21"],
+    ["Comment", "!"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "DQ"]
+    ]],
+    ["Hexadec", "x22"],
+    ["Comment", "\""],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "HASH"]
+    ]],
+    ["Hexadec", "x23"],
+    ["Comment", "#"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "DOLLAR"]
+    ]],
+    ["Hexadec", "x24"],
+    ["Comment", "$"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "PERCENT"]
+    ]],
+    ["Hexadec", "x25"],
+    ["Comment", "%"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "AND"]
+    ]],
+    ["Hexadec", "x26"],
+    ["Comment", "&"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "SQ"]
+    ]],
+    ["Hexadec", "x27"],
+    ["Comment", "'"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "LPAREN"]
+    ]],
+    ["Hexadec", "x28"],
+    ["Comment", "("],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "RPAREN"]
+    ]],
+    ["Hexadec", "x29"],
+    ["Comment", ")"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "STAR"]
+    ]],
+    ["Hexadec", "x2A"],
+    ["Comment", "*"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "PLUS"]
+    ]],
+    ["Hexadec", "x2B"],
+    ["Comment", "+"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "COMMA"]
+    ]],
+    ["Hexadec", "x2C"],
+    ["Comment", ","],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "DASH"]
+    ]],
+    ["Hexadec", "x2D"],
+    ["Comment", "-"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "MINUS"]
+    ]],
+    ["Hexadec", "x2D"],
+    ["Comment", "-"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "DOT"]
+    ]],
+    ["Hexadec", "x2E"],
+    ["Comment", "."],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "SLASH"]
+    ]],
+    ["Hexadec", "x2F"],
+    ["Comment", "/"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "COLON"]
+    ]],
+    ["Hexadec", "x3A"],
+    ["Comment", ":"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "SEMI"]
+    ]],
+    ["Hexadec", "x3B"],
+    ["Comment", ";"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "LT"]
+    ]],
+    ["Hexadec", "x3C"],
+    ["Comment", "<"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "EQ"]
+    ]],
+    ["Hexadec", "x3D"],
+    ["Comment", "="],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "GT"]
+    ]],
+    ["Hexadec", "x3E"],
+    ["Comment", ">"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "QUERY"]
+    ]],
+    ["Hexadec", "x3F"],
+    ["Comment", "?"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "QUESTION"]
+    ]],
+    ["Hexadec", "x3F"],
+    ["Comment", "?"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "AT"]
+    ]],
+    ["Hexadec", "x40"],
+    ["Comment", "@"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "LBRAKT"]
+    ]],
+    ["Hexadec", "x5B"],
+    ["Comment", "["],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "BKSLASH"]
+    ]],
+    ["Hexadec", "x5C"],
+    ["Comment", "\\"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "RBRAKT"]
+    ]],
+    ["Hexadec", "x5D"],
+    ["Comment", "]"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "CARET"]
+    ]],
+    ["Hexadec", "x5E"],
+    ["Comment", "^"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "UNDER"]
+    ]],
+    ["Hexadec", "x5F"],
+    ["Comment", "_"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "BKTICK"]
+    ]],
+    ["Hexadec", "x60"],
+    ["Comment", "`"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "LCURLY"]
+    ]],
+    ["Hexadec", "x7B"],
+    ["Comment", "{"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "LBRACE"]
+    ]],
+    ["Hexadec", "x7B"],
+    ["Comment", "{"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "BAR"]
+    ]],
+    ["Hexadec", "x7C"],
+    ["Comment", "|"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "PIPE"]
+    ]],
+    ["Hexadec", "x7C"],
+    ["Comment", "|"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", "RCURLY"],
+    ["Hexadec", "x7D"],
+    ["Comment", "}"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "RBRACE"]
+    ]],
+    ["Hexadec", "x7D"],
+    ["Comment", "}"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "TILDE"]
+    ]],
+    ["Hexadec", "x7E"],
+    ["Comment", "~"],
     ["EndLine", "\n"]
   ]]
 ]]

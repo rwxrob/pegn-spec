@@ -10,7 +10,7 @@ Meta       <-- '# ' Language ' (' Version ') ' Home EndLine
 Copyright  <-- '# Copyright ' Comment EndLine
 Licensed   <-- '# Licensed under ' Comment EndLine
 ComEndLine  <- SP* ('# ' Comment)? EndLine
-Definition  <- SchemaDef / CheckDef / ClassDef / TokenDef
+Definition  <- NodeDef / CheckDef / ClassDef / TokenDef
 
 Language    <- Lang ('-' LangExt)?
 Version     <- 'v' MajorVer '.' MinorVer '.' PatchVer ('-' PreVer)?
@@ -18,7 +18,7 @@ Home       <-- (!ws any)+
 
 Comment    <-- (!EndLine any)+
 
-SchemaDef  <-- CheckId SP+ '<--' SP+ Expression   # significant
+NodeDef    <-- CheckId SP+ '<--' SP+ Expression   # significant
 CheckDef   <-- CheckId SP+ '<-'  SP+ Expression   # convenient
 ClassDef   <-- ClassId SP+ '<-' SP+ ClassExpr
 TokenDef   <-- TokenId SP+ '<-' SP+ 
@@ -75,7 +75,6 @@ OctRange   <-- '[' Octal '-' Octal ']'      # [o20-o37]
 Rune        <- Unicode / Binary / Hexadec / Octal
 String     <-- quotable+
 Alpha      <-- alpha
-Digit      <-- digit
 Unicode    <-- 'U+' upperhex{4,8}
 Integer    <-- digit+
 Binary     <-- 'b' bindig+
