@@ -185,8 +185,8 @@ PIPE        <- x7C # |
 RCURLY      <- x7D # }
 RBRACE      <- x7D # }
 TILDE       <- x7E # ~
-UNKNOWN     <- U+FFFD # �
-REPLACE     <- U+FFFD # �
+UNKNOWN     <- U+FFFD
+REPLACE     <- U+FFFD
 MAXRUNE     <- U+10FFFF
 MAXASCII    <- x7F
 MAXLATIN    <- xFF

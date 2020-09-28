@@ -2705,5 +2705,69 @@
     ["Hexadec", "x7E"],
     ["Comment", "~"],
     ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "UNKNOWN"]
+    ]],
+    ["Unicode", "U+FFFD"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "REPLACE"]
+    ]],
+    ["Unicode", "U+FFFD"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "MAXRUNE"]
+    ]],
+    ["Unicode", "U+10FFFF"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "MAXASCII"]
+    ]],
+    ["Hexadec", "x7F"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "MAXLATIN"]
+    ]],
+    ["Hexadec", "xFF"],
+    ["EndLine", "\n"]
+  ]],
+  ["EndLine", "\n"],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "LARROW"]
+    ]],
+    ["String", "<-"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "RARROW"]
+    ]],
+    ["String", "->"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "LLARROW"]
+    ]],
+    ["String", "<--"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "RLARROW"]
+    ]],
+    ["String", "-->"],
+    ["EndLine", "\n"]
   ]]
 ]]
