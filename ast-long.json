@@ -2683,7 +2683,9 @@
     ["EndLine", "\n"]
   ]],
   ["TokenDef", [
-    ["TokenId", "RCURLY"],
+    ["TokenId", [
+      ["ResTokenId", "RCURLY"]
+    ]],
     ["Hexadec", "x7D"],
     ["Comment", "}"],
     ["EndLine", "\n"]
