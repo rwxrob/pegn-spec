@@ -1,3 +1,7 @@
 /grammar.pegn
   Content-type: text/plain
+/ast/short/grammar.pegn
+  Content-type: text/plain
+/ast/long/grammar.pegn
+  Content-type: text/plain
 
