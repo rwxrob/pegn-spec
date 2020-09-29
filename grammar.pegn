@@ -25,7 +25,7 @@ TokenDef   <-- TokenId SP+ '<-' SP+
                TokenVal (Spacing TokenVal)*
                ComEndLine
 
-TokenVal    <- Rune / SQ String SQ / TokenId
+TokenVal    <- Rune / SQ String SQ
 
 Lang       <-- upper{2,12}
 LangExt    <-- visible{1,20}
@@ -107,7 +107,7 @@ ResCheckId <-- 'EndLine'
 
 alpha       <- [A-Z] / [a-z]
 alphanum    <- [A-Z] / [a-z] / [0-9]
-any         <- [U+0000-U+FFFC] / [U+FFFE-U+10FFFF]
+any         <- [U+0000-U+10FFFF]
 bitdig      <- [0-1]
 control     <- [x00-x1F] / [x7F-x9F]
 digit       <- [0-9]
@@ -142,7 +142,7 @@ xdigit      <- hex
 TAB         <- x9     # "\t"
 LF          <- xA     # "\n" (line feed)
 CR          <- xD     # "\r" (carriage return)
-CRLF        <- CR LF  # "\r\n"
+CRLF        <- xD xA  # "\r\n"
 SP          <- x20    # " "
 VT          <- xB     # "\v" (vertical tab)
 FF          <- xC     # "\f" (form feed)
@@ -188,6 +188,7 @@ TILDE       <- x7E # ~
 UNKNOWN     <- U+FFFD
 REPLACE     <- U+FFFD
 MAXRUNE     <- U+10FFFF
+ENDOFDATA   <- U+FFFFFFFF
 MAXASCII    <- x7F
 MAXLATIN    <- xFF
 
