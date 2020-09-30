@@ -460,11 +460,6 @@
             ["ResTokenId", "SQ"]
           ]]
         ]]
-      ]],
-      ["Sequence", [
-        ["Plain", [
-          ["CheckId", "TokenId"]
-        ]]
       ]]
     ]]
   ]],
@@ -1620,7 +1615,7 @@
       ]],
       ["Sequence", [
         ["Plain", [
-          ["String", "LF"]
+          ["String", "LFAT"]
         ]]
       ]],
       ["Sequence", [
@@ -1863,12 +1858,12 @@
       ]],
       ["Sequence", [
         ["Plain", [
-          ["String", "LARROW"]
+          ["String", "LARROWF"]
         ]]
       ]],
       ["Sequence", [
         ["Plain", [
-          ["String", "RARROW"]
+          ["String", "RARROWF"]
         ]]
       ]],
       ["Sequence", [
@@ -1884,17 +1879,17 @@
       ]],
       ["Sequence", [
         ["Plain", [
-          ["String", "LARROWF"]
+          ["String", "LARROW"]
         ]]
       ]],
       ["Sequence", [
         ["Plain", [
-          ["String", "LFAT"]
+          ["String", "LF"]
         ]]
       ]],
       ["Sequence", [
         ["Plain", [
-          ["String", "RARROWF"]
+          ["String", "RARROW"]
         ]]
       ]],
       ["Sequence", [
@@ -1906,6 +1901,11 @@
       ["Sequence", [
         ["Plain", [
           ["String", "WALRUS"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "ENDOFDATA"]
         ]]
       ]]
     ]]
@@ -1970,10 +1970,6 @@
     ["ClassExpr", [
       ["UniRange", [
         ["Unicode", "U+0000"],
-        ["Unicode", "U+FFFC"]
-      ]],
-      ["UniRange", [
-        ["Unicode", "U+FFFE"],
         ["Unicode", "U+10FFFF"]
       ]]
     ]]
@@ -2332,7 +2328,9 @@
       ["ResClassId", "xdigit"]
     ]],
     ["ClassExpr", [
-      ["ClassId", "hex"]
+      ["ClassId", [
+        ["ResClassId", "hexdig"]
+      ]]
     ]]
   ]],
   ["EndLine", "\n"],
@@ -2368,12 +2366,8 @@
     ["TokenId", [
       ["ResTokenId", "CRLF"]
     ]],
-    ["TokenId", [
-      ["ResTokenId", "CR"]
-    ]],
-    ["TokenId", [
-      ["ResTokenId", "LF"]
-    ]],
+    ["Hexadec", "xD"],
+    ["Hexadec", "xA"],
     ["Comment", "\"\\r\\n\""],
     ["EndLine", "\n"]
   ]],
@@ -2729,6 +2723,14 @@
   ]],
   ["TokenDef", [
     ["TokenId", [
+      ["ResTokenId", "ENDOFDATA"]
+    ]],
+    ["Hexadec", "x7FFFFFF"],
+    ["Comment", "largest int32"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
       ["ResTokenId", "MAXASCII"]
     ]],
     ["Hexadec", "x7F"],
@@ -2744,6 +2746,20 @@
   ["EndLine", "\n"],
   ["TokenDef", [
     ["TokenId", [
+      ["ResTokenId", "RARROWF"]
+    ]],
+    ["String", "=>"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "LARROWF"]
+    ]],
+    ["String", "<="],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
       ["ResTokenId", "LARROW"]
     ]],
     ["String", "<-"],
@@ -2757,9 +2773,7 @@
     ["EndLine", "\n"]
   ]],
   ["TokenDef", [
-    ["TokenId", [
-      ["ResTokenId", "LLARROW"]
-    ]],
+    ["TokenId", "LLARROW"],
     ["String", "<--"],
     ["EndLine", "\n"]
   ]],
@@ -2769,5 +2783,27 @@
     ]],
     ["String", "-->"],
     ["EndLine", "\n"]
-  ]]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "LFAT"]
+    ]],
+    ["String", "<="],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "RFAT"]
+    ]],
+    ["String", "=>"],
+    ["EndLine", "\n"]
+  ]],
+  ["TokenDef", [
+    ["TokenId", [
+      ["ResTokenId", "WALRUS"]
+    ]],
+    ["String", ":="],
+    ["EndLine", "\n"]
+  ]],
+  ["EndLine", "\n"]
 ]]

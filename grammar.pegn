@@ -89,7 +89,7 @@ ResClassId <-- 'alphanum' / 'alpha' / 'any' / 'bitdig' / 'control'
              / 'visible' / 'ws' / 'alnum' / 'ascii' / 'blank' / 'cntrl' 
              / 'graph' / 'print' / 'space' / 'word' / 'xdigit'
 
-ResTokenId <-- 'TAB' / 'CRLF' / 'CR' / 'LF' / 'SP' / 'VT' / 'FF' / 'NOT'
+ResTokenId <-- 'TAB' / 'CRLF' / 'CR' / 'LFAT' / 'SP' / 'VT' / 'FF' / 'NOT'
              / 'BANG' / 'DQ' / 'HASH' / 'DOLLAR' / 'PERCENT' / 'AND' 
              / 'SQ' / 'LPAREN' / 'RPAREN' / 'STAR' / 'PLUS' / 'COMMA'
              / 'DASH' / 'MINUS' / 'DOT' / 'SLASH' / 'COLON' / 'SEMI' / 'LT'
@@ -97,9 +97,9 @@ ResTokenId <-- 'TAB' / 'CRLF' / 'CR' / 'LF' / 'SP' / 'VT' / 'FF' / 'NOT'
              / 'BKSLASH' / 'RBRAKT' / 'CARET' / 'UNDER' / 'BKTICK' 
              / 'LCURLY' / 'LBRACE' / 'BAR' / 'PIPE' / 'RCURLY' 
              / 'RBRACE' / 'TILDE' / 'UNKNOWN' / 'REPLACE' / 'MAXRUNE' 
-             / 'MAXASCII' / 'MAXLATIN' / 'LARROW' / 'RARROW' / 'LLARROW'
-             / 'RLARROW' / 'LARROWF' / 'LFAT' / 'RARROWF' / 'RFAT' 
-             / 'WALRUS'
+             / 'MAXASCII' / 'MAXLATIN' / 'LARROWF' / 'RARROWF' / 'LLARROW'
+             / 'RLARROW' / 'LARROW' / 'LF' / 'RARROW' / 'RFAT' 
+             / 'WALRUS' / 'ENDOFDATA'
 
 ResCheckId <-- 'EndLine'
 
@@ -135,7 +135,7 @@ graph       <- [x21-x7E]
 print       <- [x20-x7E]
 space       <- ws / VT / FF                   # [:space:] \s
 word        <- upper / lower / digit / UNDER  # [:word:]  \w
-xdigit      <- hex
+xdigit      <- hexdig
 
 # Single Rune and String Tokens
 
@@ -188,17 +188,17 @@ TILDE       <- x7E # ~
 UNKNOWN     <- U+FFFD
 REPLACE     <- U+FFFD
 MAXRUNE     <- U+10FFFF
-ENDOFDATA   <- U+FFFFFFFF
+ENDOFDATA   <- x7FFFFFF # largest int32
 MAXASCII    <- x7F
 MAXLATIN    <- xFF
 
+RARROWF     <- '=>'
+LARROWF     <- '<='
 LARROW      <- '<-'
 RARROW      <- '->'
 LLARROW     <- '<--'
 RLARROW     <- '-->'
-LARROWF     <- '<='
 LFAT        <- '<='
-RARROWF     <- '=>'
 RFAT        <- '=>'
 WALRUS      <- ':='
 
