@@ -2,6 +2,8 @@
 # Copyright 2020 Robert S Muhlestein (rwx@robs.io)
 # Licensed under Apache-2, CC-BY-4.0
 
+# Note: Assumes scanning by at least one byte at a time.
+
 Grammar    <-- Meta? Copyright? Licensed?
                ComEndLine*
                (Definition ComEndLine*)+
@@ -14,9 +16,9 @@ Definition  <- NodeDef / CheckDef / ClassDef / TokenDef
 
 Language    <- Lang ('-' LangExt)?
 Version     <- 'v' MajorVer '.' MinorVer '.' PatchVer ('-' PreVer)?
-Home       <-- (!ws any)+
+Home       <-- (!ws unicode)+
 
-Comment    <-- (!EndLine any)+
+Comment    <-- (!EndLine unicode+)+
 
 NodeDef    <-- CheckId SP+ '<--' SP+ Expression   # significant
 CheckDef   <-- CheckId SP+ '<-'  SP+ Expression   # convenient
@@ -68,26 +70,26 @@ Range       <- AlphaRange / IntRange / UniRange
 UniRange   <-- '[' Unicode '-' Unicode ']'  # [U+0000-U+10FFFF]
 AlphaRange <-- '[' Alpha '-' Alpha ']'      # [a-m] [A-Z]
 IntRange   <-- '[' Integer '-' Integer ']'  # [0-108] [0-9]
-BinRange   <-- '[' Binary '-' Binary ']'    # [b101-b1010]
+BinRange   <-- '[' Binary '-' Binary ']'    # [b101-b1111111110101010]
 HexRange   <-- '[' Hexadec '-' Hexadec ']'  # [x20-x2F]
 OctRange   <-- '[' Octal '-' Octal ']'      # [o20-o37]
 
 Rune        <- Unicode / Binary / Hexadec / Octal
 String     <-- quotable+
 Alpha      <-- alpha
-Unicode    <-- 'U+' upperhex{4,8}
+Unicode    <-- 'U+' (uphex{4,5} / '10' uphex{4})
 Integer    <-- digit+
-Binary     <-- 'b' bindig+
-Hexadec    <-- 'x' upperhex+
+Binary     <-- 'b' bindig+  # b1 == b00000001 (0 pad to closest byte)
+Hexadec    <-- 'x' uphex+
 Octal      <-- 'o' octdig+
 
 EndLine    <-- LF / CRLF / CR
 
-ResClassId <-- 'alphanum' / 'alpha' / 'any' / 'bitdig' / 'control' 
+ResClassId <-- 'alphanum' / 'alpha' / 'any' / 'bindig' / 'control' 
              / 'digit' / 'hexdig' / 'lowerhex' / 'lower' / 'octdig' 
-             / 'punct' / 'quotable' / 'sign' / 'upperhex' / 'upper' 
+             / 'punct' / 'quotable' / 'sign' / 'uphex' / 'upper' 
              / 'visible' / 'ws' / 'alnum' / 'ascii' / 'blank' / 'cntrl' 
-             / 'graph' / 'print' / 'space' / 'word' / 'xdigit'
+             / 'graph' / 'print' / 'space' / 'word' / 'xdigit' / 'unicode'
 
 ResTokenId <-- 'TAB' / 'CRLF' / 'CR' / 'LFAT' / 'SP' / 'VT' / 'FF' / 'NOT'
              / 'BANG' / 'DQ' / 'HASH' / 'DOLLAR' / 'PERCENT' / 'AND' 
@@ -107,8 +109,9 @@ ResCheckId <-- 'EndLine'
 
 alpha       <- [A-Z] / [a-z]
 alphanum    <- [A-Z] / [a-z] / [0-9]
-any         <- [U+0000-U+10FFFF]
-bitdig      <- [0-1]
+any         <- [b0-b11111111]          # . (any byte)
+unicode     <- [U+0000-U+10FFFF]
+bindig      <- [0-1]
 control     <- [x00-x1F] / [x7F-x9F]
 digit       <- [0-9]
 hexdig      <- [0-9] / [a-f] / [A-F]
@@ -122,7 +125,7 @@ quotable    <- alphanum / [x20-x26] / [x28-x2F]
              / [x3A-x40] / [x5B-x60] / [x7B-x7E]
 
 sign        <- PLUS / MINUS
-upperhex    <- [0-9] / [A-F]
+uphex       <- [0-9] / [A-F]
 upper       <- [A-Z]
 visible     <- alphanum / punct
 ws          <- SP / TAB / CR / LF

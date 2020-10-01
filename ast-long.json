@@ -17,6 +17,9 @@
     ["EndLine", "\n"]
   ]],
   ["EndLine", "\n"],
+  ["Comment", "Note: Assumes scanning by at least one byte at a time."],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
   ["NodeDef", [
     ["CheckId", "Grammar"],
     ["Expression", [
@@ -263,7 +266,7 @@
               ]],
               ["Plain", [
                 ["ClassId", [
-                  ["ResClassId", "any"]
+                  ["ResClassId", "unicode"]
                 ]]
               ]]
             ]]
@@ -289,8 +292,9 @@
               ]],
               ["Plain", [
                 ["ClassId", [
-                  ["ResClassId", "any"]
-                ]]
+                  ["ResClassId", "unicode"]
+                ]],
+                ["MinOne", "+"]
               ]]
             ]]
           ]],
@@ -1236,7 +1240,7 @@
       ]]
     ]]
   ]],
-  ["Comment", "[b101-b1010]"],
+  ["Comment", "[b101-b1111111110101010]"],
   ["EndLine", "\n"],
   ["NodeDef", [
     ["CheckId", "HexRange"],
@@ -1348,12 +1352,29 @@
           ["String", "U+"]
         ]],
         ["Plain", [
-          ["ClassId", [
-            ["ResClassId", "upperhex"]
-          ]],
-          ["MinMax", [
-            ["Min", "4"],
-            ["Max", "8"]
+          ["Expression", [
+            ["Sequence", [
+              ["Plain", [
+                ["ClassId", [
+                  ["ResClassId", "uphex"]
+                ]],
+                ["MinMax", [
+                  ["Min", "4"],
+                  ["Max", "5"]
+                ]]
+              ]]
+            ]],
+            ["Sequence", [
+              ["Plain", [
+                ["String", "10"]
+              ]],
+              ["Plain", [
+                ["ClassId", [
+                  ["ResClassId", "uphex"]
+                ]],
+                ["Count", "4"]
+              ]]
+            ]]
           ]]
         ]]
       ]]
@@ -1388,6 +1409,7 @@
       ]]
     ]]
   ]],
+  ["Comment", "b1 == b00000001 (0 pad to closest byte)"],
   ["EndLine", "\n"],
   ["NodeDef", [
     ["CheckId", "Hexadec"],
@@ -1398,7 +1420,7 @@
         ]],
         ["Plain", [
           ["ClassId", [
-            ["ResClassId", "upperhex"]
+            ["ResClassId", "uphex"]
           ]],
           ["MinOne", "+"]
         ]]
@@ -1474,7 +1496,7 @@
       ]],
       ["Sequence", [
         ["Plain", [
-          ["String", "bitdig"]
+          ["String", "bindig"]
         ]]
       ]],
       ["Sequence", [
@@ -1526,7 +1548,7 @@
       ]],
       ["Sequence", [
         ["Plain", [
-          ["String", "upperhex"]
+          ["String", "uphex"]
         ]]
       ]],
       ["Sequence", [
@@ -1589,6 +1611,11 @@
       ["Sequence", [
         ["Plain", [
           ["String", "xdigit"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["String", "unicode"]
         ]]
       ]]
     ]]
@@ -1968,6 +1995,19 @@
       ["ResClassId", "any"]
     ]],
     ["ClassExpr", [
+      ["BinRange", [
+        ["Binary", "b0"],
+        ["Binary", "b11111111"]
+      ]]
+    ]]
+  ]],
+  ["Comment", ". (any byte)"],
+  ["EndLine", "\n"],
+  ["ClassDef", [
+    ["ClassId", [
+      ["ResClassId", "unicode"]
+    ]],
+    ["ClassExpr", [
       ["UniRange", [
         ["Unicode", "U+0000"],
         ["Unicode", "U+10FFFF"]
@@ -1976,9 +2016,7 @@
   ]],
   ["EndLine", "\n"],
   ["ClassDef", [
-    ["ClassId", [
-      ["ResClassId", "bitdig"]
-    ]],
+    ["ClassId", "bindig"],
     ["ClassExpr", [
       ["IntRange", [
         ["Integer", "0"],
@@ -2151,7 +2189,7 @@
   ["EndLine", "\n"],
   ["ClassDef", [
     ["ClassId", [
-      ["ResClassId", "upperhex"]
+      ["ResClassId", "uphex"]
     ]],
     ["ClassExpr", [
       ["IntRange", [
