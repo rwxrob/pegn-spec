@@ -21,7 +21,7 @@ Home       <-- (!ws unicode)+
 Comment    <-- (!EndLine unicode+)+
 
 NodeDef    <-- CheckId SP+ '<--' SP+ Expression   # significant
-CheckDef   <-- CheckId SP+ '<-'  SP+ Expression   # convenient
+ScanDef    <-- CheckId SP+ '<-'  SP+ Expression   # convenient
 ClassDef   <-- ClassId SP+ '<-' SP+ ClassExpr
 TokenDef   <-- TokenId SP+ '<-' SP+ 
                TokenVal (Spacing TokenVal)*
@@ -103,7 +103,7 @@ ResTokenId <-- 'TAB' / 'CRLF' / 'CR' / 'LFAT' / 'SP' / 'VT' / 'FF' / 'NOT'
              / 'RLARROW' / 'LARROW' / 'LF' / 'RARROW' / 'RFAT' 
              / 'WALRUS' / 'ENDOFDATA'
 
-ResCheckId <-- 'EndLine'
+ResCheckId <-- 'EndLine' # can be overriden, parsers must reset line
 
 # Classes of Runes
 
