@@ -336,7 +336,7 @@
   ["Comment", "significant"],
   ["EndLine", "\n"],
   ["NodeDef", [
-    ["CheckId", "CheckDef"],
+    ["CheckId", "ScanDef"],
     ["Expression", [
       ["Sequence", [
         ["Plain", [
@@ -1168,7 +1168,7 @@
       ]]
     ]]
   ]],
-  ["Comment", "[U+0000-U+10FFFF]"],
+  ["Comment", "[u0000-u10FFFF]"],
   ["EndLine", "\n"],
   ["NodeDef", [
     ["CheckId", "AlphaRange"],
@@ -1349,7 +1349,7 @@
     ["Expression", [
       ["Sequence", [
         ["Plain", [
-          ["String", "U+"]
+          ["String", "u"]
         ]],
         ["Plain", [
           ["Expression", [
@@ -1933,18 +1933,6 @@
       ["Sequence", [
         ["Plain", [
           ["String", "ENDOFDATA"]
-        ]]
-      ]]
-    ]]
-  ]],
-  ["EndLine", "\n"],
-  ["EndLine", "\n"],
-  ["NodeDef", [
-    ["CheckId", "ResCheckId"],
-    ["Expression", [
-      ["Sequence", [
-        ["Plain", [
-          ["String", "EndLine"]
         ]]
       ]]
     ]]

@@ -67,7 +67,7 @@ Count      <-- '{' digit+ '}'
 Range       <- AlphaRange / IntRange / UniRange
              / BinRange / HexRange / OctRange
 
-UniRange   <-- '[' Unicode '-' Unicode ']'  # [U+0000-U+10FFFF]
+UniRange   <-- '[' Unicode '-' Unicode ']'  # [u0000-u10FFFF]
 AlphaRange <-- '[' Alpha '-' Alpha ']'      # [a-m] [A-Z]
 IntRange   <-- '[' Integer '-' Integer ']'  # [0-108] [0-9]
 BinRange   <-- '[' Binary '-' Binary ']'    # [b101-b1111111110101010]
@@ -77,7 +77,7 @@ OctRange   <-- '[' Octal '-' Octal ']'      # [o20-o37]
 Rune        <- Unicode / Binary / Hexadec / Octal
 String     <-- quotable+
 Alpha      <-- alpha
-Unicode    <-- 'U+' (uphex{4,5} / '10' uphex{4})
+Unicode    <-- 'u' (uphex{4,5} / '10' uphex{4})
 Integer    <-- digit+
 Binary     <-- 'b' bindig+  # b1 == b00000001 (0 pad to closest byte)
 Hexadec    <-- 'x' uphex+
@@ -102,8 +102,6 @@ ResTokenId <-- 'TAB' / 'CRLF' / 'CR' / 'LFAT' / 'SP' / 'VT' / 'FF' / 'NOT'
              / 'MAXASCII' / 'MAXLATIN' / 'LARROWF' / 'RARROWF' / 'LLARROW'
              / 'RLARROW' / 'LARROW' / 'LF' / 'RARROW' / 'RFAT' 
              / 'WALRUS' / 'ENDOFDATA'
-
-ResCheckId <-- 'EndLine' # can be overriden, parsers must reset line
 
 # Classes of Runes
 
