@@ -12,7 +12,7 @@ Meta       <-- '# ' Language ' (' Version ') ' Home EndLine
 Copyright  <-- '# Copyright ' Comment EndLine
 Licensed   <-- '# Licensed under ' Comment EndLine
 ComEndLine  <- SP* ('# ' Comment)? EndLine
-Definition  <- NodeDef / CheckDef / ClassDef / TokenDef
+Definition  <- NodeDef / ScanDef / ClassDef / TokenDef
 
 Language    <- Lang ('-' LangExt)?
 Version     <- 'v' MajorVer '.' MinorVer '.' PatchVer ('-' PreVer)?
@@ -40,7 +40,7 @@ MinorVer   <-- digit+
 PatchVer   <-- digit+
 PreVer     <-- (word / DASH)+ ('.' (word / DASH)+)*
 
-CheckId    <-- ResCheckId / (upper lower+)+
+CheckId    <-- (upper lower+)+
 ClassId    <-- ResClassId / lower (lower / UNDER lower)+
 TokenId    <-- ResTokenId / upper (upper / UNDER upper)+
 

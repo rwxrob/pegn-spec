@@ -84,9 +84,7 @@
           ["CheckId", "Home"]
         ]],
         ["Plain", [
-          ["CheckId", [
-            ["ResCheckId", "EndLine"]
-          ]]
+          ["CheckId", "EndLine"]
         ]]
       ]]
     ]]
@@ -103,9 +101,7 @@
           ["CheckId", "Comment"]
         ]],
         ["Plain", [
-          ["CheckId", [
-            ["ResCheckId", "EndLine"]
-          ]]
+          ["CheckId", "EndLine"]
         ]]
       ]]
     ]]
@@ -122,15 +118,13 @@
           ["CheckId", "Comment"]
         ]],
         ["Plain", [
-          ["CheckId", [
-            ["ResCheckId", "EndLine"]
-          ]]
+          ["CheckId", "EndLine"]
         ]]
       ]]
     ]]
   ]],
   ["EndLine", "\n"],
-  ["CheckDef", [
+  ["ScanDef", [
     ["CheckId", "ComEndLine"],
     ["Expression", [
       ["Sequence", [
@@ -154,15 +148,13 @@
           ["Optional", "?"]
         ]],
         ["Plain", [
-          ["CheckId", [
-            ["ResCheckId", "EndLine"]
-          ]]
+          ["CheckId", "EndLine"]
         ]]
       ]]
     ]]
   ]],
   ["EndLine", "\n"],
-  ["CheckDef", [
+  ["ScanDef", [
     ["CheckId", "Definition"],
     ["Expression", [
       ["Sequence", [
@@ -172,7 +164,7 @@
       ]],
       ["Sequence", [
         ["Plain", [
-          ["CheckId", "CheckDef"]
+          ["CheckId", "ScanDef"]
         ]]
       ]],
       ["Sequence", [
@@ -189,7 +181,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["CheckDef", [
+  ["ScanDef", [
     ["CheckId", "Language"],
     ["Expression", [
       ["Sequence", [
@@ -213,7 +205,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["CheckDef", [
+  ["ScanDef", [
     ["CheckId", "Version"],
     ["Expression", [
       ["Sequence", [
@@ -266,7 +258,7 @@
               ]],
               ["Plain", [
                 ["ClassId", [
-                  ["ResClassId", "unicode"]
+                  ["ResClassId", "unipoint"]
                 ]]
               ]]
             ]]
@@ -286,13 +278,11 @@
           ["Expression", [
             ["Sequence", [
               ["NegLook", [
-                ["CheckId", [
-                  ["ResCheckId", "EndLine"]
-                ]]
+                ["CheckId", "EndLine"]
               ]],
               ["Plain", [
                 ["ClassId", [
-                  ["ResClassId", "unicode"]
+                  ["ResClassId", "unipoint"]
                 ]],
                 ["MinOne", "+"]
               ]]
@@ -442,7 +432,31 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["CheckDef", [
+  ["Comment", "lower-case of identifier must be unique within grammar"],
+  ["EndLine", "\n"],
+  ["ScanDef", [
+    ["CheckId", "Identifier"],
+    ["Expression", [
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "CheckId"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "ClassId"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "TokenId"]
+        ]]
+      ]]
+    ]]
+  ]],
+  ["EndLine", "\n"],
+  ["EndLine", "\n"],
+  ["ScanDef", [
     ["CheckId", "TokenVal"],
     ["Expression", [
       ["Sequence", [
@@ -606,11 +620,6 @@
   ["NodeDef", [
     ["CheckId", "CheckId"],
     ["Expression", [
-      ["Sequence", [
-        ["Plain", [
-          ["CheckId", "ResCheckId"]
-        ]]
-      ]],
       ["Sequence", [
         ["Plain", [
           ["Expression", [
@@ -786,7 +795,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["CheckDef", [
+  ["ScanDef", [
     ["CheckId", "Simple"],
     ["Expression", [
       ["Sequence", [
@@ -828,7 +837,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["CheckDef", [
+  ["ScanDef", [
     ["CheckId", "Spacing"],
     ["Expression", [
       ["Sequence", [
@@ -871,7 +880,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["CheckDef", [
+  ["ScanDef", [
     ["CheckId", "Rule"],
     ["Expression", [
       ["Sequence", [
@@ -943,7 +952,7 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["CheckDef", [
+  ["ScanDef", [
     ["CheckId", "Primary"],
     ["Expression", [
       ["Sequence", [
@@ -971,7 +980,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["CheckDef", [
+  ["ScanDef", [
     ["CheckId", "Quant"],
     ["Expression", [
       ["Sequence", [
@@ -1108,7 +1117,7 @@
   ]],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["CheckDef", [
+  ["ScanDef", [
     ["CheckId", "Range"],
     ["Expression", [
       ["Sequence", [
@@ -1178,13 +1187,13 @@
           ["String", "["]
         ]],
         ["Plain", [
-          ["CheckId", "Alpha"]
+          ["CheckId", "Letter"]
         ]],
         ["Plain", [
           ["String", "-"]
         ]],
         ["Plain", [
-          ["CheckId", "Alpha"]
+          ["CheckId", "Letter"]
         ]],
         ["Plain", [
           ["String", "]"]
@@ -1291,7 +1300,7 @@
   ["Comment", "[o20-o37]"],
   ["EndLine", "\n"],
   ["EndLine", "\n"],
-  ["CheckDef", [
+  ["ScanDef", [
     ["CheckId", "Rune"],
     ["Expression", [
       ["Sequence", [
@@ -1332,7 +1341,7 @@
   ]],
   ["EndLine", "\n"],
   ["NodeDef", [
-    ["CheckId", "Alpha"],
+    ["CheckId", "Letter"],
     ["Expression", [
       ["Sequence", [
         ["Plain", [
@@ -1447,9 +1456,7 @@
   ["EndLine", "\n"],
   ["EndLine", "\n"],
   ["NodeDef", [
-    ["CheckId", [
-      ["ResCheckId", "EndLine"]
-    ]],
+    ["CheckId", "EndLine"],
     ["Expression", [
       ["Sequence", [
         ["Plain", [
@@ -1615,7 +1622,7 @@
       ]],
       ["Sequence", [
         ["Plain", [
-          ["String", "unicode"]
+          ["String", "unipoint"]
         ]]
       ]]
     ]]
@@ -1948,12 +1955,12 @@
     ]],
     ["ClassExpr", [
       ["AlphaRange", [
-        ["Alpha", "A"],
-        ["Alpha", "Z"]
+        ["Letter", "A"],
+        ["Letter", "Z"]
       ]],
       ["AlphaRange", [
-        ["Alpha", "a"],
-        ["Alpha", "z"]
+        ["Letter", "a"],
+        ["Letter", "z"]
       ]]
     ]]
   ]],
@@ -1964,12 +1971,12 @@
     ]],
     ["ClassExpr", [
       ["AlphaRange", [
-        ["Alpha", "A"],
-        ["Alpha", "Z"]
+        ["Letter", "A"],
+        ["Letter", "Z"]
       ]],
       ["AlphaRange", [
-        ["Alpha", "a"],
-        ["Alpha", "z"]
+        ["Letter", "a"],
+        ["Letter", "z"]
       ]],
       ["IntRange", [
         ["Integer", "0"],
@@ -1993,7 +2000,7 @@
   ["EndLine", "\n"],
   ["ClassDef", [
     ["ClassId", [
-      ["ResClassId", "unicode"]
+      ["ResClassId", "unipoint"]
     ]],
     ["ClassExpr", [
       ["UniRange", [
@@ -2051,12 +2058,12 @@
         ["Integer", "9"]
       ]],
       ["AlphaRange", [
-        ["Alpha", "a"],
-        ["Alpha", "f"]
+        ["Letter", "a"],
+        ["Letter", "f"]
       ]],
       ["AlphaRange", [
-        ["Alpha", "A"],
-        ["Alpha", "F"]
+        ["Letter", "A"],
+        ["Letter", "F"]
       ]]
     ]]
   ]],
@@ -2071,8 +2078,8 @@
         ["Integer", "9"]
       ]],
       ["AlphaRange", [
-        ["Alpha", "a"],
-        ["Alpha", "f"]
+        ["Letter", "a"],
+        ["Letter", "f"]
       ]]
     ]]
   ]],
@@ -2083,8 +2090,8 @@
     ]],
     ["ClassExpr", [
       ["AlphaRange", [
-        ["Alpha", "a"],
-        ["Alpha", "z"]
+        ["Letter", "a"],
+        ["Letter", "z"]
       ]]
     ]]
   ]],
@@ -2185,8 +2192,8 @@
         ["Integer", "9"]
       ]],
       ["AlphaRange", [
-        ["Alpha", "A"],
-        ["Alpha", "F"]
+        ["Letter", "A"],
+        ["Letter", "F"]
       ]]
     ]]
   ]],
@@ -2197,8 +2204,8 @@
     ]],
     ["ClassExpr", [
       ["AlphaRange", [
-        ["Alpha", "A"],
-        ["Alpha", "Z"]
+        ["Letter", "A"],
+        ["Letter", "Z"]
       ]]
     ]]
   ]],
