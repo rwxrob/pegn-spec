@@ -1412,7 +1412,9 @@
           ["String", "b"]
         ]],
         ["Plain", [
-          ["ClassId", "bindig"],
+          ["ClassId", [
+            ["ResClassId", "bindig"]
+          ]],
           ["MinOne", "+"]
         ]]
       ]]
@@ -2011,7 +2013,9 @@
   ]],
   ["EndLine", "\n"],
   ["ClassDef", [
-    ["ClassId", "bindig"],
+    ["ClassId", [
+      ["ResClassId", "bindig"]
+    ]],
     ["ClassExpr", [
       ["IntRange", [
         ["Integer", "0"],
@@ -2806,7 +2810,9 @@
     ["EndLine", "\n"]
   ]],
   ["TokenDef", [
-    ["TokenId", "LLARROW"],
+    ["TokenId", [
+      ["ResTokenId", "LLARROW"]
+    ]],
     ["String", "<--"],
     ["EndLine", "\n"]
   ]],
