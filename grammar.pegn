@@ -111,7 +111,7 @@ ResTokenId <-- 'TAB' / 'CRLF' / 'CR' / 'LFAT' / 'SP' / 'VT' / 'FF' / 'NOT'
 alpha       <- [A-Z] / [a-z]
 alphanum    <- [A-Z] / [a-z] / [0-9]
 any         <- [b0-b11111111]          # . (any byte)
-unipoint    <- [U+0000-U+10FFFF]
+unipoint    <- [u0000-u10FFFF]
 bindig      <- [0-1]
 control     <- [x00-x1F] / [x7F-x9F]
 digit       <- [0-9]
@@ -189,9 +189,9 @@ PIPE        <- x7C # |
 RCURLY      <- x7D # }
 RBRACE      <- x7D # }
 TILDE       <- x7E # ~
-UNKNOWN     <- U+FFFD
-REPLACE     <- U+FFFD
-MAXRUNE     <- U+10FFFF
+UNKNOWN     <- uFFFD
+REPLACE     <- uFFFD
+MAXRUNE     <- u10FFFF
 ENDOFDATA   <- x7FFFFFF # largest int32
 MAXASCII    <- x7F
 MAXLATIN    <- xFF
