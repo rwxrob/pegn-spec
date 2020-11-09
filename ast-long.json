@@ -461,7 +461,22 @@
     ["Expression", [
       ["Sequence", [
         ["Plain", [
-          ["CheckId", "Rune"]
+          ["CheckId", "Unicode"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Binary"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Hexadec"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Octal"]
         ]]
       ]],
       ["Sequence", [
@@ -800,9 +815,25 @@
     ["Expression", [
       ["Sequence", [
         ["Plain", [
-          ["CheckId", "Rune"]
+          ["CheckId", "Unicode"]
         ]]
       ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Binary"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Hexadec"]
+        ]]
+      ]],
+      ["Sequence", [
+        ["Plain", [
+          ["CheckId", "Octal"]
+        ]]
+      ]],
+      ["EndLine", "\n"],
       ["Sequence", [
         ["Plain", [
           ["CheckId", "ClassId"]
@@ -1273,7 +1304,7 @@
       ]]
     ]]
   ]],
-  ["Comment", "[x20-x2F]"],
+  ["Comment", "[x20-x2F] [xFFFFF - x1FFFFF]"],
   ["EndLine", "\n"],
   ["NodeDef", [
     ["CheckId", "OctRange"],
@@ -1299,32 +1330,6 @@
   ]],
   ["Comment", "[o20-o37]"],
   ["EndLine", "\n"],
-  ["EndLine", "\n"],
-  ["ScanDef", [
-    ["CheckId", "Rune"],
-    ["Expression", [
-      ["Sequence", [
-        ["Plain", [
-          ["CheckId", "Unicode"]
-        ]]
-      ]],
-      ["Sequence", [
-        ["Plain", [
-          ["CheckId", "Binary"]
-        ]]
-      ]],
-      ["Sequence", [
-        ["Plain", [
-          ["CheckId", "Hexadec"]
-        ]]
-      ]],
-      ["Sequence", [
-        ["Plain", [
-          ["CheckId", "Octal"]
-        ]]
-      ]]
-    ]]
-  ]],
   ["EndLine", "\n"],
   ["NodeDef", [
     ["CheckId", "String"],

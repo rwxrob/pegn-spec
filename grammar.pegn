@@ -30,7 +30,7 @@ TokenDef   <-- TokenId SP+ '<-' SP+
 # lower-case of identifier must be unique within grammar
 Identifier  <- CheckId / ClassId / TokenId
 
-TokenVal    <- Rune / SQ String SQ
+TokenVal    <- Unicode / Binary / Hexadec / Octal / SQ String SQ
 
 Lang       <-- upper{2,12}
 LangExt    <-- visible{1,20}
@@ -47,7 +47,8 @@ TokenId    <-- ResTokenId / upper (upper / UNDER upper)+
 Expression <-- Sequence (Spacing '/' SP+ Sequence)*
 ClassExpr  <-- Simple (Spacing '/' SP+ Simple)*
 
-Simple      <- Rune / ClassId / TokenId / Range / SQ String SQ
+Simple      <- Unicode / Binary / Hexadec / Octal 
+             / ClassId / TokenId / Range / SQ String SQ
 
 Spacing     <- ComEndLine? SP+
 
@@ -74,10 +75,9 @@ UniRange   <-- '[' Unicode '-' Unicode ']'  # [u0000-u10FFFF]
 AlphaRange <-- '[' Letter '-' Letter ']'    # [a-m] [A-Z]
 IntRange   <-- '[' Integer '-' Integer ']'  # [0-108] [0-9]
 BinRange   <-- '[' Binary '-' Binary ']'    # [b101-b1111111110101010]
-HexRange   <-- '[' Hexadec '-' Hexadec ']'  # [x20-x2F]
+HexRange   <-- '[' Hexadec '-' Hexadec ']'  # [x20-x2F] [xFFFFF - x1FFFFF]
 OctRange   <-- '[' Octal '-' Octal ']'      # [o20-o37]
 
-Rune        <- Unicode / Binary / Hexadec / Octal
 String     <-- quotable+
 Letter     <-- alpha
 Unicode    <-- 'u' (uphex{4,5} / '10' uphex{4})
