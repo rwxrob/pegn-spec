@@ -2,7 +2,7 @@
 # Copyright 2020 Robert S Muhlestein (rwx@robs.io)
 # Licensed under Apache-2, CC-BY-4.0
 
-# Note: Assumes scanning by at least one byte at a time.
+# NOTE: assumes scanning by at least one byte at a time
 
 Grammar    <-- Meta? Copyright? Licensed?
                ComEndLine*
@@ -106,7 +106,7 @@ ResTokenId <-- 'TAB' / 'CRLF' / 'CR' / 'LFAT' / 'SP' / 'VT' / 'FF' / 'NOT'
              / 'RLARROW' / 'LARROW' / 'LF' / 'RARROW' / 'RFAT' 
              / 'WALRUS' / 'ENDOFDATA'
 
-# Classes of Runes
+# classes of runes
 
 alpha       <- [A-Z] / [a-z]
 alphanum    <- [A-Z] / [a-z] / [0-9]
@@ -121,7 +121,7 @@ lower       <- [a-z]
 octdig      <- [0-7]
 punct       <- [x21-x2F] / [x3A-x40] / [x5B-x60] / [x7B-x7E]
 
-# visible ASCII character except single quote or a space
+# visible ascii character except single quote or a space
 quotable    <- alphanum / [x20-x26] / [x28-x2F]
              / [x3A-x40] / [x5B-x60] / [x7B-x7E]
 
@@ -131,17 +131,19 @@ upper       <- [A-Z]
 visible     <- alphanum / punct
 ws          <- SP / TAB / CR / LF
 
-alnum       <- alphanum
+# support for established posix class names
+
+alnum       <- alphanum                       # alias
 ascii       <- [x0-x7F]
 blank       <- SP / TAB
-cntrl       <- control
+cntrl       <- control                        # alias
 graph       <- [x21-x7E]
 print       <- [x20-x7E]
 space       <- ws / VT / FF                   # [:space:] \s
 word        <- upper / lower / digit / UNDER  # [:word:]  \w
-xdigit      <- hexdig
+xdigit      <- hexdig                         # alias
 
-# Single Rune and String Tokens
+# single rune and string tokens
 
 TAB         <- x9     # "\t"
 LF          <- xA     # "\n" (line feed)
