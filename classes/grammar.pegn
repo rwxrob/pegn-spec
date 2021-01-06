@@ -1,0 +1,92 @@
+# PEGN-classes (v1.0.0-alpha) spec.pegn.dev/classes
+# Copyright 2020 Robert S Muhlestein (rwx@robs.io)
+# Licensed under Mozilla Public License 2.0
+# Uses spec.pegn.dev/tokens
+
+alpha       <- [A-Z] / [a-z]
+alphanum    <- [A-Z] / [a-z] / [0-9]
+any         <- [b0-b11111111]          # . (any byte)
+bindig      <- [0-1]
+control     <- [x00-x1F] / [x7F-x9F]
+digit       <- [0-9]
+hexdig      <- [0-9] / [a-f] / [A-F]
+lowerhex    <- [0-9] / [a-f]
+lower       <- [a-z]
+octdig      <- [0-7]
+punct       <- [x21-x2F] / [x3A-x40] / [x5B-x60] / [x7B-x7E]
+
+# visible ascii character except single quote or a space
+quotable    <- alphanum / [x20-x26] / [x28-x2F]
+             / [x3A-x40] / [x5B-x60] / [x7B-x7E]
+
+sign        <- PLUS / MINUS
+uphex       <- [0-9] / [A-F]
+upper       <- [A-Z]
+visible     <- alphanum / punct
+ws          <- SP / TAB / CR / LF
+
+# support for established posix class names
+
+alnum       <- alphanum                       # alias
+ascii       <- [x0-x7F]
+blank       <- SP / TAB
+cntrl       <- control                        # alias
+graph       <- [x21-x7E]
+print       <- [x20-x7E]
+space       <- ws / VT / FF                   # [:space:] \s
+word        <- upper / lower / digit / UNDER  # [:word:]  \w
+xdigit      <- hexdig                         # alias
+
+# support for unicode planes and classes
+
+unipoint    <- [u0000-u10FFFF]
+ucontrol    <- TODO
+udigit      <- TODO
+ugraphic    <- TODO
+uletter     <- TODO
+ulower      <- TODO
+umark       <- TODO
+unumber     <- TODO
+uprint      <- TODO
+upunct      <- TODO
+uspace      <- TODO
+usymbol     <- TODO
+utitle      <- TODO
+uupper      <- TODO
+
+uc_cc       <- [u0000-u009F] # FIXME
+uc_cf       <- TODO
+uc_co       <- TODO
+uc_cs       <- TODO
+uc_c        <- TODO
+uc_ll       <- TODO
+uc_lm       <- TODO
+uc_lo       <- TODO
+uc_lt       <- TODO
+uc_lu       <- TODO
+uc_l        <- TODO
+uc_mc       <- TODO
+uc_me       <- TODO
+uc_mn       <- TODO
+uc_m        <- TODO
+uc_nd       <- TODO
+uc_nl       <- TODO
+uc_no       <- TODO
+uc_n        <- TODO
+uc_pc       <- TODO
+uc_pd       <- TODO
+uc_pe       <- TODO
+uc_pf       <- TODO
+uc_pi       <- TODO
+uc_po       <- TODO
+uc_ps       <- TODO
+uc_p        <- TODO
+uc_sc       <- TODO
+uc_sk       <- TODO
+uc_sm       <- TODO
+uc_so       <- TODO
+uc_s        <- TODO
+uc_zl       <- TODO
+uc_zp       <- TODO
+uc_zs       <- TODO
+uc_z        <- TODO

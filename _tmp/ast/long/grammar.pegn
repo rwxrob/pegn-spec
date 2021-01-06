@@ -1,13 +1,11 @@
-# PEGN-AST-SHORT (v1.0.0-alpha) gitlab.com/pegn/spec/ast/short
+# PEGN-AST-long (v1.0.0-alpha) spec.pegn.dev/ast/long
 # Copyright 2020 Robert S Muhlestein (rwx@robs.io)
 # Licensed under Apache-2, CC-BY-4.0
 
 Node     <-- Terminal / Parent
-Terminal <-- '[' Integer ',' DQ Literal DQ ']'
-           / '[' Integer ']' # implied empty value ''
-           / '[]'            # implied 0 type (Undefined)
-Parent   <-- '[' Integer (',' ('[]' / Children))? ']' 
-Children  <- '[' Node (',' Node)* ']'
+Terminal <-- '[' DQ CheckId DQ ',' SP DQ Literal DQ ']'
+Parent   <-- '[' DQ CheckId DQ ',' SP ('[]' / Children) ']'
+Children  <- '[' LF In Node (',' LF In{2}  Node)* LF In ']'
 In        <- SP{2,} # two spaces per depth level
 Literal  <-- Escaped / [x20-x21] / [x23-x5B] / [x5D-x10FFFF]
 Escaped   <- BKSLASH ('b' / 'f' / 'n' / 'r' / 't' # \u not included
@@ -15,5 +13,6 @@ Escaped   <- BKSLASH ('b' / 'f' / 'n' / 'r' / 't' # \u not included
 
 DQ        <- x22 # "
 SP        <- x20 # " "
+LF        <- xA  # "\n" (line feed)
 BKSLASH   <- x5C # \
 SLASH     <- x2F # /

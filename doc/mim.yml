@@ -1,0 +1,9 @@
+---
+Title: 'PEGN: Parsing Expression Grammar Notation'
+Subtitle: The Best of PEG, ABNF, EBNF, and JSON AST
+Grammar: PEGN
+Version: v1.0.0-alpha
+Home: github.com/pegn/spec
+Copyright: Copyright 2020 Robert S Muhlestein (rwx@robs.io)
+License: Apache-2.0, CC-BY-4.0 
+Author: Robert S Muhlestein (rwx@robs.io)

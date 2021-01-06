@@ -1,12 +1,4 @@
----
-Title: 'PEGN: Parsing Expression Grammar Notation'
-Subtitle: The Best of PEG, ABNF, EBNF, and JSON AST
-Language: PEGN
-Version: v1.0.0-alpha
-Copyright: Copyright 2020 Robert S Muhlestein (rwx@robs.io)
-License: Apache-2.0, CC-BY-4.0 
-Author: Robert S Muhlestein (rwx@robs.io)
----
+# PEGN: Parsing Expression Grammar Notation
 
 PEGN is a language for defining languages. More precisely, it is a
 universal notation for expressing any grammar --- including natural
@@ -278,35 +270,25 @@ contain language-specific code such as the following:
 
 Formal PEGN grammar specifications are documented in an accompanying
 `README.md` file that contains headings matching the definition
-identifiers which in turn may contain one or more Ezmark code blocks
+identifiers which in turn may contain one or more Markdown code blocks
 containing examples that double as input tests against other code blocks
 containing the expected AST in JSON long form (inspired by the
 CommonMark project). This documentation can then be easily combined with
-code generators using the Ezmark PEGN grammar parser built into the
-`pegn` utility (or any other tool capable of parsing Ezmark).
+code generators using the PEGN Markdown grammar parser built into the
+`pegn` utility (or any other tool capable of parsing Markdown).
 
 ### Linking Documentation with Definitions
 
 The `README.md` file need only contain headings (of any depth) that
-specifically match the identifier from the formal `grammar.pegn` file.
-Headings must be surrounded by backticks for further distinction and so
-that they have better rendered formatting and do not trigger spelling
-errors. Nothing else is required to make the association. This allows
-for maximum flexibility when authoring the documentation including as
-much additional content unrelated to the specific definitions. It is,
-however, a good idea to group definition documentation into a
-single section. The suggested name is *Grammar Definition Descriptions*
-but this is entirely up to the author.
-
-### RWX KnowledgeNet Node
-
-Each PEGN grammar repository conforms to the RWX
-[KnowledgeNet](https://gitlab.com/rwx.gg/kn/README) definition and
-specification of a *Knowledge Base* with a single top-level *Knowledge
-Node,* which simply requires a `README.md` with certain YAML metadata
-header properties. As such most PEGN grammar specification repos will
-also include other relevant KnowledgeNet files such as those related to
-rendering (`index.html`, `assets/`, `mygrammar-v1.0.0-alpha.pdf`, etc.).
+specifically match the identifier from the formal PEGN syntax file
+(`<grammar>.pegn`). Headings must be surrounded by backticks for further
+distinction and so that they have better rendered formatting and do not
+trigger spelling errors. Nothing else is required to make the
+association. This allows for maximum flexibility when authoring the
+documentation including as much additional content unrelated to the
+specific definitions. It is, however, a good idea to group definition
+documentation into a single section. The suggested name is *Grammar
+Definition Descriptions* but this is entirely up to the author.
 
 ## Legal Considerations
 
@@ -343,10 +325,10 @@ assist when making decisions about use of the PEGN trademarks.
 
 ### Copyright
 
-Copyright 2020 Robert S Muhlestein (rwx@robs.io)
+Copyright (c) 2020 Robert S Muhlestein (rwx@robs.io)
 
 Everything in this document and the rest of this
-[repository](https://gitlab.com/pegn/spec) falls under this copyright.
+[repository](https://github.com/pegn/spec) falls under this copyright.
 All contributions to the project also fall under this copyright per the
 terms outlined in the [Developer Certification of Origin](CONTRIBUTING)
 which every contributor accepts by making any commit or merge request to
