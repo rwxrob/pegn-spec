@@ -21,7 +21,7 @@ Grammar     <- Name ('-' NameExt)?
 Version     <- 'v' MajorVer '.' MinorVer '.' PatchVer ('-' PreVer)?
 Home       <-- (!ws unipoint)+
 
-Comment    <-- (!EndLine unipoint+)+
+Comment    <-- (!EndLine unipoint)+
 
 NodeDef    <-- CheckId SP+ '<--' SP+ Expression   # significant
 ScanDef    <-- CheckId SP+ '<-'  SP+ Expression   # convenient
