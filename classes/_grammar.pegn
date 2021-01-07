@@ -1,0 +1,56 @@
+# PEGN-classes (v1.0.0-alpha) spec.pegn.dev/classes
+# Copyright 2020 Robert S Muhlestein (rwx@robs.io)
+# Licensed under Mozilla Public License 2.0
+# Uses spec.pegn.dev/tokens
+
+alpha       <- [A-Z] / [a-z]
+alphanum    <- [A-Z] / [a-z] / [0-9]
+any         <- [b0-b11111111]          # . (any byte)
+bindig      <- [0-1]
+control     <- [x00-x1F] / [x7F-x9F]
+digit       <- [0-9]
+hexdig      <- [0-9] / [a-f] / [A-F]
+lowerhex    <- [0-9] / [a-f]
+lower       <- [a-z]
+octdig      <- [0-7]
+punct       <- [x21-x2F] / [x3A-x40] / [x5B-x60] / [x7B-x7E]
+
+# visible ascii character except single quote or a space
+quotable    <- alphanum / [x20-x26] / [x28-x2F]
+             / [x3A-x40] / [x5B-x60] / [x7B-x7E]
+
+sign        <- PLUS / MINUS
+uphex       <- [0-9] / [A-F]
+upper       <- [A-Z]
+visible     <- alphanum / punct
+ws          <- SP / TAB / CR / LF
+
+# support for established posix class names
+
+alnum       <- alphanum                       # alias
+ascii       <- [x0-x7F]
+blank       <- SP / TAB
+cntrl       <- control                        # alias
+graph       <- [x21-x7E]
+print       <- [x20-x7E]
+space       <- ws / VT / FF                   # [:space:] \s
+word        <- upper / lower / digit / UNDER  # [:word:]  \w
+xdigit      <- hexdig                         # alias
+
+# support for unicode planes and classes
+
+unipoint    <- [u0000-u10FFFF]
+ucontrol    <- TODO
+udigit      <- TODO
+ugraphic    <- TODO
+uletter     <- TODO
+ulower      <- TODO
+umark       <- TODO
+unumber     <- TODO
+uprint      <- TODO
+upunct      <- TODO
+uspace      <- TODO
+usymbol     <- TODO
+utitle      <- TODO
+uupper      <- TODO
+

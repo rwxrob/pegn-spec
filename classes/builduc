@@ -18,6 +18,7 @@ make_dec () {
   done < unicode/data.txt > unicode/dec.txt
 }
 
+
 make_classes () {
   sort -t \; -k 4,4 -k 1,1n -o unicode/classes.txt unicode/dec.txt
   while read line; do
@@ -27,7 +28,7 @@ make_classes () {
   done < unicode/classes.txt
 }
 
-make_pegn () {
+make_pegn_classes () {
   local class
   for file in unicode/??.txt; do
     class=${file%\.txt}
@@ -46,7 +47,7 @@ make_pegn () {
         if [[ -n $in_range ]]; then
           if [[ $last_hex == $first_in_range ]];then
             if (( col > max_width )); then
-              printf "\n         "
+              printf "\n       "
             fi
             local out="${sep}u${last_hex} "
             echo -n $out
@@ -54,7 +55,7 @@ make_pegn () {
             ((col+=${#sep}))
           else
             if (( col > max_width )); then
-              printf "\n         "
+              printf "\n       "
             fi
             local out="${sep}[u${first_in_range}-u${last_hex}] "
             echo -n $out
@@ -74,11 +75,15 @@ make_pegn () {
     done < $file
     echo
     echo
-  done
-  #done > unicode/unicode.pegn
+  done > unicode/unicode.pegn
 }
 
-#download
-#make_dec
-#make_classes
-make_pegn
+combine () {
+  cat _grammar.pegn unicode/unicode.pegn > grammar.pegn
+}
+
+download
+make_dec
+make_classes
+make_pegn_classes
+combine
