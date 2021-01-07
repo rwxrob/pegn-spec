@@ -83,7 +83,7 @@ OctRange   <-- '[' Octal '-' Octal ']'      # [o20-o37]
 
 String     <-- quotable+
 Letter     <-- alpha
-Unicode    <-- 'u' (uphex{4,5} / '10' uphex{4})
+Unicode    <-- 'u' ('10' uphex{4} / uphex{4,5})
 Integer    <-- digit+
 Binary     <-- 'b' bindig+  # b1 == b00000001 (0 pad to closest byte)
 Hexadec    <-- 'x' uphex+
