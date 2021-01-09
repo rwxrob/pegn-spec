@@ -63,13 +63,14 @@ PosLook    <-- '&' Primary Quant?
 NegLook    <-- '!' Primary Quant?
 Primary     <- Simple / CheckId / '(' Expression ')'
 
-Quant       <- Optional / MinZero / MinOne / MinMax / Count
+Quant       <- Optional / MinZero / MinOne / MinMax / Amount
 Optional   <-- '?'
 MinZero    <-- '*'
 MinOne     <-- '+'
 MinMax     <-- '{' Min ',' Max? '}'
 Min        <-- digit+
 Max        <-- digit+
+Amount      <- '{' Count '}'
 Count      <-- '{' digit+ '}'
 
 Range       <- AlphaRange / IntRange / UniRange
