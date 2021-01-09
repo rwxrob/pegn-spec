@@ -13,7 +13,8 @@ Spec       <-- Meta? Copyright? Licensed? Uses*
 Meta       <-- '# ' Grammar ' (' Version ') ' Home EndLine
 Copyright  <-- '# Copyright ' Comment EndLine
 Licensed   <-- '# Licensed under ' Comment EndLine
-Uses       <-- '# Uses ' (!ws unipoint)+
+Uses       <-- '# Uses ' Path EndLine
+Path       <-- (!ws unipoint)+
 ComEndLine  <- SP* ('# ' Comment)? EndLine
 Definition  <- NodeDef / ScanDef / ClassDef / TokenDef
 
