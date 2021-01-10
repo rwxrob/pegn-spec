@@ -13,7 +13,8 @@ Spec       <-- Meta? Copyright? Licensed? Uses*
 Meta       <-- '# ' Grammar ' (' Version ') ' Home EndLine
 Copyright  <-- '# Copyright ' Comment EndLine
 Licensed   <-- '# Licensed under ' Comment EndLine
-Uses       <-- '# Uses ' (!ws unipoint)+
+Uses       <-- '# Uses ' Path EndLine
+Path       <-- (!ws unipoint)+
 ComEndLine  <- SP* ('# ' Comment)? EndLine
 Definition  <- NodeDef / ScanDef / ClassDef / TokenDef
 
@@ -62,13 +63,14 @@ PosLook    <-- '&' Primary Quant?
 NegLook    <-- '!' Primary Quant?
 Primary     <- Simple / CheckId / '(' Expression ')'
 
-Quant       <- Optional / MinZero / MinOne / MinMax / Count
+Quant       <- Optional / MinZero / MinOne / MinMax / Amount
 Optional   <-- '?'
 MinZero    <-- '*'
 MinOne     <-- '+'
 MinMax     <-- '{' Min ',' Max? '}'
 Min        <-- digit+
 Max        <-- digit+
+Amount      <- '{' Count '}'
 Count      <-- '{' digit+ '}'
 
 Range       <- AlphaRange / IntRange / UniRange
