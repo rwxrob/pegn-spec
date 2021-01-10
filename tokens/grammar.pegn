@@ -64,5 +64,3 @@ RLARROW     <- '-->'
 LFAT        <- '<='
 RFAT        <- '=>'
 WALRUS      <- ':='
-
-TODO        <- any?  # keep WIP grammars compliant
