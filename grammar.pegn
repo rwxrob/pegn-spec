@@ -109,5 +109,4 @@ ResTokenId <-- 'TAB' / 'CRLF' / 'CR' / 'LFAT' / 'SP' / 'VT' / 'FF' / 'NOT'
              / 'RBRACE' / 'TILDE' / 'UNKNOWN' / 'REPLACE' / 'MAXRUNE' 
              / 'MAXASCII' / 'MAXLATIN' / 'LARROWF' / 'RARROWF' / 'LLARROW'
              / 'RLARROW' / 'LARROW' / 'LF' / 'RARROW' / 'RFAT' 
-             / 'WALRUS' / 'ENDOFDATA' / 'TODO'
-
+             / 'WALRUS' / 'ENDOFDATA'
