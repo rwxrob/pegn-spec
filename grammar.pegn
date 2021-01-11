@@ -71,7 +71,7 @@ MinMax     <-- '{' Min ',' Max? '}'
 Min        <-- digit+
 Max        <-- digit+
 Amount      <- '{' Count '}'
-Count      <-- '{' digit+ '}'
+Count      <-- digit+
 
 Range       <- AlphaRange / IntRange / UniRange
              / BinRange / HexRange / OctRange
