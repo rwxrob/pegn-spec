@@ -63,12 +63,12 @@ Integer  &lt;- &#39;0&#39; / [1-9] DIGIT*
 Escaped  &lt;- BKSLASH (&#39;b&#39; / &#39;f&#39; / &#39;n&#39; / &#39;r&#39; / &#39;t&#39; / &#39;u&#39; hex{4}
           / DQ / BKSLASH / SLASH)</code></pre>
 <h2 id="abstract-syntax-tree">Abstract Syntax Tree</h2>
-<p>PEGN includes a strict JSON AST serialization format which is itself included in the <a href="grammar.pegn">grammar specification</a>. PEGN defines an optional human-friendly version as well as the core compressed version.</p>
+<p>PEGN includes a strict JSON AST serialization format which is itself included in the <a href="https://raw.githubusercontent.com/pegn/spec/master/grammar.pegn">grammar specification</a>. PEGN defines an optional human-friendly version as well as the core compressed version.</p>
 <h3 id="ast-short-form">AST (Short-Form)</h3>
 <p>[<a href="https://github.com/pegn/spec/tree/master/ast/short">PEGN Specification of AST Short-Form</a>]</p>
 <p>The compressed, short-form of the JSON AST uses integers to identify node types (as opposed to words as found in the long form) and is optimized for the best parsing speeds and most efficient storage and transfer. It <em>must</em> be used whenever an AST is stored or transferred over the network in any way.</p>
 <h3 id="ast-long-form">AST (Long-Form)</h3>
-<p>[<a href="https://github.com/pegn/spec/tree/master/ast/short/ast/long">PEGN Specification of AST Long-Form</a>]</p>
+<p>[<a href="https://github.com/pegn/spec/tree/master/ast/long/">PEGN Specification of AST Long-Form</a>]</p>
 <p>The human-friendly JSON long-form AST is used only for debugging and documentation and need never be parsed itself (despite it being JSON as well).</p>
 <p>Here is a small bit of the resulting abstract syntax tree in JSON (long form):</p>
 <pre class="json"><code>[&quot;Grammar&quot;, [

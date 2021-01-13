@@ -98,7 +98,8 @@ Escaped  <- BKSLASH ('b' / 'f' / 'n' / 'r' / 't' / 'u' hex{4}
 ## Abstract Syntax Tree
 
 PEGN includes a strict JSON AST serialization format which is itself
-included in the [grammar specification](grammar.pegn). PEGN defines an
+included in the [grammar
+specification](https://raw.githubusercontent.com/pegn/spec/master/grammar.pegn). PEGN defines an
 optional human-friendly version as well as the core compressed version. 
 
 ### AST (Short-Form)
@@ -114,7 +115,8 @@ over the network in any way.
 
 ### AST (Long-Form)
 
-[[PEGN Specification of AST Long-Form](https://github.com/pegn/spec/tree/master/ast/short/ast/long)]
+[[PEGN Specification of AST
+Long-Form](https://github.com/pegn/spec/tree/master/ast/long/)]
 
 The human-friendly JSON long-form AST is used only for debugging and
 documentation and need never be parsed itself (despite it being JSON as
