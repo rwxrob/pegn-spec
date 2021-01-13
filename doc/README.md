@@ -69,7 +69,7 @@ but with much greater clarity and efficiency.
 ## Examples
 
 Perhaps the best example is the PEGN grammar itself, which is [specified
-in PEGN](grammar.pegn).
+in PEGN](https://github.com/pegn/spec/blob/master/grammar.pegn).
 
 Here's another example, the JSON specification in PEGN:
 
