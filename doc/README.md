@@ -74,7 +74,7 @@ in PEGN](grammar.pegn).
 Here's another example, the JSON specification in PEGN:
 
 ```pegn
-# JSON-RFC-8259 (v1.0.0) gitlab.com/pegn/grammars/json
+# JSON-RFC-8259 (v1.0.0) github.com/pegn/grammars/json
 
 Grammar <-- ws* Value ws*
 
@@ -130,7 +130,7 @@ form):
     ["MajorVer", "1"],
     ["MinorVer", "0"],
     ["PatchVer", "0"],
-    ["Home", "gitlab.com/pegn/grammars/json"],
+    ["Home", "github.com/pegn/grammars/json"],
     ["EndLine", "\n"]
   ]],
   ["EndLine", "\n"],

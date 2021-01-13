@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>PEGN: Parsing Expression Grammar Notation</title>
+    <title></title>
     <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -22,18 +22,15 @@
       <!-- div id=search-box></div -->
       <ul class=nav-links>
       <ul class=nav-links>
-        <li class=nav-item><a class="nav-link" href="https://twitch.tv/rwxrob/">Twitch</a></li>
-        <li class=nav-item><a class="nav-link" href="https://gitlab.com/pegn/">GitLab</a></li>
-        <li class=nav-item><a class="nav-link" href="https://gitlab.com/pegn/spec">Spec</a></li>
-        <li class=nav-item><a class="nav-link" href="https://gitlab.com/pegn/go">Golang</a></li>
-        <li class=nav-item><a class="nav-link" href="https://gitlab.com/pegn/grammars">Grammars</a></li>
+        <li class=nav-item><a class="nav-link" href="https://github.com/rwxrob/">Creator</a></li>
+        <li class=nav-item><a class="nav-link" href="https://github.com/pegn/">GitHub</a></li>
+        <li class=nav-item><a class="nav-link" href="https://github.com/pegn/spec">Specification</a></li>
       </ul>
     </div>
   </nav>
 </header>
 <main id=top>
-<div class=container>  <h1 id=title>PEGN: Parsing Expression Grammar Notation</h1>
-  <h2 id=subtitle>The Best of PEG, ABNF, EBNF, and JSON AST</h2>
+<div class=container><h1 id="pegn-parsing-expression-grammar-notation">PEGN: Parsing Expression Grammar Notation</h1>
 <p>PEGN is a language for defining languages. More precisely, it is a universal notation for expressing any grammar — including natural language — in a way that is easy to parse cognitively and programmatically without any specific application or implementation in mind. It builds on the best of existing meta and data structure languages such as PEG, ABNF, EBNF, and JSON.</p>
 <h2 id="motivation">Motivation</h2>
 <p>As technology increases in complexity and the need for better human-computer interaction becomes more pronounced, creating language grammars quickly and simply has become a critical need. PEGN is designed to meet this need. By allowing any data to be represented as a grammar and breaking it down into a universal form data can be combined, composed, and analyzed in remarkable ways.</p>
@@ -47,7 +44,7 @@
 <h2 id="examples">Examples</h2>
 <p>Perhaps the best example is the PEGN grammar itself, which is <a href="grammar.pegn">specified in PEGN</a>.</p>
 <p>Here’s another example, the JSON specification in PEGN:</p>
-<pre class="pegn"><code># JSON-RFC-8259 (v1.0.0) gitlab.com/pegn/grammars/json
+<pre class="pegn"><code># JSON-RFC-8259 (v1.0.0) github.com/pegn/grammars/json
 
 Grammar &lt;-- ws* Value ws*
 
@@ -70,9 +67,7 @@ Escaped  &lt;- BKSLASH (&#39;b&#39; / &#39;f&#39; / &#39;n&#39; / &#39;r&#39; / 
 <p>PEGN includes a strict JSON AST serialization format which is itself included in the <a href="grammar.pegn">grammar specification</a>. PEGN defines an optional human-friendly version as well as the core compressed version.</p>
 <h3 id="ast-short-form">AST (Short-Form)</h3>
 <p>[<a href="/ast/short/grammar.pegn">PEGN Specification of AST Short-Form</a>]</p>
-<p>The compressed, short-form of the JSON AST is optimized for the best parsing speeds and most efficient storage and transfer. It <em>must</em> be used whenever an AST is stored or transferred over the network in any way.</p>
-<p>Here is the entire JSON PEGN grammar (from the earlier example) compressed into a single line of short-form AST JSON:</p>
-<pre class="json"><code>[1,[[2,[[13,&quot;JSON&quot;],[14,&quot;RFC-8259&quot;],[15,&quot;1&quot;],[16,&quot;0&quot;],[17,&quot;0&quot;],[7,&quot;gitlab.com/pegn/grammars/json&quot;],[55,&quot;\n&quot;]]],[55,&quot;\n&quot;],[9,[[18,&quot;Grammar&quot;],[21,[[25,[[29,[[19,[[56,&quot;ws&quot;]]],[33,&quot;*&quot;]]],[29,[[18,&quot;Value&quot;]]],[29,[[19,[[56,&quot;ws&quot;]]],[33,&quot;*&quot;]]]]]]]]],[55,&quot;\n&quot;],[55,&quot;\n&quot;],[10,[[18,&quot;Value&quot;],[21,[[25,[[29,[[19,[[56,&quot;ws&quot;]]],[33,&quot;*&quot;]]],[29,[[21,[[25,[[29,[[18,&quot;Object&quot;]]]]],[25,[[29,[[18,&quot;Array&quot;]]]]],[25,[[29,[[18,&quot;Number&quot;]]]]],[25,[[29,[[18,&quot;String&quot;]]]]],[55,&quot;\n&quot;],[25,[[29,[[18,&quot;True&quot;]]]]],[25,[[29,[[18,&quot;False&quot;]]]]],[25,[[29,[[18,&quot;Null&quot;]]]]]]]]],[29,[[19,[[56,&quot;ws&quot;]]],[33,&quot;*&quot;]]]]]]]]],[55,&quot;\n&quot;],[55,&quot;\n&quot;],[9,[[18,&quot;Object&quot;],[21,[[25,[[29,[[47,&quot;{&quot;]]],[29,[[19,[[56,&quot;ws&quot;]]],[33,&quot;*&quot;]]],[29,[[18,&quot;Member&quot;]]],[29,[[21,[[25,[[29,[[19,[[56,&quot;ws&quot;]]],[33,&quot;*&quot;]]],[29,[[47,&quot;,&quot;]]],[29,[[19,[[56,&quot;ws&quot;]]],[33,&quot;*&quot;]]],[29,[[18,&quot;Member&quot;]]]]]]],[33,&quot;*&quot;]]],[29,[[19,[[56,&quot;ws&quot;]]],[33,&quot;*&quot;]]],[29,[[47,&quot;}&quot;]]]]]]]]],[55,&quot;\n&quot;],[9,[[18,&quot;Array&quot;],[21,[[25,[[29,[[47,&quot;[&quot;]]],[29,[[19,[[56,&quot;ws&quot;]]],[33,&quot;*&quot;]]],[29,[[18,&quot;Value&quot;]]],[29,[[21,[[25,[[29,[[19,[[56,&quot;ws&quot;]]],[33,&quot;*&quot;]]],[29,[[47,&quot;,&quot;]]],[29,[[19,[[56,&quot;ws&quot;]]],[33,&quot;*&quot;]]],[29,[[18,&quot;Value&quot;]]]]]]],[33,&quot;*&quot;]]],[29,[[19,[[56,&quot;ws&quot;]]],[33,&quot;*&quot;]]],[29,[[47,&quot;]&quot;]]]]]]]]],[55,&quot;\n&quot;],[9,[[18,&quot;Number&quot;],[21,[[25,[[29,[[20,[[57,&quot;MINUS&quot;]]],[32,&quot;?&quot;]]],[29,[[18,&quot;Integer&quot;]]],[29,[[21,[[25,[[29,[[20,[[57,&quot;DOT&quot;]]]]],[29,[[20,&quot;DIGIT&quot;],[34,&quot;+&quot;]]]]]]],[32,&quot;?&quot;]]],[29,[[21,[[25,[[29,[[47,&quot;e&quot;]]]]],[25,[[29,[[47,&quot;E&quot;]]]]]]]]],[29,[[19,[[56,&quot;sign&quot;]]]]],[29,[[20,&quot;DIGIT&quot;],[34,&quot;+&quot;]]]]]]]]],[55,&quot;\n&quot;],[9,[[18,&quot;String&quot;],[21,[[25,[[29,[[20,[[57,&quot;DQ&quot;]]]]],[29,[[21,[[25,[[29,[[18,&quot;Escaped&quot;]]]]],[25,[[29,[[44,[[53,&quot;x20&quot;],[53,&quot;x21&quot;]]]]]]],[25,[[29,[[44,[[53,&quot;x23&quot;],[53,&quot;x5B&quot;]]]]]]],[25,[[29,[[44,[[53,&quot;x5D&quot;],[53,&quot;x10FFFF&quot;]]]]]]]]],[33,&quot;*&quot;]]],[29,[[20,[[57,&quot;DQ&quot;]]]]]]]]]]],[55,&quot;\n&quot;],[9,[[18,&quot;True&quot;],[21,[[25,[[29,[[47,&quot;true&quot;]]]]]]]]],[55,&quot;\n&quot;],[9,[[18,&quot;False&quot;],[21,[[25,[[29,[[47,&quot;false&quot;]]]]]]]]],[55,&quot;\n&quot;],[9,[[18,&quot;Null&quot;],[21,[[25,[[29,[[47,&quot;null&quot;]]]]]]]]],[55,&quot;\n&quot;],[55,&quot;\n&quot;],[9,[[18,&quot;Member&quot;],[21,[[25,[[29,[[18,&quot;String&quot;]]],[29,[[47,&quot;:&quot;]]],[29,[[18,&quot;Value&quot;]]]]]]]]],[55,&quot;\n&quot;],[10,[[18,&quot;Integer&quot;],[21,[[25,[[29,[[47,&quot;0&quot;]]]]],[25,[[29,[[42,[[51,&quot;1&quot;],[51,&quot;9&quot;]]]]],[29,[[20,&quot;DIGIT&quot;],[33,&quot;*&quot;]]]]]]]]],[55,&quot;\n&quot;],[10,[[18,&quot;Escaped&quot;],[21,[[25,[[29,[[20,[[57,&quot;BKSLASH&quot;]]]]],[29,[[21,[[25,[[29,[[47,&quot;b&quot;]]]]],[25,[[29,[[47,&quot;f&quot;]]]]],[25,[[29,[[47,&quot;n&quot;]]]]],[25,[[29,[[47,&quot;r&quot;]]]]],[25,[[29,[[47,&quot;t&quot;]]]]],[25,[[29,[[47,&quot;u&quot;]]],[29,[[19,&quot;hex&quot;],[38,&quot;4&quot;]]]]],[55,&quot;\n&quot;],[25,[[29,[[20,[[57,&quot;DQ&quot;]]]]]]],[25,[[29,[[20,[[57,&quot;BKSLASH&quot;]]]]]]],[25,[[29,[[20,[[57,&quot;SLASH&quot;]]]]]]]]]]]]]]]]],[55,&quot;\n&quot;]]]</code></pre>
+<p>The compressed, short-form of the JSON AST uses integers to identify node types (as opposed to words as found in the long form) and is optimized for the best parsing speeds and most efficient storage and transfer. It <em>must</em> be used whenever an AST is stored or transferred over the network in any way.</p>
 <h3 id="ast-long-form">AST (Long-Form)</h3>
 <p>[<a href="/ast/long/grammar.pegn">PEGN Specification of AST Long-Form</a>]</p>
 <p>The human-friendly JSON long-form AST is used only for debugging and documentation and need never be parsed itself (despite it being JSON as well).</p>
@@ -84,7 +79,7 @@ Escaped  &lt;- BKSLASH (&#39;b&#39; / &#39;f&#39; / &#39;n&#39; / &#39;r&#39; / 
     [&quot;MajorVer&quot;, &quot;1&quot;],
     [&quot;MinorVer&quot;, &quot;0&quot;],
     [&quot;PatchVer&quot;, &quot;0&quot;],
-    [&quot;Home&quot;, &quot;gitlab.com/pegn/grammars/json&quot;],
+    [&quot;Home&quot;, &quot;github.com/pegn/grammars/json&quot;],
     [&quot;EndLine&quot;, &quot;\n&quot;]
   ]],
   [&quot;EndLine&quot;, &quot;\n&quot;],
@@ -152,11 +147,9 @@ EndLine   &lt;-- LF / CRLF / CR</code></pre>
 <li><a href="https://www.antlr.org/">ANTLR</a></li>
 </ul>
 <h2 id="creating-documentation">Creating Documentation</h2>
-<p>Formal PEGN grammar specifications are documented in an accompanying <code>README.md</code> file that contains headings matching the definition identifiers which in turn may contain one or more Ezmark code blocks containing examples that double as input tests against other code blocks containing the expected AST in JSON long form (inspired by the CommonMark project). This documentation can then be easily combined with code generators using the Ezmark PEGN grammar parser built into the <code>pegn</code> utility (or any other tool capable of parsing Ezmark).</p>
+<p>Formal PEGN grammar specifications are documented in an accompanying <code>README.md</code> file that contains headings matching the definition identifiers which in turn may contain one or more Markdown code blocks containing examples that double as input tests against other code blocks containing the expected AST in JSON long form (inspired by the CommonMark project). This documentation can then be easily combined with code generators using the PEGN Markdown grammar parser built into the <code>pegn</code> utility (or any other tool capable of parsing Markdown).</p>
 <h3 id="linking-documentation-with-definitions">Linking Documentation with Definitions</h3>
-<p>The <code>README.md</code> file need only contain headings (of any depth) that specifically match the identifier from the formal <code>grammar.pegn</code> file. Headings must be surrounded by backticks for further distinction and so that they have better rendered formatting and do not trigger spelling errors. Nothing else is required to make the association. This allows for maximum flexibility when authoring the documentation including as much additional content unrelated to the specific definitions. It is, however, a good idea to group definition documentation into a single section. The suggested name is <em>Grammar Definition Descriptions</em> but this is entirely up to the author.</p>
-<h3 id="rwx-knowledgenet-node">RWX KnowledgeNet Node</h3>
-<p>Each PEGN grammar repository conforms to the RWX <a href="https://gitlab.com/rwx.gg/kn/README">KnowledgeNet</a> definition and specification of a <em>Knowledge Base</em> with a single top-level <em>Knowledge Node,</em> which simply requires a <code>README.md</code> with certain YAML metadata header properties. As such most PEGN grammar specification repos will also include other relevant KnowledgeNet files such as those related to rendering (<code>index.html</code>, <code>assets/</code>, <code>mygrammar-v1.0.0-alpha.pdf</code>, etc.).</p>
+<p>The <code>README.md</code> file need only contain headings (of any depth) that specifically match the identifier from the formal PEGN syntax file (<code>&lt;grammar&gt;.pegn</code>). Headings must be surrounded by backticks for further distinction and so that they have better rendered formatting and do not trigger spelling errors. Nothing else is required to make the association. This allows for maximum flexibility when authoring the documentation including as much additional content unrelated to the specific definitions. It is, however, a good idea to group definition documentation into a single section. The suggested name is <em>Grammar Definition Descriptions</em> but this is entirely up to the author.</p>
 <h2 id="legal-considerations">Legal Considerations</h2>
 <p>Wide adoption of any open source project requires a pristine legal pedigree demonstrating that use of the software and all related content under its licensed terms can be trusted to never put those using it at legal risk — especially legal entities other than individuals that are more frequently targeted for such litigation. Given the origins of PEGN outside of academia it seems prudent to provide a higher degree of attention to these legal considerations that academic publishing might have otherwise provided. The details of this section are designed to meet those needs with the hope that more will choose to use PEGN openly, collaborative, and privately.</p>
 <h2 id="mime-type">MIME Type</h2>
@@ -164,8 +157,8 @@ EndLine   &lt;-- LF / CRLF / CR</code></pre>
 <h3 id="trademarks">Trademarks</h3>
 <p>Whether marked with ™ or not, PEGN, <code>pegn</code>, and the PEGN logo are trademarks of Robert S Muhlestein who maintains an exclusive right to authorize or control the use of these marks primarily to provide assurance to the PEGN community of consistency with respect to content of related tools and services. Use of PEGN trademarks is governed by the same guidelines applied to the <a href="https://www.linuxfoundation.org/trademark-usage/">Linux trademarks by the Linux Foundation</a>. This enables the most permissive use without losing trademark control. Until a more formal trademark usage guideline document can be drafted and legally reviewed please use Linux Foundation guideline to assist when making decisions about use of the PEGN trademarks.</p>
 <h3 id="copyright">Copyright</h3>
-<p>Copyright 2020 Robert S Muhlestein (rwx@robs.io)</p>
-<p>Everything in this document and the rest of this <a href="https://gitlab.com/pegn/spec">repository</a> falls under this copyright. All contributions to the project also fall under this copyright per the terms outlined in the <a href="CONTRIBUTING">Developer Certification of Origin</a> which every contributor accepts by making any commit or merge request to the project git repository.</p>
+<p>Copyright (c) 2020 Robert S Muhlestein (rwx@robs.io)</p>
+<p>Everything in this document and the rest of this <a href="https://github.com/pegn/spec">repository</a> falls under this copyright. All contributions to the project also fall under this copyright per the terms outlined in the <a href="CONTRIBUTING">Developer Certification of Origin</a> which every contributor accepts by making any commit or merge request to the project git repository.</p>
 <h3 id="licenses">Licenses</h3>
 <p>PEGN is licensed under both of the following licenses:</p>
 <ul>
