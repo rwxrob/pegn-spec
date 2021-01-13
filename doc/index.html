@@ -11,7 +11,6 @@
   <meta http-equiv="Expires" content="0"/>
   <!-- link rel="shortcut icon" href="/assets/img/logo.png" type="image/png"-->
     <link rel="stylesheet" href="/assets/styles.css">
-  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header class=nav-bar>
@@ -42,7 +41,7 @@
 <p>For years ABNF and EBNF provide excruciating levels of specificity in their grammars but lack the obvious advantages of ordered priority and the simplicity of the <em>original</em> ASCII PEG grammar. For example, PEGN adds <code>Count</code> and <code>MinMax</code> to provide limits and adds Unicode tokens.</p>
 <p>The hope is that the PEGN language itself can become a more explicit, better performing, and readable replacement for many grammar meta-languages and inline regular expressions. Code generators producing parsers of different types and in different implementation languages can be created from the same grammar specification expressed in PEGN. PEGN parsers and standard libraries can even provide highly optimized handling of PEGN grammars included directly in code as strings and constants much like compiled regular expressions are handled today but with much greater clarity and efficiency.</p>
 <h2 id="examples">Examples</h2>
-<p>Perhaps the best example is the PEGN grammar itself, which is <a href="https://github.com/pegn/spec/blob/master/grammar.pegn">specified in PEGN</a>.</p>
+<p>Perhaps the best example is the PEGN grammar itself, which is <a href="https://raw.githubusercontent.com/pegn/spec/master/grammar.pegn">specified in PEGN</a>.</p>
 <p>Here’s another example, the JSON specification in PEGN:</p>
 <pre class="pegn"><code># JSON-RFC-8259 (v1.0.0) github.com/pegn/grammars/json
 
@@ -66,10 +65,10 @@ Escaped  &lt;- BKSLASH (&#39;b&#39; / &#39;f&#39; / &#39;n&#39; / &#39;r&#39; / 
 <h2 id="abstract-syntax-tree">Abstract Syntax Tree</h2>
 <p>PEGN includes a strict JSON AST serialization format which is itself included in the <a href="grammar.pegn">grammar specification</a>. PEGN defines an optional human-friendly version as well as the core compressed version.</p>
 <h3 id="ast-short-form">AST (Short-Form)</h3>
-<p>[<a href="/ast/short/grammar.pegn">PEGN Specification of AST Short-Form</a>]</p>
+<p>[<a href="https://github.com/pegn/spec/tree/master/ast/short">PEGN Specification of AST Short-Form</a>]</p>
 <p>The compressed, short-form of the JSON AST uses integers to identify node types (as opposed to words as found in the long form) and is optimized for the best parsing speeds and most efficient storage and transfer. It <em>must</em> be used whenever an AST is stored or transferred over the network in any way.</p>
 <h3 id="ast-long-form">AST (Long-Form)</h3>
-<p>[<a href="/ast/long/grammar.pegn">PEGN Specification of AST Long-Form</a>]</p>
+<p>[<a href="https://github.com/pegn/spec/tree/master/ast/short/ast/long">PEGN Specification of AST Long-Form</a>]</p>
 <p>The human-friendly JSON long-form AST is used only for debugging and documentation and need never be parsed itself (despite it being JSON as well).</p>
 <p>Here is a small bit of the resulting abstract syntax tree in JSON (long form):</p>
 <pre class="json"><code>[&quot;Grammar&quot;, [
@@ -158,7 +157,7 @@ EndLine   &lt;-- LF / CRLF / CR</code></pre>
 <p>Whether marked with ™ or not, PEGN, <code>pegn</code>, and the PEGN logo are trademarks of Robert S Muhlestein who maintains an exclusive right to authorize or control the use of these marks primarily to provide assurance to the PEGN community of consistency with respect to content of related tools and services. Use of PEGN trademarks is governed by the same guidelines applied to the <a href="https://www.linuxfoundation.org/trademark-usage/">Linux trademarks by the Linux Foundation</a>. This enables the most permissive use without losing trademark control. Until a more formal trademark usage guideline document can be drafted and legally reviewed please use Linux Foundation guideline to assist when making decisions about use of the PEGN trademarks.</p>
 <h3 id="copyright">Copyright</h3>
 <p>Copyright (c) 2020 Robert S Muhlestein (rwx@robs.io)</p>
-<p>Everything in this document and the rest of this <a href="https://github.com/pegn/spec">repository</a> falls under this copyright. All contributions to the project also fall under this copyright per the terms outlined in the <a href="CONTRIBUTING">Developer Certification of Origin</a> which every contributor accepts by making any commit or merge request to the project git repository.</p>
+<p>Everything in this document and the rest of this <a href="https://github.com/pegn/spec">repository</a> falls under this copyright. All contributions to the project also fall under this copyright per the terms outlined in the Developer Certification of Origin which every contributor accepts by making any commit or merge request to the project git repository.</p>
 <h3 id="licenses">Licenses</h3>
 <p>PEGN is licensed under both of the following licenses:</p>
 <ul>
@@ -169,7 +168,7 @@ EndLine   &lt;-- LF / CRLF / CR</code></pre>
 <h3 id="patents">Patents</h3>
 <p>Any and all patent rights associated with PEGN and anything in this repository are addressed under the Apache-2 license which contains explicit language regarding the granting of patent rights.</p>
 <h3 id="contributing">Contributing</h3>
-<p>Contributions are governed under the same DCO terms as those of the Linux and Gitlab projects. Any commit or merge request to this project Git repository legally constitutes acceptance of the terms of the <a href="CONTRIBUTING">Developer Certificate of Origin</a> and the release of all rights by the contributor to the project and its owners.</p>
+<p>Contributions are governed under the same DCO terms as those of the Linux and Gitlab projects. Any commit or merge request to this project Git repository legally constitutes acceptance of the terms of the Developer Certificate of Origin and the release of all rights by the contributor to the project and its owners.</p>
 <h3 id="ietf-rfc-consideration">IETF RFC Consideration</h3>
 <p>As the PEGN standard continues to receive practical adoption an IETF RFC may eventually be considered to further codify the standard in a way that provides further assuages potential legal concerns.</p>
 </div>

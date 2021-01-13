@@ -69,7 +69,7 @@ but with much greater clarity and efficiency.
 ## Examples
 
 Perhaps the best example is the PEGN grammar itself, which is [specified
-in PEGN](https://github.com/pegn/spec/blob/master/grammar.pegn).
+in PEGN](https://raw.githubusercontent.com/pegn/spec/master/grammar.pegn).
 
 Here's another example, the JSON specification in PEGN:
 
@@ -103,7 +103,8 @@ optional human-friendly version as well as the core compressed version.
 
 ### AST (Short-Form)
 
-[[PEGN Specification of AST Short-Form](/ast/short/grammar.pegn)]
+[[PEGN Specification of AST
+Short-Form](https://github.com/pegn/spec/tree/master/ast/short)]
 
 The compressed, short-form of the JSON AST uses integers to identify
 node types (as opposed to words as found in the long form) and is
@@ -113,7 +114,7 @@ over the network in any way.
 
 ### AST (Long-Form)
 
-[[PEGN Specification of AST Long-Form](/ast/long/grammar.pegn)]
+[[PEGN Specification of AST Long-Form](https://github.com/pegn/spec/tree/master/ast/short/ast/long)]
 
 The human-friendly JSON long-form AST is used only for debugging and
 documentation and need never be parsed itself (despite it being JSON as
@@ -330,7 +331,7 @@ Copyright (c) 2020 Robert S Muhlestein (rwx@robs.io)
 Everything in this document and the rest of this
 [repository](https://github.com/pegn/spec) falls under this copyright.
 All contributions to the project also fall under this copyright per the
-terms outlined in the [Developer Certification of Origin](CONTRIBUTING)
+terms outlined in the Developer Certification of Origin
 which every contributor accepts by making any commit or merge request to
 the project git repository.
 
@@ -362,7 +363,7 @@ explicit language regarding the granting of patent rights.
 Contributions are governed under the same DCO terms as those of the
 Linux and Gitlab projects. Any commit or merge request to this project
 Git repository legally constitutes acceptance of the terms of the
-[Developer Certificate of Origin](CONTRIBUTING) and the release of all
+Developer Certificate of Origin and the release of all
 rights by the contributor to the project and its owners.
 
 ### IETF RFC Consideration
