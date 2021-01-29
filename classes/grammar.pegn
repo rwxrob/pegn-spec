@@ -40,19 +40,21 @@ xdigit      <- hexdig                         # alias
 # support for unicode planes and classes
 
 unipoint    <- [u0000-u10FFFF]
-ucontrol    <- TODO
-udigit      <- TODO
-ugraphic    <- TODO
-uletter     <- TODO
-ulower      <- TODO
-umark       <- TODO
-unumber     <- TODO
-uprint      <- TODO
-upunct      <- TODO
-uspace      <- TODO
-usymbol     <- TODO
-utitle      <- TODO
-uupper      <- TODO
+ucontrol    <- uc_cc / uc_cf / uc_co / uc_cs
+udigit      <- uc_nd
+ugraphic    <- uprint / uc_zs 
+uletter     <- uc_ll / uc_lm / uc_lo / uc_lt / uc_lu
+ulower      <- uc_ll
+umark       <- uc_mc / uc_me / uc_mn
+unumber     <- uc_nd / uc_nl / uc_no
+uprint      <- ulower / umark / unumber / upunct / usymbol 
+upunct      <- uc_pc / uc_pd / uc_pe / uc_pf / uc_pi / uc_po / uc_ps
+uspace      <- uc_zl / uc_zp / uc_zs / 
+usymbol     <- uc_sc / uc_sk / uc_sm / uc_so / 
+utitle      <- uc_lt
+uupper      <- uc_lu
+
+uc_cc <- [u0000-u001F] 
 
 uc_cf <- [u007F-u009F] 
        / u00AD 
