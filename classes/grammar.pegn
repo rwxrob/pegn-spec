@@ -49,8 +49,8 @@ umark       <- uc_mc / uc_me / uc_mn
 unumber     <- uc_nd / uc_nl / uc_no
 uprint      <- ulower / umark / unumber / upunct / usymbol 
 upunct      <- uc_pc / uc_pd / uc_pe / uc_pf / uc_pi / uc_po / uc_ps
-uspace      <- uc_zl / uc_zp / uc_zs / 
-usymbol     <- uc_sc / uc_sk / uc_sm / uc_so / 
+uspace      <- uc_zl / uc_zp / uc_zs
+usymbol     <- uc_sc / uc_sk / uc_sm / uc_so
 utitle      <- uc_lt
 uupper      <- uc_lu
 
