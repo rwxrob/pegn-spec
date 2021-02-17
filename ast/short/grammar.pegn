@@ -8,7 +8,6 @@ Terminal <-- '[' Integer ',' DQ Literal DQ ']'
            / '[]'            # implied 0 type (Undefined)
 Parent   <-- '[' Integer (',' ('[]' / Children))? ']' 
 Children  <- '[' Node (',' Node)* ']'
-In        <- SP{2,} # two spaces per depth level
 Literal  <-- Escaped / [x20-x21] / [x23-x5B] / [x5D-x10FFFF]
 Escaped   <- BKSLASH ('b' / 'f' / 'n' / 'r' / 't' # \u not included
            / DQ / BKSLASH / SLASH)

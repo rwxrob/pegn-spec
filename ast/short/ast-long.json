@@ -158,23 +158,6 @@
     ]]
   ]],
   ["EndLine", "\n"],
-  ["CheckDef", [
-    ["CheckId", "In"],
-    ["Expression", [
-      ["Sequence", [
-        ["Plain", [
-          ["TokenId", [
-            ["ResTokenId", "SP"]
-          ]],
-          ["MinMax", [
-            ["Min", "2"]
-          ]]
-        ]]
-      ]]
-    ]]
-  ]],
-  ["Comment", "two spaces per depth level"],
-  ["EndLine", "\n"],
   ["SchemaDef", [
     ["CheckId", "Literal"],
     ["Expression", [
