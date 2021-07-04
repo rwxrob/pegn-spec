@@ -1,10 +1,11 @@
-# PEGN (v1.0.0-alpha) spec.pegn.dev
-# Copyright 2020 Robert S Muhlestein (rwx@robs.io)
-# Licensed under Mozilla Public License 2.0
+# PEGN (v1.1.0) spec.pegn.dev
+# Copyright 2021 Robert S Muhlestein (rob@rwx.gg)
+# Licensed under Apache-2
 # Uses spec.pegn.dev/classes
 # Uses spec.pegn.dev/tokens
 
 # NOTE: assumes scanning by at least one byte at a time
+# (except for StateDef, which is rhetorical)
 
 Spec       <-- Meta? Copyright? Licensed? Uses*
                ComEndLine*
@@ -16,7 +17,7 @@ Licensed   <-- '# Licensed under ' Comment EndLine
 Uses       <-- '# Uses ' Path EndLine
 Path       <-- (!ws unipoint)+
 ComEndLine  <- SP* ('# ' Comment)? EndLine
-Definition  <- NodeDef / ScanDef / ClassDef / TokenDef
+Definition  <- StateDef / NodeDef / ScanDef / ClassDef / TokenDef
 
 Grammar     <- Name ('-' NameExt)?
 Version     <- 'v' MajorVer '.' MinorVer '.' PatchVer ('-' PreVer)?
@@ -24,19 +25,20 @@ Home       <-- (!ws unipoint)+
 
 Comment    <-- (!EndLine unipoint)+
 
-NodeDef    <-- CheckId SP+ '<--' SP+ Expression   # significant
+StateDef   <-- StateId SP+ '<-' SP+ '# ' Comment  # rhetorical
 ScanDef    <-- CheckId SP+ '<-'  SP+ Expression   # convenient
+NodeDef    <-- CheckId SP+ '<--' SP+ Expression   # significant
 ClassDef   <-- ClassId SP+ '<-' SP+ ClassExpr
 TokenDef   <-- TokenId SP+ '<-' SP+ 
                TokenVal (Spacing TokenVal)*
                ComEndLine
 
 # lower-case of identifier must be unique within grammar
-Identifier  <- CheckId / ClassId / TokenId
+Identifier  <- CheckId / ClassId / TokenId / StateId
 
 TokenVal    <- Unicode / Binary / Hexadec / Octal / SQ String SQ
 
-Name       <-- upper{2,12}
+Name       <-- upper{2,12}    # ascii, not unicode
 NameExt    <-- visible{1,20}
 
 MajorVer   <-- digit+
@@ -47,6 +49,7 @@ PreVer     <-- (word / DASH)+ ('.' (word / DASH)+)*
 CheckId    <-- (upper lower+)+
 ClassId    <-- ResClassId / lower (lower / UNDER lower)+
 TokenId    <-- ResTokenId / upper (upper / UNDER upper)+
+StateId    <-- UNDER upper+
 
 Expression <-- Sequence (Spacing '/' SP+ Sequence)*
 ClassExpr  <-- Simple (Spacing '/' SP+ Simple)*
