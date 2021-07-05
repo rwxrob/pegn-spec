@@ -243,8 +243,8 @@ at PEGN.
 
 ## PEGN Related Tools and Resources
 
-* Vim Plugin
-* Emacs Plugin
+* [Vim Plugin](https://github.com/pegn/pegn-syntax)
+* [Emacs Plugin](https://github.com/pegn/pegn-mode)
 * VSCode Extension
 * Language Syntax Server
 * `pegn` Linter
