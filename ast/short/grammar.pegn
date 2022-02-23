@@ -1,5 +1,5 @@
-# PEGN-AST-short (v1.0.0-alpha) spec.pegn.dev/ast/short
-# Copyright 2020 Robert S Muhlestein (rwx@robs.io)
+# PEGN-AST-short (v1.0.0) pegn.dev/spec/short.pegn
+# Copyright 2020 Robert S Muhlestein (rob@rwx.gg)
 # Licensed under Apache-2, CC-BY-4.0
 
 Node     <-- Terminal / Parent

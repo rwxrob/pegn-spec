@@ -1,7 +1,7 @@
-# PEGN-classes (v1.0.0-alpha) spec.pegn.dev/classes
-# Copyright 2020 Robert S Muhlestein (rwx@robs.io)
-# Licensed under Mozilla Public License 2.0
-# Uses spec.pegn.dev/tokens
+# PEGN-classes (v1.0.0) pegn.dev/spec/classes.pegn
+# Copyright 2020 Robert S Muhlestein (rob@rwx.gg)
+# Licensed under Apache-2
+# Uses pegn.dev/spec/tokens.pegn
 
 alpha       <- [A-Z] / [a-z]
 alphanum    <- [A-Z] / [a-z] / [0-9]

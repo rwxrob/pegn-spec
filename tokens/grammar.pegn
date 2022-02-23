@@ -1,6 +1,6 @@
-# PEGN-tokens (v1.0.0-alpha) spec.pegn.dev/tokens
-# Copyright 2020 Robert S Muhlestein (rwx@robs.io)
-# Licensed under Mozilla Public License 2.0
+# PEGN-tokens (v1.0.0) pegn.dev/spec/tokens.pegn
+# Copyright 2020 Robert S Muhlestein (rob@rwx.gg)
+# Licensed under Apache-2
 
 TAB         <- x9     # "\t"
 LF          <- xA     # "\n" (line feed)

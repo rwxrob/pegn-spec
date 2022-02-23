@@ -1,5 +1,5 @@
-# PEGN-AST-long (v1.0.0-alpha) spec.pegn.dev/ast/long
-# Copyright 2020 Robert S Muhlestein (rwx@robs.io)
+# PEGN-AST-long (v1.0.) pegn.dev/spec/ast-long.pegn
+# Copyright 2020 Robert S Muhlestein (rob@rwx.gg)
 # Licensed under Apache-2, CC-BY-4.0
 
 Node     <-- Terminal / Parent

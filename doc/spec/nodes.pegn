@@ -1,8 +1,8 @@
-# PEGN (v1.1.0) spec.pegn.dev
+# PEGN (v1.1.1) pegn.dev/spec/nodes.pegn
 # Copyright 2021 Robert S Muhlestein (rob@rwx.gg)
 # Licensed under Apache-2
-# Uses spec.pegn.dev/classes
-# Uses spec.pegn.dev/tokens
+# Uses pegn.dev/spec/classes.pegn
+# Uses pegn.dev/spec/tokens.pegn
 
 # NOTE: assumes scanning by at least one byte at a time
 # (except for StateDef, which is rhetorical)
