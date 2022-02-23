@@ -21,9 +21,7 @@
       <!-- div id=search-box></div -->
       <ul class=nav-links>
       <ul class=nav-links>
-        <li class=nav-item><a class="nav-link" href="https://github.com/rwxrob/">Creator</a></li>
-        <li class=nav-item><a class="nav-link" href="https://github.com/pegn/">GitHub</a></li>
-        <li class=nav-item><a class="nav-link" href="https://github.com/pegn/spec">Specification</a></li>
+        <li class=nav-item><a class="nav-link" href="https://github.com/rwxrob/pegn-spec">Specification</a></li>
       </ul>
     </div>
   </nav>
@@ -63,12 +61,12 @@ Integer  &lt;- &#39;0&#39; / [1-9] DIGIT*
 Escaped  &lt;- BKSLASH (&#39;b&#39; / &#39;f&#39; / &#39;n&#39; / &#39;r&#39; / &#39;t&#39; / &#39;u&#39; hex{4}
           / DQ / BKSLASH / SLASH)</code></pre>
 <h2 id="abstract-syntax-tree">Abstract Syntax Tree</h2>
-<p>PEGN includes a strict JSON AST serialization format which is itself included in the <a href="https://raw.githubusercontent.com/pegn/spec/master/grammar.pegn">grammar specification</a>. PEGN defines an optional human-friendly version as well as the core compressed version.</p>
+<p>PEGN includes a strict JSON AST serialization format which is itself included in the <a href="/spec/nodes.pegn">grammar specification</a>. PEGN defines an optional human-friendly version as well as the core compressed version.</p>
 <h3 id="ast-short-form">AST (Short-Form)</h3>
-<p>[<a href="https://github.com/pegn/spec/tree/master/ast/short">PEGN Specification of AST Short-Form</a>]</p>
+<p>[<a href="/spec/ast-short.pegn">PEGN Specification of AST Short-Form</a>]</p>
 <p>The compressed, short-form of the JSON AST uses integers to identify node types (as opposed to words as found in the long form) and is optimized for the best parsing speeds and most efficient storage and transfer. It <em>must</em> be used whenever an AST is stored or transferred over the network in any way.</p>
 <h3 id="ast-long-form">AST (Long-Form)</h3>
-<p>[<a href="https://github.com/pegn/spec/tree/master/ast/long/">PEGN Specification of AST Long-Form</a>]</p>
+<p>[<a href="/spec/ast-long.pegn">PEGN Specification of AST Long-Form</a>]</p>
 <p>The human-friendly JSON long-form AST is used only for debugging and documentation and need never be parsed itself (despite it being JSON as well).</p>
 <p>Here is a small bit of the resulting abstract syntax tree in JSON (long form):</p>
 <pre class="json"><code>[&quot;Grammar&quot;, [
@@ -115,14 +113,14 @@ Comment   &lt;-- (!EndLine any)+
 EndLine   &lt;-- LF / CRLF / CR</code></pre>
 <p>Having corrected the problem we now see that after parsing the AST the relevant text of the <code>Copyright</code> is contained in the <code>Comment</code> terminal node.</p>
 <pre class="json"><code>[&quot;Copyright&quot;, [
-  [&quot;Comment&quot;, &quot;2020 Robert S Muhlestein (rwx@robs.io)&quot;],
+  [&quot;Comment&quot;, &quot;2020 Robert S Muhlestein (rob@rwx.gg)&quot;],
   [&quot;EndLine&quot;, &quot;\n&quot;]
 ]]</code></pre>
 <p>Another fix would be to have made <code>EndLine</code> insignificant (<code>CheckDef</code>), but that would break other requirements of this specific grammar.</p>
 <h3 id="no-ast-node-attributes">No AST Node Attributes</h3>
 <p>Some rooted node tree data structure models allow for attributes. PEGN’s AST does not since attributes can more efficiently and precisely be indicated by adding an additional Parent or Terminal Node type.</p>
 <h2 id="origins-and-history">Origins and History</h2>
-<p>PEGN was conceived and originally developed by <a href="https://robs.io">Rob Muhlestein</a> while creating grammars needed for the RWX KnowledgeNet specification including Ezmark, Datamark, BaseQL, and others. During Rob’s <a href="https://twitch.com/rwxrob">live-coding streams</a> others jumped in to contribute providing valuable suggestions and merge requests. PEGN’s design has always been driven by practical needs making it useful for other projects. It is designed for creating easy, sustainable, readable grammars for any purpose. If you are planning anything involving any sort of grammar you might consider taking a look at PEGN.</p>
+<p>PEGN was conceived and originally developed by <a href="https://github.com/rwxrob">Rob Muhlestein</a> while creating grammars needed for the RWX KnowledgeNet specification including Ezmark, Datamark, BaseQL, and others. During Rob’s <a href="https://twitch.com/rwxrob">live-coding streams</a> others jumped in to contribute providing valuable suggestions and merge requests. PEGN’s design has always been driven by practical needs making it useful for other projects. It is designed for creating easy, sustainable, readable grammars for any purpose. If you are planning anything involving any sort of grammar you might consider taking a look at PEGN.</p>
 <h2 id="pegn-related-tools-and-resources">PEGN Related Tools and Resources</h2>
 <ul>
 <li>Vim Plugin</li>
@@ -156,7 +154,7 @@ EndLine   &lt;-- LF / CRLF / CR</code></pre>
 <h3 id="trademarks">Trademarks</h3>
 <p>Whether marked with ™ or not, PEGN, <code>pegn</code>, and the PEGN logo are trademarks of Robert S Muhlestein who maintains an exclusive right to authorize or control the use of these marks primarily to provide assurance to the PEGN community of consistency with respect to content of related tools and services. Use of PEGN trademarks is governed by the same guidelines applied to the <a href="https://www.linuxfoundation.org/trademark-usage/">Linux trademarks by the Linux Foundation</a>. This enables the most permissive use without losing trademark control. Until a more formal trademark usage guideline document can be drafted and legally reviewed please use Linux Foundation guideline to assist when making decisions about use of the PEGN trademarks.</p>
 <h3 id="copyright">Copyright</h3>
-<p>Copyright (c) 2020 Robert S Muhlestein (rwx@robs.io)</p>
+<p>Copyright (c) 2020 Robert S Muhlestein (rob@rwx.gg)</p>
 <p>Everything in this document and the rest of this <a href="https://github.com/pegn/spec">repository</a> falls under this copyright. All contributions to the project also fall under this copyright per the terms outlined in the Developer Certification of Origin which every contributor accepts by making any commit or merge request to the project git repository.</p>
 <h3 id="licenses">Licenses</h3>
 <p>PEGN is licensed under both of the following licenses:</p>
