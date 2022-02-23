@@ -1,0 +1,66 @@
+# PEGN-tokens (v1.0.0-alpha) spec.pegn.dev/tokens
+# Copyright 2020 Robert S Muhlestein (rwx@robs.io)
+# Licensed under Mozilla Public License 2.0
+
+TAB         <- x9     # "\t"
+LF          <- xA     # "\n" (line feed)
+CR          <- xD     # "\r" (carriage return)
+CRLF        <- xD xA  # "\r\n"
+SP          <- x20    # " "
+VT          <- xB     # "\v" (vertical tab)
+FF          <- xC     # "\f" (form feed)
+
+NOT         <- x21 # !
+BANG        <- x21 # !
+DQ          <- x22 # "
+HASH        <- x23 # #
+DOLLAR      <- x24 # $
+PERCENT     <- x25 # %
+AND         <- x26 # &
+SQ          <- x27 # '
+LPAREN      <- x28 # (
+RPAREN      <- x29 # )
+STAR        <- x2A # *
+PLUS        <- x2B # +
+COMMA       <- x2C # ,
+DASH        <- x2D # -
+MINUS       <- x2D # -
+DOT         <- x2E # .
+SLASH       <- x2F # /
+COLON       <- x3A # :
+SEMI        <- x3B # ;
+LT          <- x3C # <
+EQ          <- x3D # =
+GT          <- x3E # >
+QUERY       <- x3F # ?
+QUESTION    <- x3F # ?
+AT          <- x40 # @
+LBRAKT      <- x5B # [
+BKSLASH     <- x5C # \
+RBRAKT      <- x5D # ]
+CARET       <- x5E # ^
+UNDER       <- x5F # _
+BKTICK      <- x60 # `
+LCURLY      <- x7B # {
+LBRACE      <- x7B # {
+BAR         <- x7C # |
+PIPE        <- x7C # |
+RCURLY      <- x7D # }
+RBRACE      <- x7D # }
+TILDE       <- x7E # ~
+UNKNOWN     <- uFFFD
+REPLACE     <- uFFFD
+MAXRUNE     <- u10FFFF
+ENDOFDATA   <- x7FFFFFF # largest int32
+MAXASCII    <- x7F
+MAXLATIN    <- xFF
+
+RARROWF     <- '=>'
+LARROWF     <- '<='
+LARROW      <- '<-'
+RARROW      <- '->'
+LLARROW     <- '<--'
+RLARROW     <- '-->'
+LFAT        <- '<='
+RFAT        <- '=>'
+WALRUS      <- ':='

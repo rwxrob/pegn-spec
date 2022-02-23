@@ -20,13 +20,13 @@ Whether it be simply counting all the words in a document, creating a
 simple query language to make searching logs easier, coding a
 human-friendly interface to an otherwise complicated web API,
 simplifying the parsing of a form of a common Markup, implementing a
-full programming language that leverages the LLVM to
-quickly create a highly-performant compiler, or developing a binary
-language for moisture evaporators, PEGN addresses these needs by
-prioritizing the creation of other language grammars without weighing
-them down with any specific bias about how they should be implemented. In fact,
-PEGN is so flexible it can be used to define spoken and written natural
-languages and musical notation as well.
+full programming language that leverages the LLVM to quickly create a
+highly-performant compiler, or developing a binary language for moisture
+evaporators, PEGN addresses these needs by prioritizing the creation of
+other language grammars without weighing them down with any specific
+bias about how they should be implemented. In fact, PEGN is so flexible
+it can be used to define spoken and written natural languages and
+musical notation as well.
 
 ### PEG Grammars are Exploding, But Inconsistent
 
@@ -69,7 +69,7 @@ but with much greater clarity and efficiency.
 ## Examples
 
 Perhaps the best example is the PEGN grammar itself, which is [specified
-in PEGN](https://raw.githubusercontent.com/pegn/spec/master/grammar.pegn).
+in PEGN](/spec/types.pegn).
 
 Here's another example, the JSON specification in PEGN:
 
@@ -98,14 +98,12 @@ Escaped  <- BKSLASH ('b' / 'f' / 'n' / 'r' / 't' / 'u' hex{4}
 ## Abstract Syntax Tree
 
 PEGN includes a strict JSON AST serialization format which is itself
-included in the [grammar
-specification](https://raw.githubusercontent.com/pegn/spec/master/grammar.pegn). PEGN defines an
-optional human-friendly version as well as the core compressed version. 
+included in the grammar specification as long
+[short](/spec/ast-short.pegn) and [long](/spec/ast-long.pegn) forms.
+PEGN defines these two forms to provide both readability and ultimate
+parsing performance.
 
 ### AST (Short-Form)
-
-[[PEGN Specification of AST
-Short-Form](https://github.com/pegn/spec/tree/master/ast/short)]
 
 The compressed, short-form of the JSON AST uses integers to identify
 node types (as opposed to words as found in the long form) and is
@@ -114,9 +112,6 @@ transfer. It *must* be used whenever an AST is stored or transferred
 over the network in any way. 
 
 ### AST (Long-Form)
-
-[[PEGN Specification of AST
-Long-Form](https://github.com/pegn/spec/tree/master/ast/long/)]
 
 The human-friendly JSON long-form AST is used only for debugging and
 documentation and need never be parsed itself (despite it being JSON as
@@ -152,9 +147,9 @@ form):
 
 ### Parent and Terminal Nodes
 
-There are two meta-types of PEGN AST Nodes *parents* and *terminals*.
-Terminals contain nothing but a literal value. Parents contain nothing
-but other parent and terminal Nodes. This constraint prevents
+There are two meta-types of PEGN AST Nodes *parents* and *terminals* (or
+*leafs*). Terminals contain nothing but a literal value. Parents contain
+nothing but other parent and terminal Nodes. This constraint prevents
 unnecessary complications. 
 
 #### Thinking Differently About Grammar Design
@@ -176,7 +171,7 @@ EndLine   <-- LF / CRLF / CR
 Given the following sample data the error becomes apparent:
 
 ```
-# Copyright 2020 Robert S Muhlestein (rwx@robs.io)
+# Copyright 2020 Robert S Muhlestein (rob@rwx.gg)
 ```
 
 Notice the AST below does not contain a node containing any relevant
@@ -189,7 +184,7 @@ text from the `Copyright` making it virtually useless.
 ```
 
 This problem occurs because both `Copyright` and `EndLine` are
-"significant" (`SchemaDef`) nodes and therefore the literal text is
+"significant" (`SchemaDef`) node types and therefore the literal text is
 discarded from the AST when the `EndLine` definition triggers the parser
 of `Copyright` to become a *parent* instead of a *terminal* node. Since
 parents have no literal value we need more to capture the text. PEGN's
@@ -208,13 +203,13 @@ Comment   <-- (!EndLine any)+
 EndLine   <-- LF / CRLF / CR
 ```
 
-Having corrected the problem we now see that after parsing the AST
+Having corrected the problem we now see that after parsing the AST,
 the relevant text of the `Copyright` is contained in the `Comment`
 terminal node.
 
 ```json
 ["Copyright", [
-  ["Comment", "2020 Robert S Muhlestein (rwx@robs.io)"],
+  ["Comment", "2020 Robert S Muhlestein (rob@rwx.gg)"],
   ["EndLine", "\n"]
 ]]
 ```
@@ -225,26 +220,28 @@ that would break other requirements of this specific grammar.
 ### No AST Node Attributes
 
 Some rooted node tree data structure models allow for attributes. PEGN's
-AST does not since attributes can more efficiently and precisely be
+AST does not since attributes can be more efficiently and precisely 
 indicated by adding an additional Parent or Terminal Node type.
 
 ## Origins and History
 
 PEGN was conceived and originally developed by [Rob
-Muhlestein](https://robs.io) while creating grammars needed for the RWX
-KnowledgeNet specification including Ezmark, Datamark, BaseQL, and
-others. During Rob's [live-coding streams](https://twitch.com/rwxrob)
-others jumped in to contribute providing valuable suggestions and merge
-requests. PEGN's design has always been driven by practical needs making
-it useful for other projects. It is designed for creating easy,
-sustainable, readable grammars for any purpose. If you are planning
-anything involving any sort of grammar you might consider taking a look
-at PEGN.
+Muhlestein](https://github.com/rwxrob) while creating grammars needed
+for the Knowledge Exchange Grid (KEG) specification and Go Bonzai
+Commander project. During Rob's [live-coding
+streams](https://twitch.com/rwxrob) others jumped in to contribute
+providing valuable suggestions and merge requests --- notably
+[di-wu](https://github.com/di-wu) who took on the task of creating the
+first AST-to-code generator. 
+
+PEGN's design has always been driven by practical needs making it useful
+for other projects. It is designed for creating easy, sustainable,
+readable grammars for any purpose. If you are planning anything
+involving any sort of grammar you might consider taking a look at PEGN.
 
 ## PEGN Related Tools and Resources
 
-* [Vim Plugin](https://github.com/pegn/pegn-syntax)
-* [Emacs Plugin](https://github.com/pegn/pegn-mode)
+* [Vim Plugin](https://github.com/rwxrob/vim-pegn)
 * VSCode Extension
 * Language Syntax Server
 * `pegn` Linter
@@ -306,7 +303,7 @@ have otherwise provided. The details of this section are designed to meet
 those needs with the hope that more will choose to use PEGN openly,
 collaborative, and privately.
 
-## MIME Type
+### MIME Type
 
 Currently the official MIME type associated with the `.pegn` suffix
 related to PEGN grammars is `text/x-pegn` with the hope of eventually
@@ -328,14 +325,14 @@ assist when making decisions about use of the PEGN trademarks.
 
 ### Copyright
 
-Copyright (c) 2020 Robert S Muhlestein (rwx@robs.io)
+Copyright (c) 2020 Robert S Muhlestein (rob@rwx.gg)
 
 Everything in this document and the rest of this
-[repository](https://github.com/pegn/spec) falls under this copyright.
-All contributions to the project also fall under this copyright per the
-terms outlined in the Developer Certification of Origin
-which every contributor accepts by making any commit or merge request to
-the project git repository.
+[repository](https://github.com/rwxrob/pegn-spec) falls under this
+copyright. All contributions to the project also fall under this
+copyright per the terms outlined in the Developer Certification of
+Origin which every contributor accepts by making any commit or merge
+request to the project git repository.
 
 ### Licenses
 
