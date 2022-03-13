@@ -1,4 +1,4 @@
-# PEGN (v1.1.1) pegn.dev/spec/nodes.pegn
+# PEGN (v1.2.0) pegn.dev/spec/nodes.pegn
 # Copyright 2021 Robert S Muhlestein (rob@rwx.gg)
 # Licensed under Apache-2
 # Uses pegn.dev/spec/classes.pegn
@@ -48,7 +48,7 @@ PreVer     <-- (word / DASH)+ ('.' (word / DASH)+)*
 
 CheckId    <-- (upper lower+)+
 ClassId    <-- ResClassId / lower (lower / UNDER lower)+
-TokenId    <-- ResTokenId / upper (upper / UNDER upper)+
+TokenId    <-- ResStrId / ResRuneId / upper (upper / UNDER upper)+
 StateId    <-- UNDER upper+
 
 Expression <-- Sequence (Spacing '/' SP+ Sequence)*
@@ -102,7 +102,7 @@ ResClassId <-- 'alphanum' / 'alpha' / 'any' / 'bindig' / 'control'
              / 'visible' / 'ws' / 'alnum' / 'ascii' / 'blank' / 'cntrl' 
              / 'graph' / 'print' / 'space' / 'word' / 'xdigit' / 'unipoint'
 
-ResTokenId <-- 'TAB' / 'CRLF' / 'CR' / 'LFAT' / 'SP' / 'VT' / 'FF' / 'NOT'
+ResRuneId  <-- 'TAB' / 'CR' / 'LFAT' / 'SP' / 'VT' / 'FF' / 'NOT'
              / 'BANG' / 'DQ' / 'HASH' / 'DOLLAR' / 'PERCENT' / 'AND' 
              / 'SQ' / 'LPAREN' / 'RPAREN' / 'STAR' / 'PLUS' / 'COMMA'
              / 'DASH' / 'MINUS' / 'DOT' / 'SLASH' / 'COLON' / 'SEMI' / 'LT'
@@ -110,6 +110,7 @@ ResTokenId <-- 'TAB' / 'CRLF' / 'CR' / 'LFAT' / 'SP' / 'VT' / 'FF' / 'NOT'
              / 'BKSLASH' / 'RBRAKT' / 'CARET' / 'UNDER' / 'BKTICK' 
              / 'LCURLY' / 'LBRACE' / 'BAR' / 'PIPE' / 'RCURLY' 
              / 'RBRACE' / 'TILDE' / 'UNKNOWN' / 'REPLACE' / 'MAXRUNE' 
-             / 'MAXASCII' / 'MAXLATIN' / 'LARROWF' / 'RARROWF' / 'LLARROW'
-             / 'RLARROW' / 'LARROW' / 'LF' / 'RARROW' / 'RFAT' 
-             / 'WALRUS' / 'ENDOFDATA'
+             / 'MAXASCII' / 'MAXLATIN' / 'LF'  / 'ENDOFDATA' 
+
+ResStrId   <-- 'CRLF' / 'LARROWF' / 'RARROWF' / 'LLARROW' / 'RLARROW'
+             / 'LARROW' /  'RARROW' / 'RFAT' / 'WALRUS'
