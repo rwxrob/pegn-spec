@@ -1,4 +1,4 @@
-# PEGN (v1.2.0) pegn.dev/spec/nodes.pegn
+# PEGN (v1.2.1) pegn.dev/spec/nodes.pegn
 # Copyright 2021 Robert S Muhlestein (rob@rwx.gg)
 # Licensed under Apache-2
 # Uses pegn.dev/spec/classes.pegn
@@ -6,6 +6,9 @@
 
 # NOTE: assumes scanning by at least one byte at a time
 # (except for StateDef, which is rhetorical)
+
+# NOTE: PEGN requires no line exceed 72 ASCII characters in width
+# (which is the same standard required for IETF RFCs)
 
 Spec       <-- Meta? Copyright? Licensed? Uses*
                ComEndLine*
@@ -83,7 +86,7 @@ UniRange   <-- '[' Unicode '-' Unicode ']'  # [u0000-u10FFFF]
 AlphaRange <-- '[' Letter '-' Letter ']'    # [a-m] [A-Z]
 IntRange   <-- '[' Integer '-' Integer ']'  # [0-108] [0-9]
 BinRange   <-- '[' Binary '-' Binary ']'    # [b101-b1111111110101010]
-HexRange   <-- '[' Hexadec '-' Hexadec ']'  # [x20-x2F] [xFFFFF - x1FFFFF]
+HexRange   <-- '[' Hexadec '-' Hexadec ']'  # [x20-x2F] [xFFFFF-x1FFFFF]
 OctRange   <-- '[' Octal '-' Octal ']'      # [o20-o37]
 
 String     <-- quotable+
@@ -96,21 +99,22 @@ Octal      <-- 'o' octdig+
 
 EndLine    <-- LF / CRLF / CR
 
-ResClassId <-- 'alphanum' / 'alpha' / 'any' / 'bindig' / 'control' 
-             / 'digit' / 'hexdig' / 'lowerhex' / 'lower' / 'octdig' 
-             / 'punct' / 'quotable' / 'sign' / 'uphex' / 'upper' 
-             / 'visible' / 'ws' / 'alnum' / 'ascii' / 'blank' / 'cntrl' 
-             / 'graph' / 'print' / 'space' / 'word' / 'xdigit' / 'unipoint'
+ResClassId <-- 'alphanum' / 'alpha' / 'any' / 'bindig' / 'control'
+             / 'digit' / 'hexdig' / 'lowerhex' / 'lower' / 'octdig'
+             / 'punct' / 'quotable' / 'sign' / 'uphex' / 'upper'
+             / 'visible' / 'ws' / 'alnum' / 'ascii' / 'blank' / 'cntrl'
+             / 'graph' / 'print' / 'space' / 'word' / 'xdigit'
+             / 'unipoint'
 
 ResRuneId  <-- 'TAB' / 'CR' / 'LFAT' / 'SP' / 'VT' / 'FF' / 'NOT'
-             / 'BANG' / 'DQ' / 'HASH' / 'DOLLAR' / 'PERCENT' / 'AND' 
+             / 'BANG' / 'DQ' / 'HASH' / 'DOLLAR' / 'PERCENT' / 'AND'
              / 'SQ' / 'LPAREN' / 'RPAREN' / 'STAR' / 'PLUS' / 'COMMA'
-             / 'DASH' / 'MINUS' / 'DOT' / 'SLASH' / 'COLON' / 'SEMI' / 'LT'
-             / 'EQ' / 'GT' / 'QUERY' / 'QUESTION' / 'AT' / 'LBRAKT'
-             / 'BKSLASH' / 'RBRAKT' / 'CARET' / 'UNDER' / 'BKTICK' 
-             / 'LCURLY' / 'LBRACE' / 'BAR' / 'PIPE' / 'RCURLY' 
-             / 'RBRACE' / 'TILDE' / 'UNKNOWN' / 'REPLACE' / 'MAXRUNE' 
-             / 'MAXASCII' / 'MAXLATIN' / 'LF'  / 'ENDOFDATA' 
+             / 'DASH' / 'MINUS' / 'DOT' / 'SLASH' / 'COLON' / 'SEMI'
+             / 'LT' / 'EQ' / 'GT' / 'QUERY' / 'QUESTION' / 'AT'
+             / 'LBRAKT' / 'BKSLASH' / 'RBRAKT' / 'CARET' / 'UNDER'
+             / 'BKTICK' / 'LCURLY' / 'LBRACE' / 'BAR' / 'PIPE'
+             / 'RCURLY' / 'RBRACE' / 'TILDE' / 'UNKNOWN' / 'REPLACE'
+             / 'MAXRUNE' / 'MAXASCII' / 'MAXLATIN' / 'LF'  / 'ENDOFDATA'
 
 ResStrId   <-- 'CRLF' / 'LARROWF' / 'RARROWF' / 'LLARROW' / 'RLARROW'
              / 'LARROW' /  'RARROW' / 'RFAT' / 'WALRUS'
