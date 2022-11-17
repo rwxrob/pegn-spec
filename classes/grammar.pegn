@@ -23,7 +23,7 @@ sign        <- PLUS / MINUS
 uphex       <- [0-9] / [A-F]
 upper       <- [A-Z]
 visible     <- alphanum / punct
-ws          <- SP / TAB / CR / LF
+ws          <- SP / TAB / LF / CR
 
 # support for established posix class names
 
@@ -42,7 +42,7 @@ xdigit      <- hexdig                         # alias
 unipoint    <- [u0000-u10FFFF]
 ucontrol    <- uc_cc / uc_cf / uc_co / uc_cs
 udigit      <- uc_nd
-ugraphic    <- uprint / uc_zs 
+ugraphic    <- uprint / uc_zs
 uletter     <- uc_ll / uc_lm / uc_lo / uc_lt / uc_lu
 ulower      <- uc_ll
 umark       <- uc_mc / uc_me / uc_mn
