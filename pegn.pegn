@@ -1,55 +1,48 @@
-# PEGN (v1.1.1) pegn.dev/spec/nodes.pegn
-# Copyright 2021 Robert S Muhlestein (rob@rwx.gg)
-# Licensed under Apache-2
-# Uses pegn.dev/spec/classes.pegn
-# Uses pegn.dev/spec/tokens.pegn
+# PEGN pegn.dev/spec/2023-01/pegn.pegn
+# Copyright 2023 Robert S Muhlestein (rob@rwx.gg)
+# SPDX-License-Identifier: Apache-2
+# Include pegn.dev/spec/2023-01/classes.pegn
+# Include pegn.dev/spec/2023-01/tokens.pegn
 
-# NOTE: assumes scanning by at least one byte at a time
-# (except for StateDef, which is rhetorical)
+Spec       <-- Meta? Rules
+Meta       <-- '# ' Ident Home LF Copyright? License? Include*
+Rules      <-- (BlankLine / Comment / TokenDef / ClassDef / RuleDef)+
+Ident      <-- upper{2,12}
+Home       <-- Path
+Path       <-- (!ws rune)+
+Copyright  <-- '# ' < 'Copyright ' rune+ > LF
+License    <-- '# SPDX-License-Identifier: ' < SPDXID > LF
+Include    <-- '# Include ' Path LF
+Comment    <-- '# ' < (!LF rune)+ >
 
-Spec       <-- Meta? Copyright? Licensed? Uses*
-               ComEndLine*
-               (Definition ComEndLine*)+
 
-Meta       <-- '# ' Grammar ' (' Version ') ' Home EndLine
-Copyright  <-- '# Copyright ' Comment EndLine
-Licensed   <-- '# Licensed under ' Comment EndLine
-Uses       <-- '# Uses ' Path EndLine
-Path       <-- (!ws unipoint)+
-ComEndLine  <- SP* ('# ' Comment)? EndLine
-Definition  <- StateDef / NodeDef / ScanDef / ClassDef / TokenDef
 
-Grammar     <- Name ('-' NameExt)?
-Version     <- 'v' MajorVer '.' MinorVer '.' PatchVer ('-' PreVer)?
-Home       <-- (!ws unipoint)+
+# ----------------------------- secondary ----------------------------
 
-Comment    <-- (!EndLine unipoint)+
+Name        <- RuleName / ClassName / TokenName
 
-StateDef   <-- StateId SP+ '<-' SP+ '# ' Comment  # rhetorical
-ScanDef    <-- CheckId SP+ '<-'  SP+ Expression   # convenient
-NodeDef    <-- CheckId SP+ '<--' SP+ Expression   # significant
-ClassDef   <-- ClassId SP+ '<-' SP+ ClassExpr
-TokenDef   <-- TokenId SP+ '<-' SP+ 
+RuleDef  <- RuleName
+Class <-- ClassName SP+ '<-' SP+ ClassExpr
+Token <-- TokenName SP+ '<-' SP+ 
                TokenVal (Spacing TokenVal)*
                ComEndLine
 
+Comment    <-- (!EndLine unipoint)+
+
+
 # lower-case of identifier must be unique within grammar
-Identifier  <- CheckId / ClassId / TokenId / StateId
+Name        <- RuleName / ClassName / TokenName
 
 TokenVal    <- Unicode / Binary / Hexadec / Octal / SQ String SQ
-
-Name       <-- upper{2,12}    # ascii, not unicode
-NameExt    <-- visible{1,20}
 
 MajorVer   <-- digit+
 MinorVer   <-- digit+
 PatchVer   <-- digit+
 PreVer     <-- (word / DASH)+ ('.' (word / DASH)+)*
 
-CheckId    <-- (upper lower+)+
+RuleId    <-- (upper lower+)+
 ClassId    <-- ResClassId / lower (lower / UNDER lower)+
 TokenId    <-- ResTokenId / upper (upper / UNDER upper)+
-StateId    <-- UNDER upper+
 
 Expression <-- Sequence (Spacing '/' SP+ Sequence)*
 ClassExpr  <-- Simple (Spacing '/' SP+ Simple)*
@@ -86,6 +79,22 @@ BinRange   <-- '[' Binary '-' Binary ']'    # [b101-b1111111110101010]
 HexRange   <-- '[' Hexadec '-' Hexadec ']'  # [x20-x2F] [xFFFFF - x1FFFFF]
 OctRange   <-- '[' Octal '-' Octal ']'      # [o20-o37]
 
+# PEGN itself has no requirements for any granularity beyond rounding to
+# the last second. Unlike the ISO/RFC specifications, a timezone is
+# never optional and MUST be in UTC for everything with a Z indicator.
+
+IsoDate    <-- Date Time
+Date       <-- Year '-' Month '-' Day
+Time       <-- Hour ':' Minute ':' Second 'Z' # UTC is required
+Year       <-- digit{4}
+Month      <-- (('0' [0-9]) / ('1' [0-2]))
+Day        <-- (([0-2] [0-9]) / ('3' [0-1]))
+Hour       <-- ([0-1] [0-9]) / ('2' [0-3])
+Minute     <-- ([0-5] [0-9])
+Second     <-- ([0-5] [0-9])
+
+Field      <-- uprint+
+
 String     <-- quotable+
 Letter     <-- alpha
 Unicode    <-- 'u' ('10' uphex{4} / uphex{4,5})
@@ -94,7 +103,7 @@ Binary     <-- 'b' bindig+  # b1 == b00000001 (0 pad to closest byte)
 Hexadec    <-- 'x' uphex+
 Octal      <-- 'o' octdig+
 
-EndLine    <-- LF / CRLF / CR
+EndPara    <-- ws* (!. / EndLine !. / EndLine{2})
 
 ResClassId <-- 'alphanum' / 'alpha' / 'any' / 'bindig' / 'control' 
              / 'digit' / 'hexdig' / 'lowerhex' / 'lower' / 'octdig' 
