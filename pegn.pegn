@@ -82,8 +82,9 @@ OctRange   <-- '[' Octal '-' Octal ']'      # [o20-o37]
 # PEGN itself has no requirements for any granularity beyond rounding to
 # the last second. Unlike the ISO/RFC specifications, a timezone is
 # never optional and MUST be in UTC for everything with a Z indicator.
+# The 'T' is also not optional to avoid whitespace.
 
-IsoDate    <-- Date Time
+IsoDate    <-- Date 'T' Time
 Date       <-- Year '-' Month '-' Day
 Time       <-- Hour ':' Minute ':' Second 'Z' # UTC is required
 Year       <-- digit{4}
