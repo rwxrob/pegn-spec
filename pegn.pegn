@@ -96,7 +96,7 @@ Second     <-- ([0-5] [0-9])
 
 Field      <-- uprint+
 
-String     <-- quotable+
+String     <-- (quotable / SP)+
 Letter     <-- alpha
 Unicode    <-- 'u' ('10' uphex{4} / uphex{4,5})
 Integer    <-- digit+
