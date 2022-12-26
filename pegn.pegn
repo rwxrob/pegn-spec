@@ -2,124 +2,104 @@
 # Copyright 2023 Robert S Muhlestein (rob@rwx.gg)
 # SPDX-License-Identifier: Apache-2
 # Include pegn.dev/spec/2023-01/classes.pegn
-# Include pegn.dev/spec/2023-01/tokens.pegn
+# Include pegn.dev/spec/2023-01/literals.pegn
 
-Spec       <-- Meta? Rules
-Meta       <-- '# ' Ident Home LF Copyright? License? Include*
-Rules      <-- (BlankLine / Comment / TokenDef / ClassDef / RuleDef)+
-Ident      <-- upper{2,12}
-Home       <-- Path
-Path       <-- (!ws rune)+
-Copyright  <-- '# ' < 'Copyright ' rune+ > LF
-License    <-- '# SPDX-License-Identifier: ' < SPDXID > LF
-Include    <-- '# Include ' Path LF
-Comment    <-- '# ' < (!LF rune)+ >
+Spec      <- Meta? Rules
+Meta      <- '# ' Ident Home LF Copyright? License? Include*
+Rules     <- (BlankLine / Comment / LiteralDef / ClassDef / RuleDef)+
+Ident     <- upper{2,12}
+Home      <- Path
+Path      <- (!ws rune)+
+Copyright <- '# ' < 'Copyright ' rune+ > LF
+License   <- '# SPDX-License-Identifier: ' < SPDXID > LF
+Include   <- '# Include ' Path LF
+Comment   <- '# ' < (!LF rune)+ >
 
+# ----------------------------------------------------------------------
 
+Name      <- RuleName / ClassName / LitName
 
-# ----------------------------- secondary ----------------------------
+RuleDef   <- RuleName
+Class     <- ClassName SP+ '<-' SP+ ClassExpr
+Literal   <- LitName SP+ '<-' SP+
+             LitVal (Spacing LitVal)*
+             ComEndLine
 
-Name        <- RuleName / ClassName / TokenName
+Comment   <- (!EndLine rune)+
 
-RuleDef  <- RuleName
-Class <-- ClassName SP+ '<-' SP+ ClassExpr
-Token <-- TokenName SP+ '<-' SP+ 
-               TokenVal (Spacing TokenVal)*
-               ComEndLine
+LitVal    <- Unicode / Binary / Hexadec / Octal / SQ String SQ
 
-Comment    <-- (!EndLine unipoint)+
+MajorVer  <- digit+
+MinorVer  <- digit+
+PatchVer  <- digit+
+PreVer    <- (word / DASH)+ ('.' (word / DASH)+)*
 
+RuleId    <- (upper lower+)+
+ClassId   <- RClassId / lower (lower / UNDER lower)+
+LitIdent  <- RLitIdent / upper (upper / UNDER upper)+
 
-# lower-case of identifier must be unique within grammar
-Name        <- RuleName / ClassName / TokenName
+Expr      <- Sequence (Spacing '/' SP+ Sequence)*
+ClassExpr <- Simple (Spacing '/' SP+ Simple)*
 
-TokenVal    <- Unicode / Binary / Hexadec / Octal / SQ String SQ
+Simple    <- Unicode / Binary / Hexadec / Octal
+           / ClassIdent / LitIdent / Range / SQ String SQ
 
-MajorVer   <-- digit+
-MinorVer   <-- digit+
-PatchVer   <-- digit+
-PreVer     <-- (word / DASH)+ ('.' (word / DASH)+)*
+Spacing   <- ComEndLine? SP+
 
-RuleId    <-- (upper lower+)+
-ClassId    <-- ResClassId / lower (lower / UNDER lower)+
-TokenId    <-- ResTokenId / upper (upper / UNDER upper)+
+Sequence  <- Rule (Spacing Rule)*
+Rule      <- PosLook / NegLook / Plain
+Plain     <- Primary Quant?
+PosLook   <- '&' Primary Quant?
+NegLook   <- '!' Primary Quant?
+Primary   <- Simple / CheckId / '(' Expr ')'
 
-Expression <-- Sequence (Spacing '/' SP+ Sequence)*
-ClassExpr  <-- Simple (Spacing '/' SP+ Simple)*
+Quant     <- Optional / MinZero / MinOne / MinMax / Amount
+Optional  <- '?'
+MinZero   <- '*'
+MinOne    <- '+'
+MinMax    <- '{' Min ',' Max? '}'
+Min       <- digit+
+Max       <- digit+
+Amount    <- '{' Count '}'
+Count     <- digit+
 
-Simple      <- Unicode / Binary / Hexadec / Octal 
-             / ClassId / TokenId / Range / SQ String SQ
+Range     <- AlphaRange / IntRange / UniRange
+           / BinRange / HexRange / OctRange
 
-Spacing     <- ComEndLine? SP+
+UniRange   <- '[' Unicode '-' Unicode ']'  # [u0000-u10FFFF]
+AlphaRange <- '[' Letter '-' Letter ']'    # [a-m] [A-Z]
+IntRange   <- '[' Integer '-' Integer ']'  # [0-108] [0-9]
+BinRange   <- '[' Binary '-' Binary ']'    # [b101-b1111111110101010]
+HexRange   <- '[' Hexadec '-' Hexadec ']'  # [x20-x2F] [xFFFFF - x1FFFFF]
+OctRange   <- '[' Octal '-' Octal ']'      # [o20-o37]
 
-Sequence   <-- Rule (Spacing Rule)*
-Rule        <- PosLook / NegLook / Plain
-Plain      <-- Primary Quant?
-PosLook    <-- '&' Primary Quant?
-NegLook    <-- '!' Primary Quant?
-Primary     <- Simple / CheckId / '(' Expression ')'
+Field      <-- uvisible+
 
-Quant       <- Optional / MinZero / MinOne / MinMax / Amount
-Optional   <-- '?'
-MinZero    <-- '*'
-MinOne     <-- '+'
-MinMax     <-- '{' Min ',' Max? '}'
-Min        <-- digit+
-Max        <-- digit+
-Amount      <- '{' Count '}'
-Count      <-- digit+
-
-Range       <- AlphaRange / IntRange / UniRange
-             / BinRange / HexRange / OctRange
-
-UniRange   <-- '[' Unicode '-' Unicode ']'  # [u0000-u10FFFF]
-AlphaRange <-- '[' Letter '-' Letter ']'    # [a-m] [A-Z]
-IntRange   <-- '[' Integer '-' Integer ']'  # [0-108] [0-9]
-BinRange   <-- '[' Binary '-' Binary ']'    # [b101-b1111111110101010]
-HexRange   <-- '[' Hexadec '-' Hexadec ']'  # [x20-x2F] [xFFFFF - x1FFFFF]
-OctRange   <-- '[' Octal '-' Octal ']'      # [o20-o37]
-
-# PEGN itself has no requirements for any granularity beyond rounding to
-# the last second. Unlike the ISO/RFC specifications, a timezone is
-# never optional and MUST be in UTC for everything with a Z indicator.
-# The 'T' is also not optional to avoid whitespace.
-
-IsoDate    <-- Date 'T' Time
-Date       <-- Year '-' Month '-' Day
-Time       <-- Hour ':' Minute ':' Second 'Z' # UTC is required
-Year       <-- digit{4}
-Month      <-- (('0' [0-9]) / ('1' [0-2]))
-Day        <-- (([0-2] [0-9]) / ('3' [0-1]))
-Hour       <-- ([0-1] [0-9]) / ('2' [0-3])
-Minute     <-- ([0-5] [0-9])
-Second     <-- ([0-5] [0-9])
-
-Field      <-- uprint+
-
-String     <-- (quotable / SP)+
-Letter     <-- alpha
-Unicode    <-- 'u' ('10' uphex{4} / uphex{4,5})
-Integer    <-- digit+
-Binary     <-- 'b' bindig+  # b1 == b00000001 (0 pad to closest byte)
-Hexadec    <-- 'x' uphex+
-Octal      <-- 'o' octdig+
+String     <- (quotable / SP)+
+Letter     <- alpha
+Unicode    <- 'u' ('10' uphex{4} / uphex{4,5})
+Integer    <- digit+
+Binary     <- 'b' bindig+  # b1 == b00000001 (0 pad to closest byte)
+Hexadec    <- 'x' uphex+
+Octal      <- 'o' octdig+
+Quoted     <- SQ (!SQ uprint+ )SQ
 
 EndPara    <-- ws* (!. / EndLine !. / EndLine{2})
 
-ResClassId <-- 'alphanum' / 'alpha' / 'any' / 'bindig' / 'control' 
-             / 'digit' / 'hexdig' / 'lowerhex' / 'lower' / 'octdig' 
-             / 'punct' / 'quotable' / 'sign' / 'uphex' / 'upper' 
-             / 'visible' / 'ws' / 'alnum' / 'ascii' / 'blank' / 'cntrl' 
+RClassIdent <-- 'alphanum' / 'alpha' / 'any' / 'bindig' / 'control'
+             / 'digit' / 'hexdig' / 'lowerhex' / 'lower' / 'octdig'
+             / 'punct' / 'quotable' / 'sign' / 'uphex' / 'upper'
+             / 'visible' / 'ws' / 'alnum' / 'ascii' / 'blank' / 'cntrl'
              / 'graph' / 'print' / 'space' / 'word' / 'xdigit' / 'unipoint'
 
-ResTokenId <-- 'TAB' / 'CRLF' / 'CR' / 'LFAT' / 'SP' / 'VT' / 'FF' / 'NOT'
-             / 'BANG' / 'DQ' / 'HASH' / 'DOLLAR' / 'PERCENT' / 'AND' 
+RLitIdent <-- 'TAB' / 'CRLF' / 'CR' / 'LFAT' / 'SP' / 'VT' / 'FF' / 'NOT'
+             / 'BANG' / 'DQ' / 'HASH' / 'DOLLAR' / 'PERCENT' / 'AND'
              / 'SQ' / 'LPAREN' / 'RPAREN' / 'STAR' / 'PLUS' / 'COMMA'
              / 'DASH' / 'MINUS' / 'DOT' / 'SLASH' / 'COLON' / 'SEMI' / 'LT'
              / 'EQ' / 'GT' / 'QUERY' / 'QUESTION' / 'AT' / 'LBRAKT'
-             / 'BKSLASH' / 'RBRAKT' / 'CARET' / 'UNDER' / 'BKTICK' 
-             / 'LCURLY' / 'LBRACE' / 'BAR' / 'PIPE' / 'RCURLY' 
-             / 'RBRACE' / 'TILDE' / 'UNKNOWN' / 'REPLACE' / 'MAXRUNE' 
+             / 'BKSLASH' / 'RBRAKT' / 'CARET' / 'UNDER' / 'BKTICK'
+             / 'LCURLY' / 'LBRACE' / 'BAR' / 'PIPE' / 'RCURLY'
+             / 'RBRACE' / 'TILDE' / 'UNKNOWN' / 'REPLACE' / 'MAXRUNE'
              / 'MAXASCII' / 'MAXLATIN' / 'LARROWF' / 'RARROWF' / 'LLARROW'
-             / 'RLARROW' / 'LARROW' / 'LF' / 'RARROW' / 'RFAT' 
+             / 'RLARROW' / 'LARROW' / 'LF' / 'RARROW' / 'RFAT'
              / 'WALRUS' / 'ENDOFDATA'

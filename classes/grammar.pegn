@@ -3,56 +3,45 @@
 # Licensed under Apache-2
 # Uses pegn.dev/spec/tokens.pegn
 
+# ascii is most common in grammar specifications
+
 alpha       <- [A-Z] / [a-z]
-alphanum    <- [A-Z] / [a-z] / [0-9]
-any         <- [b0-b11111111]          # . (any byte)
-bindig      <- [0-1]
-control     <- [x00-x1F] / [x7F-x9F]
-digit       <- [0-9]
-hexdig      <- [0-9] / [a-f] / [A-F]
-lowerhex    <- [0-9] / [a-f]
 lower       <- [a-z]
-octdig      <- [0-7]
-punct       <- [x21-x2F] / [x3A-x40] / [x5B-x60] / [x7B-x7E]
-
-# visible ascii character except single quote or a space
-quotable    <- alphanum / [x20-x26] / [x28-x2F]
-             / [x3A-x40] / [x5B-x60] / [x7B-x7E]
-
-sign        <- PLUS / MINUS
-uphex       <- [0-9] / [A-F]
 upper       <- [A-Z]
-visible     <- alphanum / punct
-ws          <- SP / TAB / LF / CR
-
-# support for established posix class names
-
-alnum       <- alphanum                       # alias
+alnum       <- lower / upper / [0-9]
 ascii       <- [x0-x7F]
 blank       <- SP / TAB
-cntrl       <- control                        # alias
-graph       <- [x21-x7E]
-print       <- [x20-x7E]
+cntrl       <- [x00-x1F] / [x7F-x9F]
+graph       <- [x21-x7E]                      # all visible ascii
+print       <- [x20-x7E]                      # all visible + space
+ws          <- SP / TAB / LF / CR             # common ws
 space       <- ws / VT / FF                   # [:space:] \s
 word        <- upper / lower / digit / UNDER  # [:word:]  \w
-xdigit      <- hexdig                         # alias
+symbol      <- [x21-x2F] / [x3A-x40] / [x5B-x60] / [x7B-x7E]
+sign        <- PLUS / MINUS
+xdigit      <- [0-9] / [a-f] / [A-F]
+uphex       <- [0-9] / [A-F]
+lowerhex    <- [0-9] / [a-f]
+digit       <- [0-9]
+bindig      <- [0-1]
+octdig      <- [0-7]
 
 # support for unicode planes and classes
 
-unipoint    <- [u0000-u10FFFF]
-ucontrol    <- uc_cc / uc_cf / uc_co / uc_cs
-udigit      <- uc_nd
+rune        <- [u0000-u10FFFF]
+uprint      <- uletter / umark / unumber / upunct / usymbol / SP
 ugraphic    <- uprint / uc_zs
 uletter     <- uc_ll / uc_lm / uc_lo / uc_lt / uc_lu
 ulower      <- uc_ll
+uupper      <- uc_lu
+udigit      <- uc_nd
+ucontrol    <- uc_cc / uc_cf / uc_co / uc_cs
 umark       <- uc_mc / uc_me / uc_mn
 unumber     <- uc_nd / uc_nl / uc_no
-uprint      <- uletter / umark / unumber / upunct / usymbol
 upunct      <- uc_pc / uc_pd / uc_pe / uc_pf / uc_pi / uc_po / uc_ps
 uspace      <- uc_zl / uc_zp / uc_zs
 usymbol     <- uc_sc / uc_sk / uc_sm / uc_so
 utitle      <- uc_lt
-uupper      <- uc_lu
 
 uc_cc <- [u0000-u001F] 
 
