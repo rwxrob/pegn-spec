@@ -49,35 +49,35 @@ Spacing   <- ComEndLine? SP+
 Sequence  <- Rule (Spacing Rule)*
 Rule      <- PosLook / NegLook / Plain
 Plain     <- Primary Quant?
-PosLook   <- '&' Primary Quant?
-NegLook   <- '!' Primary Quant?
+LookPos   <- '&' Primary Quant?
+LookNeg   <- '!' Primary Quant?
+To        <- '...' Primary Quant?
+ToIncl    <- '..' Primary Quant?
 Primary   <- Simple / CheckId / '(' Expr ')'
 
-Quant     <- Optional / MinZero / MinOne / MinMax / Amount
+Quant     <- Optional / Min0 / Min1 / Max / MinMax / Min / Repeat
 Optional  <- '?'
-MinZero   <- '*'
-MinOne    <- '+'
-MinMax    <- '{' Min ',' Max? '}'
-Min       <- digit+
-Max       <- digit+
-Amount    <- '{' Count '}'
-Count     <- digit+
+Min0      <- '*'
+Min1      <- '+'
+Max       <- '{0,' digit+ '}'
+MinMax    <- '{' digit+ ',' digit+ '}'
+Min       <- '{' digit+ ',}'
+Repeat    <- '{' digit+ '}'
 
 Range     <- AlphaRange / IntRange / UniRange
            / BinRange / HexRange / OctRange
 
-UniRange   <- '[' Unicode '-' Unicode ']'  # [u0000-u10FFFF]
-AlphaRange <- '[' Letter '-' Letter ']'    # [a-m] [A-Z]
-IntRange   <- '[' Integer '-' Integer ']'  # [0-108] [0-9]
-BinRange   <- '[' Binary '-' Binary ']'    # [b101-b1111111110101010]
-HexRange   <- '[' Hexadec '-' Hexadec ']'  # [x20-x2F] [xFFFFF - x1FFFFF]
-OctRange   <- '[' Octal '-' Octal ']'      # [o20-o37]
+LowRng    <- '[' lower '-' lower ']'      # [a-m]
+UprRng    <- '[' upper '-' upper ']'      # [A-Z]
+DigRng    <- '[' digit '-' digit ']'      # [0-9]
+UniRng    <- '[' Unicode '-' Unicode ']'  # [u0000-u10FFFF]
+HexRng    <- '[' Hexadec '-' Hexadec ']'  # [x20-x2F] [xFFFFF - x1FFFFF]
+OctRng    <- '[' Octal '-' Octal ']'      # [o20-o37]
 
 Field      <-- uvisible+
 
 String     <- (quotable / SP)+
-Letter     <- alpha
-Unicode    <- 'u' ('10' uphex{4} / uphex{4,5})
+Unicode    <- 'u' ('10' uphex / uphex{4,5})
 Integer    <- digit+
 Binary     <- 'b' bindig+  # b1 == b00000001 (0 pad to closest byte)
 Hexadec    <- 'x' uphex+
