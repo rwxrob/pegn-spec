@@ -1,6 +1,0 @@
-55296;D800;<Non Private Use High Surrogate, First>;Cs;0;L;;;;;N;;;;;
-56191;DB7F;<Non Private Use High Surrogate, Last>;Cs;0;L;;;;;N;;;;;
-56192;DB80;<Private Use High Surrogate, First>;Cs;0;L;;;;;N;;;;;
-56319;DBFF;<Private Use High Surrogate, Last>;Cs;0;L;;;;;N;;;;;
-56320;DC00;<Low Surrogate, First>;Cs;0;L;;;;;N;;;;;
-57343;DFFF;<Low Surrogate, Last>;Cs;0;L;;;;;N;;;;;

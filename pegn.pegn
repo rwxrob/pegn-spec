@@ -1,40 +1,58 @@
-# PEGN pegn.dev/spec/2023-01/pegn.pegn
+# PEGN pegn.dev/spec/2023-04/pegn.pegn
 # Copyright 2023 Robert S Muhlestein (rob@rwx.gg)
 # SPDX-License-Identifier: Apache-2
-# Include pegn.dev/spec/2023-01/classes.pegn
-# Include pegn.dev/spec/2023-01/literals.pegn
 
-Spec      <- Meta? Rules
-Meta      <- '# ' Ident Home LF Copyright? License? Include*
-Rules     <- (BlankLine / Comment / LiteralDef / ClassDef / RuleDef)+
-Ident     <- upper{2,12}
-Home      <- Path
-Path      <- (!ws rune)+
-Copyright <- '# ' < 'Copyright ' rune+ > LF
-License   <- '# SPDX-License-Identifier: ' < SPDXID > LF
-Include   <- '# Include ' Path LF
-Comment   <- '# ' < (!LF rune)+ >
+Grammar     <- (BlankLine / CommentSpan / RuleBlock / BaseUnitDef)+
+BlankLine   <- SP* LF
+CommentSpan <- SP* '#' SP Comment? LF
+Comment     <- uprint+
+BaseUnitDef <- '.' SP+ '<-' SP+ BaseUnit
+BaseUnit    <- Rule
+RuleBlock   <- Name SP+ '<-' SP+ (Rule CommentSpan)+
+Name        <- (alpha alnum*)
+
+Rule        <- Sequence / OneOf / Save / Value / Ref / Opt
+             / Min0 / Min1 / Min / Max / MinMax / Repeat
+             / LookPos / LookNeg / To / Any / Range / End
+             / UniProp / Literal
+
+Sequence    <- '(' Rule ((SP/LF)+ Rule)* ')'
+             /     Rule ((SP/LF)+ Rule)*
+
+OneOf       <- '(' Rule ((SP/LF)+ '/' (SP/LF)+ Rule)* ')'
+             /     Rule ((SP/LF)+ '/' (SP/LF)+ Rule)*
+
+Save        <- '=' Name
+Value       <- '$' Name
+LookPos     <- '&' Rule
+LookNeg     <- '!' Rule
+To          <- '..' SP+ Rule
+Any         <- '.'
+End         <- '!.'
+Ref         <- Name
+Opt         <- Rule '?'
+Min0        <- Rule '*'
+Min1        <- Rule '+'
+Min         <- Rule '{' digit+ ',}'
+Max         <- Rule '{,' digit+ '}'
+MinMax      <- Rule '{' digit+ ',' digit+ '}'
+Repeat      <- Rule '{' digit+ '}'
+UniProp     <- 'p{' .. '}'
+
+Range       <-
+Literal     <-
 
 # ----------------------------------------------------------------------
 
-Name      <- RuleName / ClassName / LitName
+PlainName <- (upper lower+)+    # PlainName
+ClassName <- Classes / lower+   # class
+TokenName <- Tokens / upper+    # TOKEN
 
-RuleDef   <- RuleName
-Class     <- ClassName SP+ '<-' SP+ ClassExpr
-Literal   <- LitName SP+ '<-' SP+
-             LitVal (Spacing LitVal)*
-             ComEndLine
-
-Comment   <- (!EndLine rune)+
+# ----------------------------------------------------------------------
+# ----------------------------------------------------------------------
 
 LitVal    <- Unicode / Binary / Hexadec / Octal / SQ String SQ
 
-MajorVer  <- digit+
-MinorVer  <- digit+
-PatchVer  <- digit+
-PreVer    <- (word / DASH)+ ('.' (word / DASH)+)*
-
-RuleId    <- (upper lower+)+
 ClassId   <- RClassId / lower (lower / UNDER lower)+
 LitIdent  <- RLitIdent / upper (upper / UNDER upper)+
 
@@ -54,15 +72,6 @@ LookNeg   <- '!' Primary Quant?
 To        <- '...' Primary Quant?
 ToIncl    <- '..' Primary Quant?
 Primary   <- Simple / CheckId / '(' Expr ')'
-
-Quant     <- Optional / Min0 / Min1 / Max / MinMax / Min / Repeat
-Optional  <- '?'
-Min0      <- '*'
-Min1      <- '+'
-Max       <- '{0,' digit+ '}'
-MinMax    <- '{' digit+ ',' digit+ '}'
-Min       <- '{' digit+ ',}'
-Repeat    <- '{' digit+ '}'
 
 Range     <- AlphaRange / IntRange / UniRange
            / BinRange / HexRange / OctRange
@@ -86,20 +95,100 @@ Quoted     <- SQ (!SQ uprint+ )SQ
 
 EndPara    <-- ws* (!. / EndLine !. / EndLine{2})
 
-RClassIdent <-- 'alphanum' / 'alpha' / 'any' / 'bindig' / 'control'
-             / 'digit' / 'hexdig' / 'lowerhex' / 'lower' / 'octdig'
-             / 'punct' / 'quotable' / 'sign' / 'uphex' / 'upper'
-             / 'visible' / 'ws' / 'alnum' / 'ascii' / 'blank' / 'cntrl'
-             / 'graph' / 'print' / 'space' / 'word' / 'xdigit' / 'unipoint'
+# ------------------------------- Classes -----------------------------
 
-RLitIdent <-- 'TAB' / 'CRLF' / 'CR' / 'LFAT' / 'SP' / 'VT' / 'FF' / 'NOT'
-             / 'BANG' / 'DQ' / 'HASH' / 'DOLLAR' / 'PERCENT' / 'AND'
-             / 'SQ' / 'LPAREN' / 'RPAREN' / 'STAR' / 'PLUS' / 'COMMA'
-             / 'DASH' / 'MINUS' / 'DOT' / 'SLASH' / 'COLON' / 'SEMI' / 'LT'
-             / 'EQ' / 'GT' / 'QUERY' / 'QUESTION' / 'AT' / 'LBRAKT'
-             / 'BKSLASH' / 'RBRAKT' / 'CARET' / 'UNDER' / 'BKTICK'
-             / 'LCURLY' / 'LBRACE' / 'BAR' / 'PIPE' / 'RCURLY'
-             / 'RBRACE' / 'TILDE' / 'UNKNOWN' / 'REPLACE' / 'MAXRUNE'
-             / 'MAXASCII' / 'MAXLATIN' / 'LARROWF' / 'RARROWF' / 'LLARROW'
-             / 'RLARROW' / 'LARROW' / 'LF' / 'RARROW' / 'RFAT'
-             / 'WALRUS' / 'ENDOFDATA'
+# Classes contains all the special class names that are predefined by
+# PEGN spec itself and do not need to be explicitly included in any
+# valid PEGN grammar. Most of these are POSIX legacy class identifiers.
+
+Classes <- '.' /
+
+.           <- rune                           # default base unit
+rune        <- [u0000-u10FFFF]
+
+alpha       <- [A-Z] / [a-z]
+lower       <- [a-z]
+upper       <- [A-Z]
+alnum       <- lower / upper / [0-9]
+ascii       <- [x0-x7F]
+blank       <- SP / TAB
+cntrl       <- [x00-x1F] / [x7F-x9F]
+graph       <- [x21-x7E]                      # all visible ascii
+print       <- [x20-x7E]                      # all visible + space
+ws          <- SP / TAB / LF / CR             # common ws
+space       <- ws / VT / FF                   # [:space:] \s
+word        <- upper / lower / digit / UNDER  # [:word:]  \w
+symbol      <- [x21-x2F] / [x3A-x40] / [x5B-x60] / [x7B-x7E]
+sign        <- PLUS / MINUS
+xdigit      <- [0-9] / [a-f] / [A-F]
+uphex       <- [0-9] / [A-F]
+lowhex      <- [0-9] / [a-f]
+digit       <- [0-9]
+
+uprint      <- uletter / umark / unumber / upunct / usymbol / SP
+ugraphic    <- uprint / p{Zs}
+uletter     <- p{Ll} / p{Lm} / p{Lo} / p{Lt} / p{Lu}
+ulower      <- p{Ll}
+uupper      <- p{Lu}
+udigit      <- p{Nd}
+ucontrol    <- p{Cc} / p{Cf} / p{Co} / p{Cs}
+umark       <- p{Mc} / p{Me} / p{Mn}
+unumber     <- p{Nd} / p{Nl} / p{No}
+upunct      <- p{Pc} / p{Pd} / p{Pe} / p{Pf} / p{Pi} / p{Po} / p{Ps}
+uspace      <- p{Zl} / p{Zp} / p{Zs}
+usymbol     <- p{Sc} / p{Sk} / p{Sm} / p{So}
+utitle      <- p{Lt}
+
+# ------------------------------- Tokens ------------------------------
+            
+Tokens  <- 
+
+TAB      <- x9     # "\t"
+LF       <- xA     # "\n" (line feed)
+CR       <- xD     # "\r" (carriage return)
+CRLF     <- xD xA  # "\r\n"
+NL       <- xD? xA # "\r?\n"
+SP       <- x20    # " "
+VT       <- xB     # "\v" (vertical tab)
+FF       <- xC     # "\f" (form feed)
+
+DQ       <- x22 # "
+BQ       <- x60 # `
+SQ       <- x27 # '
+
+EXCL     <- x21 # !
+HASH     <- x23 # #
+DOLLAR   <- x24 # $
+PERCENT  <- x25 # %
+AND      <- x26 # &
+STAR     <- x2A # *
+PLUS     <- x2B # +
+MINUS    <- x2D # -
+COMMA    <- x2C # ,
+DOT      <- x2E # .
+COLON    <- x3A # :
+SEMI     <- x3B # ;
+EQ       <- x3D # =
+QUEST    <- x3F # ?
+AT       <- x40 # @
+CARET    <- x5E # ^
+UNDER    <- x5F # _
+BAR      <- x7C # |
+TILDE    <- x7E # ~
+
+LP       <- x28 # (
+RP       <- x29 # )
+LT       <- x3C # <
+GT       <- x3E # >
+LB       <- x5B # [
+RB       <- x5D # ]
+SLASH    <- x2F # /
+BSLASH   <- x5C # \
+LC       <- x7B # {
+RC       <- x7D # }
+
+UNKNOWN  <- uFFFD
+REPLACE  <- uFFFD
+MAXRUNE  <- u10FFFF
+MAXASCII <- x7F
+MAXLATIN <- xFF

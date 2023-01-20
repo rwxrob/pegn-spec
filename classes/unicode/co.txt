@@ -1,6 +1,0 @@
-57344;E000;<Private Use, First>;Co;0;L;;;;;N;;;;;
-63743;F8FF;<Private Use, Last>;Co;0;L;;;;;N;;;;;
-983040;F0000;<Plane 15 Private Use, First>;Co;0;L;;;;;N;;;;;
-1048573;FFFFD;<Plane 15 Private Use, Last>;Co;0;L;;;;;N;;;;;
-1048576;100000;<Plane 16 Private Use, First>;Co;0;L;;;;;N;;;;;
-1114109;10FFFD;<Plane 16 Private Use, Last>;Co;0;L;;;;;N;;;;;

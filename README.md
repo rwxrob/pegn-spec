@@ -5,10 +5,10 @@
 
 ## Legal
 
-Copyright (c) 2021 Robert S. Muhlestein
+Copyright (c) 2023 Robert S. Muhlestein
 Released under the [Apache 2.0](LICENSE)
 
-Contributors and project participants implicitly accept the 
+Contributors and project participants implicitly accept the
 [Developer Certificate of Authenticity (DCO)](DCO).
 
 "PEGN" and "pegn" are legal trademarks of Robert S. Muhlestein but can
