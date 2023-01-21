@@ -2,193 +2,141 @@
 # Copyright 2023 Robert S Muhlestein (rob@rwx.gg)
 # SPDX-License-Identifier: Apache-2
 
-Grammar     <- (BlankLine / CommentSpan / RuleBlock / BaseUnitDef)+
-BlankLine   <- SP* LF
-CommentSpan <- SP* '#' SP Comment? LF
-Comment     <- uprint+
-BaseUnitDef <- '.' SP+ '<-' SP+ BaseUnit
-BaseUnit    <- Rule
-RuleBlock   <- Name SP+ '<-' SP+ (Rule CommentSpan)+
-Name        <- (alpha alnum*)
+# Only grammars that are expressed in Unicode (UTF-8) can be specified
+# with PEGN, but any (dot) can be assigned explicitly defining a Unicode
+# subset for the entire grammar (ex: . <- p{French} / ws / upunct).
 
-Rule        <- Sequence / OneOf / Save / Value / Ref / Opt
-             / Min0 / Min1 / Min / Max / MinMax / Repeat
-             / LookPos / LookNeg / To / Any / Range / End
-             / UniProp / Literal
+. <- uprint / LF         # default for all PEGN grammars when undefined
 
-Sequence    <- '(' Rule ((SP/LF)+ Rule)* ')'
-             /     Rule ((SP/LF)+ Rule)*
+Grammar <- (Blank / CmtLine / Def)+
+Blank   <- SP* LF
+CmtLine <- '#' SP Cmt LF
+Cmt     <- uprint+
+Def     <- Name SP+ '<-' SP+ Rule (SP+ Comment) LF
+Name    <- (alpha alnum+) / '.'
+Rule    <- RRule / Seq / One / Count / Save / Val / Ref / Look
+         / String / Rule / To
+Count   <- Opt / Mn0 / Mn1 / Min / Max / Mmx / Rep
+Rune    <- '.' / RRune / Range / Class / UniProp / Hexadec / Unicode
+String  <- SQ uprint+ SQ
+Seq     <- '(' Rule (WS+ Rule)* ')' / Rule (WS+ Rule)*
+One     <- '(' Rule (WS+ '/' WS+ Rule)* ')' / Rule (WS+ '/' WS+ Rule)*
+Ref     <- Name
+Save    <- '=' Name
+Value   <- '$' Name
 
-OneOf       <- '(' Rule ((SP/LF)+ '/' (SP/LF)+ Rule)* ')'
-             /     Rule ((SP/LF)+ '/' (SP/LF)+ Rule)*
+Lookable <- !Look !To !END Rule
+Look     <- LookPos / LookNeg
+LookPos  <- '&' Lookable
+LookNeg  <- '!' Lookable
 
-Save        <- '=' Name
-Value       <- '$' Name
-LookPos     <- '&' Rule
-LookNeg     <- '!' Rule
-To          <- '..' SP+ Rule
-Any         <- '.'
-End         <- '!.'
-Ref         <- Name
-Opt         <- Rule '?'
-Min0        <- Rule '*'
-Min1        <- Rule '+'
-Min         <- Rule '{' digit+ ',}'
-Max         <- Rule '{,' digit+ '}'
-MinMax      <- Rule '{' digit+ ',' digit+ '}'
-Repeat      <- Rule '{' digit+ '}'
-UniProp     <- 'p{' .. '}'
+Countable <- Seq / One / Val / Ref / Str / Rune
+Opt       <- Countable '?'
+Min0      <- Countable '*'
+Min1      <- Countable '+'
+Min       <- Countable '{' digit+ ',}'
+Max       <- Countable '{,' digit+ '}'
+MinMax    <- Countable '{' digit+ ',' digit+ '}'
+Repeat    <- Countable '{' digit+ '}'
 
-Range       <-
-Literal     <-
+To     <- ToOpt / ToMn0 / ToMn1 / ToMax / ToMin / ToRep / ToMnx / ToRune
+ToOpt  <- '..?' SP+ !To &Rule
+ToMn0  <- '..*' SP+ !To &Rule
+ToMn1  <- '..+' SP+ !To &Rule
+ToMax  <- '..{,' digit+ '}' SP+ !To &Rule
+ToRep  <- '..{' digit+ '}' SP+ !To &Rule
+ToMin  <- '..{' digit+ ',}' SP+ !To &Rule
+ToMnx  <- '..{' digit+ ',' digit+ '}' SP+ !To &Rule
+ToRune <- '..' SP+ !To &Rule
 
-# ----------------------------------------------------------------------
+Range      <- AlphaRange / DigitRange / UniRange / HexRange
+AlphaRange <- LowerRange / UpperRange
+LowerRange <- '[' lower '-' lower ']'       # [a-z]
+UpperRange <- '[' upper '-' upper ']'       # [A-Z]
+DigitRange <- '[' digit '-' digit ']'       # [0-9]
+UniRange   <- '[' Unicode '-' Unicode ']'   # [u0000-u10FFFF]
+HexRange   <- '[' Hexadec '-' Hexadec ']'   # [x20-x2F] [xFFFFF - x1FFFFF]
+Unicode    <- 'u' ('10' uphex / uphex{4,5}) # u7024
+Hexadec    <- 'x' uphex{2,}                 # x20
 
-PlainName <- (upper lower+)+    # PlainName
-ClassName <- Classes / lower+   # class
-TokenName <- Tokens / upper+    # TOKEN
+# Anything is allowed as a Unicode class qualifier to accommodate
+# changes to Unicode categories, scripts, and properties over time.
+# Implementations may choose to follow an In*/Is* convention or explicit
+# '=' notation. PEGN leaves these details unspecified but recommends one
+# Unicode qualifier per rule (avoid joining with comma, etc.) since most
+# language implementations have functions or tables that match these
+# qualifiers.
 
-# ----------------------------------------------------------------------
-# ----------------------------------------------------------------------
+UniProp  <- 'p{' ..+ '}'                    # p{Cyrillic}
 
-LitVal    <- Unicode / Binary / Hexadec / Octal / SQ String SQ
+# class names are lowercaser by convention
 
-ClassId   <- RClassId / lower (lower / UNDER lower)+
-LitIdent  <- RLitIdent / upper (upper / UNDER upper)+
+Class <- 'alpha' / 'lower' / 'upper' / 'alnum' / 'ascii' / 'blank'
+       / 'cntrl' / 'graph' / 'print' / 'space' / 'word' / 'symbol'
+       / 'sign' / 'xdigit' / 'uphex' / 'lowhex' / 'digit'
+       / 'uprint' / 'ugraphic' / 'uletter' / 'ulower' / 'uupper'
+       / 'udigit' / 'ucontrol' / 'umark' / 'unumber' / 'upunct'
+       / 'uspace' / 'usymbol' / 'utitle' / 'rune'
 
-Expr      <- Sequence (Spacing '/' SP+ Sequence)*
-ClassExpr <- Simple (Spacing '/' SP+ Simple)*
+# mostly from POSIX
 
-Simple    <- Unicode / Binary / Hexadec / Octal
-           / ClassIdent / LitIdent / Range / SQ String SQ
+alpha  <- [A-Z] / [a-z]
+lower  <- [a-z]
+upper  <- [A-Z]
+alnum  <- lower / upper / [0-9]
+ascii  <- [x0-x7F]
+blank  <- SP / TAB
+cntrl  <- [x00-x1F] / [x7F-x9F]
+graph  <- [x21-x7E]                    # all visible ascii
+print  <- [x20-x7E]                    # all visible + space
+ws     <- SP / TAB / LF / CR           # (common ws)
+space  <- ws / x0B / x0F               # [:space:] \s
+word   <- upper / lower / digit / '_'  # [:word:]  \w
+symbol <- [x21-x2F] / [x3A-x40] / [x5B-x60] / [x7B-x7E]
+sign   <- '+' / '-'
+xdigit <- [0-9] / [a-f] / [A-F]
+uphex  <- [0-9] / [A-F]
+lowhex <- [0-9] / [a-f]
+digit  <- [0-9]
 
-Spacing   <- ComEndLine? SP+
+# inspired by Go unicode package
 
-Sequence  <- Rule (Spacing Rule)*
-Rule      <- PosLook / NegLook / Plain
-Plain     <- Primary Quant?
-LookPos   <- '&' Primary Quant?
-LookNeg   <- '!' Primary Quant?
-To        <- '...' Primary Quant?
-ToIncl    <- '..' Primary Quant?
-Primary   <- Simple / CheckId / '(' Expr ')'
+rune     <- [u0000-u10FFFF]
+uprint   <- uletter / umark / unumber / upunct / usymbol / SP
+ugraphic <- uprint / p{Zs}
+uletter  <- p{Ll} / p{Lm} / p{Lo} / p{Lt} / p{Lu}
+ulower   <- p{Ll}
+uupper   <- p{Lu}
+udigit   <- p{Nd}
+ucontrol <- p{Cc} / p{Cf} / p{Co} / p{Cs}
+umark    <- p{Mc} / p{Me} / p{Mn}
+unumber  <- p{Nd} / p{Nl} / p{No}
+upunct   <- p{Pc} / p{Pd} / p{Pe} / p{Pf} / p{Pi} / p{Po} / p{Ps}
+uspace   <- p{Zl} / p{Zp} / p{Zs}
+usymbol  <- p{Sc} / p{Sk} / p{Sm} / p{So}
+utitle   <- p{Lt}
 
-Range     <- AlphaRange / IntRange / UniRange
-           / BinRange / HexRange / OctRange
+# common or reserved rules are caps by convention
+# (and ususally under 5 in length)
 
-LowRng    <- '[' lower '-' lower ']'      # [a-m]
-UprRng    <- '[' upper '-' upper ']'      # [A-Z]
-DigRng    <- '[' digit '-' digit ']'      # [0-9]
-UniRng    <- '[' Unicode '-' Unicode ']'  # [u0000-u10FFFF]
-HexRng    <- '[' Hexadec '-' Hexadec ']'  # [x20-x2F] [xFFFFF - x1FFFFF]
-OctRng    <- '[' Octal '-' Octal ']'      # [o20-o37]
+RRule <- 'END' / 'NL' / 'WS'
 
-Field      <-- uvisible+
+END <- '!.'     # (less cryptic)
+NL  <- xD? xA   # "\r?\n"
+WS  <- SP / LF  # (PEGN ws)
 
-String     <- (quotable / SP)+
-Unicode    <- 'u' ('10' uphex / uphex{4,5})
-Integer    <- digit+
-Binary     <- 'b' bindig+  # b1 == b00000001 (0 pad to closest byte)
-Hexadec    <- 'x' uphex+
-Octal      <- 'o' octdig+
-Quoted     <- SQ (!SQ uprint+ )SQ
+RRune <- 'TAB' / 'LF' / 'CR' / 'SP' / 'DQ' / 'BQ' / 'SQ'
+       / 'UNKNOWN' / 'MAXRUNE' / 'MAXASCII' / 'MAXLATIN'
 
-EndPara    <-- ws* (!. / EndLine !. / EndLine{2})
-
-# ------------------------------- Classes -----------------------------
-
-# Classes contains all the special class names that are predefined by
-# PEGN spec itself and do not need to be explicitly included in any
-# valid PEGN grammar. Most of these are POSIX legacy class identifiers.
-
-Classes <- '.' /
-
-.           <- rune                           # default base unit
-rune        <- [u0000-u10FFFF]
-
-alpha       <- [A-Z] / [a-z]
-lower       <- [a-z]
-upper       <- [A-Z]
-alnum       <- lower / upper / [0-9]
-ascii       <- [x0-x7F]
-blank       <- SP / TAB
-cntrl       <- [x00-x1F] / [x7F-x9F]
-graph       <- [x21-x7E]                      # all visible ascii
-print       <- [x20-x7E]                      # all visible + space
-ws          <- SP / TAB / LF / CR             # common ws
-space       <- ws / VT / FF                   # [:space:] \s
-word        <- upper / lower / digit / UNDER  # [:word:]  \w
-symbol      <- [x21-x2F] / [x3A-x40] / [x5B-x60] / [x7B-x7E]
-sign        <- PLUS / MINUS
-xdigit      <- [0-9] / [a-f] / [A-F]
-uphex       <- [0-9] / [A-F]
-lowhex      <- [0-9] / [a-f]
-digit       <- [0-9]
-
-uprint      <- uletter / umark / unumber / upunct / usymbol / SP
-ugraphic    <- uprint / p{Zs}
-uletter     <- p{Ll} / p{Lm} / p{Lo} / p{Lt} / p{Lu}
-ulower      <- p{Ll}
-uupper      <- p{Lu}
-udigit      <- p{Nd}
-ucontrol    <- p{Cc} / p{Cf} / p{Co} / p{Cs}
-umark       <- p{Mc} / p{Me} / p{Mn}
-unumber     <- p{Nd} / p{Nl} / p{No}
-upunct      <- p{Pc} / p{Pd} / p{Pe} / p{Pf} / p{Pi} / p{Po} / p{Ps}
-uspace      <- p{Zl} / p{Zp} / p{Zs}
-usymbol     <- p{Sc} / p{Sk} / p{Sm} / p{So}
-utitle      <- p{Lt}
-
-# ------------------------------- Tokens ------------------------------
-            
-Tokens  <- 
-
-TAB      <- x9     # "\t"
-LF       <- xA     # "\n" (line feed)
-CR       <- xD     # "\r" (carriage return)
-CRLF     <- xD xA  # "\r\n"
-NL       <- xD? xA # "\r?\n"
-SP       <- x20    # " "
-VT       <- xB     # "\v" (vertical tab)
-FF       <- xC     # "\f" (form feed)
-
-DQ       <- x22 # "
-BQ       <- x60 # `
-SQ       <- x27 # '
-
-EXCL     <- x21 # !
-HASH     <- x23 # #
-DOLLAR   <- x24 # $
-PERCENT  <- x25 # %
-AND      <- x26 # &
-STAR     <- x2A # *
-PLUS     <- x2B # +
-MINUS    <- x2D # -
-COMMA    <- x2C # ,
-DOT      <- x2E # .
-COLON    <- x3A # :
-SEMI     <- x3B # ;
-EQ       <- x3D # =
-QUEST    <- x3F # ?
-AT       <- x40 # @
-CARET    <- x5E # ^
-UNDER    <- x5F # _
-BAR      <- x7C # |
-TILDE    <- x7E # ~
-
-LP       <- x28 # (
-RP       <- x29 # )
-LT       <- x3C # <
-GT       <- x3E # >
-LB       <- x5B # [
-RB       <- x5D # ]
-SLASH    <- x2F # /
-BSLASH   <- x5C # \
-LC       <- x7B # {
-RC       <- x7D # }
+TAB <- x9   # "\t"
+LF  <- xA   # "\n" (line feed)
+CR  <- xD   # "\r" (carriage return)
+SP  <- x20  # " "
+DQ  <- x22  # "
+BQ  <- x60  # `
+SQ  <- x27  # '
 
 UNKNOWN  <- uFFFD
-REPLACE  <- uFFFD
 MAXRUNE  <- u10FFFF
 MAXASCII <- x7F
 MAXLATIN <- xFF
