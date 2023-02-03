@@ -8,27 +8,23 @@
 
 . <- uprint / LF         # default for all PEGN grammars when undefined
 
-Grammar <- (Blank / CmtLine / Def)+
-Blank   <- SP* LF
-CmtLine <- '#' SP Cmt LF
-Cmt     <- uprint+
-Def     <- Name SP+ '<-' SP+ Rule (SP+ Comment) LF
+Grammar <- (BL / CL / Def)+
+Def     <- Name SP+ '<-' SP+ Rule LF
 Name    <- (alpha alnum+) / '.'
-Rule    <- RRule / Seq / One / Count / Save / Val / Ref / Look
-         / String / Rune / To
+Text    <- uprint+
+Rule    <- RRule / Seq / One / Count / Sav / Val / Ref / See / Not
+         / Str / Rune / To / Cmt
 Count   <- Opt / Mn0 / Mn1 / Min / Max / Mmx / Rep
 Rune    <- '.' / RRune / Range / Class / UniProp / Hexadec / Unicode
-String  <- SQ uprint+ SQ
+Str     <- SQ uprint+ SQ
 Seq     <- '(' Rule (WS+ Rule)* ')' / Rule (WS+ Rule)*
 One     <- '(' Rule (WS+ '/' WS+ Rule)* ')' / Rule (WS+ '/' WS+ Rule)*
 Ref     <- Name
-Save    <- '=' Name
-Value   <- '$' Name
-
-Lookable <- !Look !To !END Rule
-Look     <- See / Not
-See      <- '&' Lookable
-Not      <- '!' Lookable
+Sav     <- '=' Name
+Val     <- '$' Name
+See     <- '&' !(To / See / Not) Rule            # positive lookahead
+Not     <- '!' !(To / See / Not) Rule            # negative lookahead
+Cmt     <- '#' Text LF                           # comment / rhetorical
 
 Countable <- Seq / One / Val / Ref / Str / Rune
 Opt       <- Countable '?'
@@ -49,15 +45,14 @@ ToMin  <- '..{' digit+ ',}' SP+ !To &Rule
 ToMnx  <- '..{' digit+ ',' digit+ '}' SP+ !To &Rule
 ToRune <- '..' SP+ !To &Rule
 
-Range      <- AlphaRange / DigitRange / UniRange / HexRange
-AlphaRange <- LowerRange / UpperRange
-LowerRange <- '[' lower '-' lower ']'       # [a-z]
-UpperRange <- '[' upper '-' upper ']'       # [A-Z]
-DigitRange <- '[' digit '-' digit ']'       # [0-9]
-UniRange   <- '[' Unicode '-' Unicode ']'   # [u0000-u10FFFF]
-HexRange   <- '[' Hexadec '-' Hexadec ']'   # [x20-x2F] [xFFFFF - x1FFFFF]
-Unicode    <- 'u' ('10' uphex / uphex{4,5}) # u7024
-Hexadec    <- 'x' uphex{2,}                 # x20
+Range <- ARng / DRng / URng / HRng
+ARng  <- '[' lower '-' lower ']'       # [a-z]
+       / '[' upper '-' upper ']'       # [A-Z]
+DRng  <- '[' digit '-' digit ']'       # [0-9]
+URng  <- '[' Uni '-' Uni ']'           # [u0000-u10FFFF]
+HRng  <- '[' Hex '-' Hex ']'           # [x20-x2F] [xFFFFF - x1FFFFF]
+Uni   <- 'u' ('10' uphex / uphex{4,5}) # u7024
+Hex   <- 'x' uphex{2,}                 # x20
 
 # Anything is allowed as a Unicode class qualifier to accommodate
 # changes to Unicode categories, scripts, and properties over time.
@@ -119,11 +114,11 @@ utitle   <- p{Lt}
 # common or reserved rules are caps by convention
 # (and ususally under 5 in length)
 
-RRule <- 'END' / 'NL' / 'WS'
+RRule <- 'NL' / 'WS' / 'BL' / 'CL'
 
-END <- '!.'     # (less cryptic)
-NL  <- xD? xA   # "\r?\n"
-WS  <- SP / LF  # (PEGN ws)
+NL    <- xD? xA                 # "\r?\n"
+WS    <- SP / LF                # PEGN ws
+BL    <- SP* LF                 # blank line
 
 RRune <- 'TAB' / 'LF' / 'CR' / 'SP' / 'DQ' / 'BQ' / 'SQ'
        / 'UNKNOWN' / 'MAXRUNE' / 'MAXASCII' / 'MAXLATIN'
