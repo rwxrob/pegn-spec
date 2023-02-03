@@ -26,9 +26,9 @@ Save    <- '=' Name
 Value   <- '$' Name
 
 Lookable <- !Look !To !END Rule
-Look     <- LookPos / LookNeg
-LookPos  <- '&' Lookable
-LookNeg  <- '!' Lookable
+Look     <- See / Not
+See      <- '&' Lookable
+Not      <- '!' Lookable
 
 Countable <- Seq / One / Val / Ref / Str / Rune
 Opt       <- Countable '?'
