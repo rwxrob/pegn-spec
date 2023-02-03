@@ -15,7 +15,7 @@ Cmt     <- uprint+
 Def     <- Name SP+ '<-' SP+ Rule (SP+ Comment) LF
 Name    <- (alpha alnum+) / '.'
 Rule    <- RRule / Seq / One / Count / Save / Val / Ref / Look
-         / String / Rule / To
+         / String / Rune / To
 Count   <- Opt / Mn0 / Mn1 / Min / Max / Mmx / Rep
 Rune    <- '.' / RRune / Range / Class / UniProp / Hexadec / Unicode
 String  <- SQ uprint+ SQ
