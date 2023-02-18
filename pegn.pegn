@@ -14,8 +14,9 @@ Name    <- (alpha alnum+) / '.'
 Text    <- uprint+
 Rule    <- RRule / Seq / One / Count / Sav / Val / Ref / See / Not
          / Str / Rune / To / Cmt
-Count   <- Opt / Mn0 / Mn1 / Min / Max / Mmx / Rep
-Rune    <- '.' / RRune / Range / Class / UniProp / Hexadec / Unicode
+Count   <- (Seq / One / Val / Ref / Str / Rune) Quant
+Quant   <- '?' / '*' / '+' / '{' digit+ (',' (digit+)?)? '}'
+Rune    <- '.' / RRune / Range / Class / UniProp / Hex / Uni
 Str     <- SQ uprint+ SQ
 Seq     <- '(' Rule (WS+ Rule)* ')' / Rule (WS+ Rule)*
 One     <- '(' Rule (WS+ '/' WS+ Rule)* ')' / Rule (WS+ '/' WS+ Rule)*
@@ -25,25 +26,7 @@ Val     <- '$' Name
 See     <- '&' !(To / See / Not) Rule            # positive lookahead
 Not     <- '!' !(To / See / Not) Rule            # negative lookahead
 Cmt     <- '#' Text LF                           # comment / rhetorical
-
-Countable <- Seq / One / Val / Ref / Str / Rune
-Opt       <- Countable '?'
-Min0      <- Countable '*'
-Min1      <- Countable '+'
-Min       <- Countable '{' digit+ ',}'
-Max       <- Countable '{,' digit+ '}'
-MinMax    <- Countable '{' digit+ ',' digit+ '}'
-Repeat    <- Countable '{' digit+ '}'
-
-To     <- ToOpt / ToMn0 / ToMn1 / ToMax / ToMin / ToRep / ToMnx / ToRune
-ToOpt  <- '..?' SP+ !To &Rule
-ToMn0  <- '..*' SP+ !To &Rule
-ToMn1  <- '..+' SP+ !To &Rule
-ToMax  <- '..{,' digit+ '}' SP+ !To &Rule
-ToRep  <- '..{' digit+ '}' SP+ !To &Rule
-ToMin  <- '..{' digit+ ',}' SP+ !To &Rule
-ToMnx  <- '..{' digit+ ',' digit+ '}' SP+ !To &Rule
-ToRune <- '..' SP+ !To &Rule
+To      <- '..' Quant? !To &Rule
 
 Range <- ARng / DRng / URng / HRng
 ARng  <- '[' lower '-' lower ']'       # [a-z]
@@ -67,8 +50,8 @@ UniProp  <- 'p{' ..+ '}'                    # p{Cyrillic}
 # class names are lowercaser by convention
 
 Class <- 'alpha' / 'lower' / 'upper' / 'alnum' / 'ascii' / 'blank'
-       / 'cntrl' / 'graph' / 'print' / 'space' / 'word' / 'symbol'
-       / 'sign' / 'xdigit' / 'uphex' / 'lowhex' / 'digit'
+       / 'cntrl' / 'graph' / 'print' / 'space' / 'word'
+       / 'symbol' / 'sign' / 'xdigit' / 'uphex' / 'lowhex' / 'digit'
        / 'uprint' / 'ugraphic' / 'uletter' / 'ulower' / 'uupper'
        / 'udigit' / 'ucontrol' / 'umark' / 'unumber' / 'upunct'
        / 'uspace' / 'usymbol' / 'utitle' / 'rune'
@@ -82,11 +65,10 @@ alnum  <- lower / upper / [0-9]
 ascii  <- [x0-x7F]
 blank  <- SP / TAB
 cntrl  <- [x00-x1F] / [x7F-x9F]
-graph  <- [x21-x7E]                    # all visible ascii
-print  <- [x20-x7E]                    # all visible + space
-ws     <- SP / TAB / LF / CR           # (common ws)
-space  <- ws / x0B / x0F               # [:space:] \s
-word   <- upper / lower / digit / '_'  # [:word:]  \w
+graph  <- [x21-x7E]                       # all visible ascii
+print  <- [x20-x7E]                       # all visible + space
+space  <- SP / TAB / LF / CR / x0B / x0F  # [:space:] \s
+word   <- upper / lower / digit / '_'     # [:word:]  \w
 symbol <- [x21-x2F] / [x3A-x40] / [x5B-x60] / [x7B-x7E]
 sign   <- '+' / '-'
 xdigit <- [0-9] / [a-f] / [A-F]
@@ -114,11 +96,11 @@ utitle   <- p{Lt}
 # common or reserved rules are caps by convention
 # (and ususally under 5 in length)
 
-RRule <- 'NL' / 'WS' / 'BL' / 'CL'
+RRule <- 'NL' / 'WS' / 'BL'
 
 NL    <- xD? xA                 # "\r?\n"
-WS    <- SP / LF                # PEGN ws
-BL    <- SP* LF                 # blank line
+WS    <- SP / LF                # PEGN white space
+BL    <- SP* LF                 # PEGN blank line
 
 RRune <- 'TAB' / 'LF' / 'CR' / 'SP' / 'DQ' / 'BQ' / 'SQ'
        / 'UNKNOWN' / 'MAXRUNE' / 'MAXASCII' / 'MAXLATIN'
